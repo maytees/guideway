@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable} anitaliased`}>{children}</body>
+      <body className={`font-sans ${inter.variable} anitaliased min-h-screen`}>{children}</body>
     </html>
   );
 }

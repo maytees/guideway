@@ -38,5 +38,5 @@ async function signout(): Promise<ActionResult> {
     const sessionCookie = lucia.createBlankSessionCookie();
     cookies()
         .set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
-    return redirect("/login");
+    return redirect("/auth/login");
 }

@@ -3,20 +3,12 @@ import bcrypt from "bcryptjs";
 import { lucia } from "~/server/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import LoginForm from "~/components/forms/LoginForm";
 
 export default async function Page() {
     return (
         <>
-            <h1>Sign in</h1>
-            <form action={login}>
-                <label htmlFor="username">Username</label>
-                <input name="username" id="username" />
-                <br />
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="password" />
-                <br />
-                <button>Continue</button>
-            </form>
+            <LoginForm />
         </>
     );
 }
