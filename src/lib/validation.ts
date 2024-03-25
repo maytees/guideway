@@ -2,10 +2,7 @@ import z, { isValid } from "zod";
 // import { isValidPhoneNumber } from "react-phone-number-input";
 
 export const loginSchema = z.object({
-    cred: z.union([
-        z.string().regex(/^[a-zA-Z0-9_]+$/, { message: "Username can only contain underscores or alphanumeric characters." }),
-        z.string().email({ message: "Invalid email" }),
-    ]),
+    email: z.string().email({ message: "Invalid email" }),
     password: z.string().min(6, { message: "Password must be at least 6 characters long" }),
 });
 

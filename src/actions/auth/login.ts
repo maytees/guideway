@@ -17,32 +17,25 @@ export const login = async (values: ILogin): Promise<ActionResult> => {
     }
 
     const {
-        cred, password
+        email, password
     } = fields.data;
 
-    let isEmail = false;
-    if (cred.includes("@")) isEmail = true;
-
-    const existingUser = isEmail ? await db.user.findUnique({
+    const existingUser = await db.user.findUnique({
         where: {
-            email: cred
-        }
-    }) : await db.user.findUnique({
-        where: {
-            name: cred
+            email
         }
     });
 
     if (!existingUser) {
         return {
-            error: `Invalid ${isEmail ? "email" : "username"} or password`
+            error: `Invalid email or password`
         };
     }
 
     // Is OAuth
     if (existingUser.password === null) {
         return {
-            error: "Invalid username or password"
+            error: "Invalid email or password"
         };
     }
 
@@ -50,7 +43,7 @@ export const login = async (values: ILogin): Promise<ActionResult> => {
 
     if (!validPassword) {
         return {
-            error: "Invalid username or password"
+            error: "Invalid email or password"
         };
     }
 
@@ -64,7 +57,7 @@ export const login = async (values: ILogin): Promise<ActionResult> => {
         );
 
     return {
-        success: "Success"
+        success: "Logged in"
     }
 }
 

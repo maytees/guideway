@@ -20,7 +20,7 @@ const LoginForm = () => {
     const form = useForm<ILogin>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
-            cred: '',
+            email: '',
             password: ''
         }
     });
@@ -52,12 +52,12 @@ const LoginForm = () => {
                     <FormField
                         disabled={isPending}
                         control={form.control}
-                        name="cred"
+                        name="email"
                         render={({ field }) => (
                             <FormItem >
-                                <FormLabel>Username or email</FormLabel>
+                                <FormLabel>Email</FormLabel>
                                 <FormControl>
-                                    <Input type="text" placeholder='example@example.com' {...field} />
+                                    <Input type="email" placeholder='example@example.com' {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
