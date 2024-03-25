@@ -14,11 +14,11 @@ const FormCard = (
     }
 ) => {
     return (
-        <Card className="mt-56 mx-auto max-w-sm">
+        <Card className="mt-[10%] mx-auto max-w-md">
             <CardHeader className='flex flex-col items-center'>
+                <Image src={'/logo.svg'} alt={'Guideway'} width={80} height={80} />
                 <CardTitle className="flex w-full flex-col items-center">
-                    <Image src={'/logo.svg'} alt={'Guideway'} width={80} height={80} />
-                    <h1 className="text-center text-2xl">{title}</h1>
+                    <span className="text-center text-2xl">{title}</span>
                 </CardTitle>
                 <CardDescription>{description}</CardDescription>
             </CardHeader>
