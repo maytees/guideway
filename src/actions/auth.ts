@@ -1,0 +1,121 @@
+"use server";
+
+import { type ILogin, loginSchema, type IRegister, registerSchema } from "~/lib/validation";
+import { db } from "~/server/db";
+import bcrypt from "bcryptjs";
+import { cookies } from "next/headers";
+import { lucia } from "~/server/auth";
+
+export const login = async (values: ILogin): Promise<ActionResult> => {
+    "use server";
+    const fields = loginSchema.safeParse(values);
+
+    if (!fields.success) {
+        return {
+            error: "Invalid fields"
+        }
+    }
+
+    const {
+        email, password
+    } = fields.data;
+
+    const existingUser = await db.user.findUnique({
+        where: {
+            email
+        }
+    });
+
+    if (!existingUser) {
+        return {
+            error: `Invalid email or password`
+        };
+    }
+
+    // Is OAuth
+    if (existingUser.password === null) {
+        return {
+            error: "Invalid email or password"
+        };
+    }
+
+    const validPassword = await bcrypt.compare(password, existingUser.password);
+
+    if (!validPassword) {
+        return {
+            error: "Invalid email or password"
+        };
+    }
+
+    if (!existingUser.emailVerified) {
+        return {
+            error: "Please verify your email",
+            action: "EMAIL_NOT_VERIFIED"
+        };
+    }
+
+    const session = await lucia.createSession(existingUser.id, {});
+    const sessionCookie = lucia.createSessionCookie(session.id);
+    cookies()
+        .set(
+            sessionCookie.name,
+            sessionCookie.value,
+            sessionCookie.attributes
+        );
+
+    return {
+        success: "Logged in"
+    }
+}
+
+
+export const register = async (values: IRegister): Promise<ActionResult> => {
+    "use server";
+    const fields = registerSchema.safeParse(values);
+
+    if (!fields.success) {
+        return {
+            error: "Invalid fields"
+        }
+    }
+
+    const {
+        email, password
+    } = fields.data;
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = await db.user.create({
+        data: {
+            name: email,
+            password: hashedPassword,
+        }
+    });
+
+    if (!newUser) {
+        return {
+            error: "Something went wrong when creating user"
+        }
+    }
+
+    // TODO: Create verification link, then send the email using Resend
+
+    // TODO: Run this code on verification, not on sign up
+    // ...................................................
+    // const session = await lucia.createSession(newUser.id, {});
+    // const sessionCookie = lucia.createSessionCookie(session.id);
+    // cookies().set(
+    //     sessionCookie.name,
+    //     sessionCookie.value,
+    //     sessionCookie.attributes
+    // );
+
+    return {
+        success: "We sent a verification link to your email!"
+    }
+}
+
+interface ActionResult {
+    error?: string;
+    success?: string;
+    action?: "EMAIL_NOT_VERIFIED"
+}
