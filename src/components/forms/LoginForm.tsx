@@ -11,11 +11,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { login } from '~/actions/auth';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { ErrorComponent, SuccessComponent } from './FormInfo';
+import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {
     const [error, setError] = useState<string | undefined>();
     const [success, setSuccess] = useState<string | undefined>();
     const [isPending, startTransition] = useTransition();
+
+    const router = useRouter();
 
     const form = useForm<ILogin>({
         resolver: zodResolver(loginSchema),
@@ -76,7 +79,7 @@ const LoginForm = () => {
                                     </Link>
                                 </div>
                                 <FormControl>
-                                    <Input type="password" {...field} />
+                                    <Input type="password" placeholder="••••••••" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -86,17 +89,22 @@ const LoginForm = () => {
                         <ErrorComponent message={error} />
                         <SuccessComponent message={success} />
                         <Button className="w-full" type='submit'>Log in</Button>
-                        <p className="text-center w-full font-thin text-xs">OR</p>
-                        <Button className="w-full gap-x-2 " variant={"outline"}>
-                            <FaGoogle size={15} />
-                            <span>Log in with Google</span>
-                        </Button>
-                    </div>
-                    <div className="mt-4 text-center text-sm">
-                        Don&apos;t have an account?
-                        <Link href="/auth/register" className="underline ml-1">Register</Link>
+                        <p className="text-center w-full font-thin text-xs pt-2">OR</p>
                     </div>
                 </form>
+                <Button className="w-full gap-x-2 " variant={"outline"}
+                    onClick={
+                        () => {
+                            router.push("/auth/google")
+                        }
+                    }>
+                    <FaGoogle size={15} />
+                    <span>Log in with Google</span>
+                </Button>
+                <div className="mt-4 text-center text-sm">
+                    Don&apos;t have an account?
+                    <Link href="/auth/register" className="underline ml-1">Register</Link>
+                </div>
             </Form >
         </FormCard >
     )

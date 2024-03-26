@@ -1,7 +1,6 @@
-import { ActionResult } from 'next/dist/server/app-render/types';
+import { type ActionResult } from 'next/dist/server/app-render/types';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { userAgent } from 'next/server'
 import React from 'react'
 import { lucia, validateRequest } from '~/server/auth'
 

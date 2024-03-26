@@ -25,6 +25,8 @@ model User {
     isTwoFactorEnabled    Boolean                @default(false)
     twoFactorConfirmation TwoFactorConfirmation?
     Session               Session[]
+
+    google_id String? @unique
 }
 
 model Session {

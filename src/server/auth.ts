@@ -4,6 +4,13 @@ import { db } from "./db";
 import { env } from "~/env";
 import { cache } from "react";
 import { cookies } from "next/headers";
+import { Google } from "arctic";
+
+interface DatabaseUserAttributes {
+  email: string;
+  name: string;
+  google_id?: string;
+}
 
 const adapter = new PrismaAdapter(db.session, db.user);
 
@@ -17,9 +24,11 @@ export const lucia = new Lucia(adapter, {
       secure: env.NODE_ENV === "production",
     }
   },
-  getUserAttributes: (attributes: DatabaseUserAttributes) => {
+  getUserAttributes: (attributes): DatabaseUserAttributes => {
     return {
-      email: attributes.email
+      email: attributes.email,
+      name: attributes.name,
+      google_id: attributes.google_id,
     }
   }
 });
@@ -29,10 +38,6 @@ declare module "lucia" {
     Lucia: typeof lucia
     DatabaseUserAttributes: DatabaseUserAttributes
   }
-}
-
-interface DatabaseUserAttributes {
-  email: string;
 }
 
 // Checks if there is a current via cookie, if so then validate it,
@@ -66,3 +71,9 @@ export const validateRequest = cache(
     return res;
   }
 )
+
+export const google = new Google(
+  env.GOOGLE_CLIENT_ID,
+  env.GOOGLE_CLIENT_SECRET,
+  `${env.BASE_URL}/auth/google/callback`
+);

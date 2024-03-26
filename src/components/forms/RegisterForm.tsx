@@ -11,11 +11,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { register } from '~/actions/auth';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { ErrorComponent, SuccessComponent } from './FormInfo';
+import { useRouter } from 'next/navigation';
 
 const RegisterForm = () => {
     const [error, setError] = useState<string | undefined>();
     const [success, setSuccess] = useState<string | undefined>();
     const [isPending, startTransition] = useTransition();
+
+    const router = useRouter();
 
     const form = useForm<IRegister>({
         resolver: zodResolver(registerSchema),
@@ -116,17 +119,21 @@ const RegisterForm = () => {
                         <ErrorComponent message={error} />
                         <SuccessComponent message={success} />
                         <Button className="w-full" type='submit'>Register</Button>
-                        <p className="text-center w-full font-thin text-xs">OR</p>
-                        <Button className="w-full gap-x-2 " variant={"outline"}>
-                            <FaGoogle size={15} />
-                            <span>Register with Google</span>
-                        </Button>
-                    </div>
-                    <div className="mt-4 text-center text-sm">
-                        Already have an account?
-                        <Link href="/auth/login" className="underline ml-1">Log in</Link>
+                        <p className="text-center pt-2 w-full font-thin text-xs">OR</p>
                     </div>
                 </form>
+                <Button className="w-full gap-x-2" variant={"outline"}
+                    onClick={
+                        () => router.push("/auth/google")
+                    }
+                >
+                    <FaGoogle size={15} />
+                    <span>Register with Google</span>
+                </Button>
+                <div className="mt-4 text-center text-sm">
+                    Already have an account?
+                    <Link href="/auth/login" className="underline ml-1">Log in</Link>
+                </div>
             </Form >
         </FormCard >
     )
