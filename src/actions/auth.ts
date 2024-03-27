@@ -6,6 +6,12 @@ import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
 import { lucia, validateRequest } from "~/server/auth";
 
+interface ActionResult {
+    error?: string;
+    success?: string;
+    action?: "EMAIL_NOT_VERIFIED"
+}
+
 export const login = async (values: ILogin): Promise<ActionResult> => {
     "use server";
     const fields = loginSchema.safeParse(values);
@@ -203,8 +209,57 @@ export const updateUsername = async (id: string, values: IGoogleName): Promise<A
         success: "Username successfully set!"
     }
 }
-interface ActionResult {
-    error?: string;
-    success?: string;
-    action?: "EMAIL_NOT_VERIFIED"
+
+export const newVerification = async (token: string): Promise<ActionResult> => {
+    const existingToken = await db.verificationToken.findUnique({
+        where: {
+            token
+        }
+    });
+
+    if (!existingToken) {
+        return {
+            error: "Invalid link"
+        }
+    }
+
+    const hasExpired = new Date() > new Date(existingToken.expires);
+
+    if (hasExpired) {
+        return {
+            error: "Link expired"
+        }
+    }
+
+    const existingUser = await db.user.findUnique({
+        where: {
+            email: existingToken.email
+        }
+    });
+
+    if (!existingUser) {
+        return {
+            error: "Email does not exist"
+        }
+    }
+
+    await db.user.update({
+        where: {
+            id: existingUser.id
+        },
+        data: {
+            emailVerified: new Date(),
+            email: existingToken.email
+        }
+    });
+
+    await db.verificationToken.delete({
+        where: {
+            id: existingToken.id
+        }
+    });
+
+    return {
+        success: "Email verified!"
+    }
 }
