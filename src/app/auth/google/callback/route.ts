@@ -79,7 +79,6 @@ export async function GET(request: Request): Promise<Response> {
         const newUser = await db.user.create({
             data: {
                 google_id: googleUser.sub,
-                name: googleUser.name,
                 email: googleUser.email,
                 emailVerified: new Date()
             }
@@ -93,7 +92,7 @@ export async function GET(request: Request): Promise<Response> {
         return new Response(null, {
             status: 302,
             headers: {
-                Location: "/"
+                Location: `/auth/oauth?requiresName=true&id=${newUser.id}`
             }
         })
 

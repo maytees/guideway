@@ -5,6 +5,8 @@ import { env } from "~/env";
 import { cache } from "react";
 import { cookies } from "next/headers";
 import { Google } from "arctic";
+import { type NextResponse } from "next/server";
+import { redirect } from "next/navigation"
 
 interface DatabaseUserAttributes {
   email: string;
@@ -44,7 +46,7 @@ declare module "lucia" {
 // then update the cookie if necessary. Use cache() to prevent
 // unnecessary database calls
 export const validateRequest = cache(
-  async (): Promise<{ user: User; session: Session; } | { user: null; session: null; }> => {
+  async (noRedirect?: boolean): Promise<NextResponse | { user: User; session: Session; } | { user: null; session: null; }> => {
     const sessionId =
       cookies().get(lucia.sessionCookieName)?.value ?? null;
 
@@ -67,6 +69,14 @@ export const validateRequest = cache(
         cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
       }
     } catch { }
+
+    if (res.user) {
+      console.log("hi")
+      if (!res.user.name && !noRedirect) {
+        console.log("No name");
+        return redirect(`${env.BASE_URL}/auth/oauth?requiresName=true&id=${res.user.id}`)
+      }
+    }
 
     return res;
   }

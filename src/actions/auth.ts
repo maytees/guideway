@@ -1,10 +1,11 @@
 "use server";
 
-import { type ILogin, loginSchema, type IRegister, registerSchema } from "~/lib/validation";
+import { type ILogin, loginSchema, type IRegister, registerSchema, IGoogleName, goolgeNameSchema } from "~/lib/validation";
 import { db } from "~/server/db";
 import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
-import { lucia } from "~/server/auth";
+import { lucia, validateRequest } from "~/server/auth";
+import { NextResponse } from "next/server";
 
 export const login = async (values: ILogin): Promise<ActionResult> => {
     "use server";
@@ -139,6 +140,76 @@ export const register = async (values: IRegister): Promise<ActionResult> => {
 
 }
 
+export const updateUsername = async (id: string, values: IGoogleName): Promise<ActionResult> => {
+    "use server";
+    console.log("using server")
+    const fields = goolgeNameSchema.safeParse(values);
+
+    console.log(fields, "fields");
+
+    if (!fields.success) {
+        console.log("no success")
+        return {
+            error: "Invalid fields"
+        }
+    }
+
+    const { username } = fields.data;
+
+    console.log(username, "user name")
+
+    const validate = await validateRequest(true);
+
+    console.log(validate, "validate")
+
+    if ((validate instanceof NextResponse)) {
+        return {
+            error: "Unexpected response"
+        }
+    }
+
+    if (!validate.user) {
+        return {
+            error: "Unauthorized (1)"
+        }
+    }
+
+    if (validate.user.name) {
+        return {
+            error: "Username already set"
+        }
+    }
+
+    const user = await db.user.findUnique({
+        where: {
+            id
+        }
+    });
+
+    console.log(user, " user")
+
+    if (!user) {
+        console.log("no user")
+        return {
+            error: "Invalid email"
+        }
+    }
+
+    const updatedUser = await db.user.update({
+        where: {
+            id
+        },
+        data: {
+            name: username
+        }
+    });
+
+    console.log("updated", updatedUser)
+
+    return {
+        success: "Username successfully set!"
+    }
+}
 interface ActionResult {
     error?: string;
     success?: string;
