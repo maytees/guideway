@@ -177,6 +177,18 @@ export const updateUsername = async (id: string, values: IGoogleName): Promise<A
         }
     }
 
+    const existsUsername = await db.user.findUnique({
+        where: {
+            name: username
+        }
+    });
+
+    if (existsUsername) {
+        return {
+            error: "Username already exists"
+        }
+    }
+
     await db.user.update({
         where: {
             id
