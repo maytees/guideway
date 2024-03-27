@@ -1,7 +1,6 @@
 import { google, lucia } from "../../../../server/auth";
 import { cookies } from "next/headers";
-import { OAuth2RequestError, generateCodeVerifier } from "arctic";
-import { generateId } from "lucia";
+import { OAuth2RequestError } from "arctic";
 import { db } from "~/server/db";
 
 type GoogleUser = {

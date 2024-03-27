@@ -5,8 +5,6 @@ import { db } from "~/server/db";
 import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
 import { lucia } from "~/server/auth";
-import { Prisma } from "@prisma/client";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 export const login = async (values: ILogin): Promise<ActionResult> => {
     "use server";
