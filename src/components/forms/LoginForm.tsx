@@ -38,11 +38,9 @@ const LoginForm = () => {
             login(values)
                 .then((data) => {
                     if (data?.error) {
-                        form.reset();
                         setError(data.error);
                     }
                 }).catch(() => {
-                    form.reset();
                     setError("Something went wrong");
                 })
         })
@@ -87,7 +85,6 @@ const LoginForm = () => {
                     />
                     <div className="space-y-2 mt-5">
                         <ErrorComponent message={error} />
-                        <SuccessComponent message={success} />
                         <Button className="w-full" disabled={isPending} type='submit'>Log in</Button>
                         <p className="text-center w-full font-thin text-xs pt-2">OR</p>
                     </div>

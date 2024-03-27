@@ -57,84 +57,89 @@ const RegisterForm = () => {
 
     return (
         <FormCard title={"Hello there"} description={'Please create an account'}>
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <FormField
-                        disabled={isPending}
-                        control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                            <FormItem >
-                                <FormLabel>Email</FormLabel>
-                                <FormControl>
-                                    <Input type="email" disabled={isPending} placeholder='example@example.com' {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        disabled={isPending}
-                        control={form.control}
-                        name="username"
-                        render={({ field }) => (
-                            <FormItem >
-                                <FormLabel>Username</FormLabel>
-                                <FormControl>
-                                    <Input type="text" disabled={isPending} placeholder='jhon_doe' {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        disabled={isPending}
-                        control={form.control}
-                        name="password"
-                        render={({ field }) => (
-                            <FormItem className='mt-3'>
-                                <FormLabel htmlFor="password">Password</FormLabel>
-                                <FormControl>
-                                    <Input type="password" disabled={isPending} placeholder="Enter your password" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        disabled={isPending}
-                        control={form.control}
-                        name="confirmPassword"
-                        render={({ field }) => (
-                            <FormItem className='mt-3'>
-                                <FormLabel htmlFor="password">Confirm password</FormLabel>
-                                <FormControl>
-                                    <Input type="password" disabled={isPending} placeholder='Confirm your password' {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <div className="space-y-2 mt-5">
-                        <ErrorComponent message={error} />
-                        <SuccessComponent message={success} />
-                        <Button className="w-full" type='submit'>Register</Button>
-                        <p className="text-center pt-2 w-full font-thin text-xs">OR</p>
+            {!success ?
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)}>
+                        <FormField
+                            disabled={isPending}
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem >
+                                    <FormLabel>Email</FormLabel>
+                                    <FormControl>
+                                        <Input type="email" disabled={isPending} placeholder='example@example.com' {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            disabled={isPending}
+                            control={form.control}
+                            name="username"
+                            render={({ field }) => (
+                                <FormItem >
+                                    <FormLabel>Username</FormLabel>
+                                    <FormControl>
+                                        <Input type="text" disabled={isPending} placeholder='jhon_doe' {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            disabled={isPending}
+                            control={form.control}
+                            name="password"
+                            render={({ field }) => (
+                                <FormItem className='mt-3'>
+                                    <FormLabel htmlFor="password">Password</FormLabel>
+                                    <FormControl>
+                                        <Input type="password" disabled={isPending} placeholder="Enter your password" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            disabled={isPending}
+                            control={form.control}
+                            name="confirmPassword"
+                            render={({ field }) => (
+                                <FormItem className='mt-3'>
+                                    <FormLabel htmlFor="password">Confirm password</FormLabel>
+                                    <FormControl>
+                                        <Input type="password" disabled={isPending} placeholder='Confirm your password' {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <div className="space-y-2 mt-5">
+                            <ErrorComponent message={error} />
+                            <Button className="w-full" type='submit'>Register</Button>
+                            <p className="text-center pt-2 w-full font-thin text-xs">OR</p>
+                        </div>
+                    </form>
+                    <Button className="w-full gap-x-2" variant={"outline"}
+                        onClick={
+                            () => router.push("/auth/google")
+                        }
+                    >
+                        <FaGoogle size={15} />
+                        <span>Register with Google</span>
+                    </Button>
+                    <div className="mt-4 text-center text-sm">
+                        Already have an account?
+                        <Link href="/auth/login" className="underline ml-1">Log in</Link>
                     </div>
-                </form>
-                <Button className="w-full gap-x-2" variant={"outline"}
-                    onClick={
-                        () => router.push("/auth/google")
-                    }
-                >
-                    <FaGoogle size={15} />
-                    <span>Register with Google</span>
-                </Button>
-                <div className="mt-4 text-center text-sm">
-                    Already have an account?
-                    <Link href="/auth/login" className="underline ml-1">Log in</Link>
-                </div>
-            </Form >
+                </Form >
+                :
+                <>
+                    <SuccessComponent message={success} />
+                </>
+            }
         </FormCard >
     )
 }
