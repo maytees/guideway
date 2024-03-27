@@ -10,12 +10,11 @@ import { type ILogin, loginSchema } from '~/lib/validation';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login } from '~/actions/auth';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
-import { ErrorComponent, SuccessComponent } from './FormInfo';
+import { ErrorComponent } from './FormInfo';
 import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {
     const [error, setError] = useState<string | undefined>();
-    const [success, setSuccess] = useState<string | undefined>();
     const [isPending, startTransition] = useTransition();
 
     const router = useRouter();
@@ -32,7 +31,6 @@ const LoginForm = () => {
         values: ILogin
     ) {
         setError("");
-        setSuccess("");
 
         startTransition(() => {
             login(values)
