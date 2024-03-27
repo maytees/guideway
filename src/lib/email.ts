@@ -1,5 +1,4 @@
 import { Resend } from "resend";
-import { string } from "zod";
 import { env } from "~/env";
 
 const resend = new Resend(env.RESEND_KEY);
