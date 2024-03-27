@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useTransition } from 'react'
+import React, { useEffect, useState, useTransition } from 'react'
 import FormCard from './FormCard'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
@@ -11,12 +11,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { register } from '~/actions/auth';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { ErrorComponent, SuccessComponent } from './FormInfo';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const RegisterForm = () => {
     const [error, setError] = useState<string | undefined>();
     const [success, setSuccess] = useState<string | undefined>();
     const [isPending, startTransition] = useTransition();
+
+    const searchParams = useSearchParams();
+    const errorCode = searchParams.get("code");
 
     const router = useRouter();
 
@@ -29,6 +32,14 @@ const RegisterForm = () => {
             confirmPassword: ''
         }
     });
+
+    useEffect(() => {
+        if (errorCode === "409") {
+            setError("Account with email already exists")
+            return;
+        }
+
+    }, [errorCode]);
 
     function onSubmit(
         values: IRegister

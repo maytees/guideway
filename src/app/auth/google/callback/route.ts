@@ -2,6 +2,8 @@ import { google, lucia } from "../../../../server/auth";
 import { cookies } from "next/headers";
 import { OAuth2RequestError } from "arctic";
 import { db } from "~/server/db";
+import { NextResponse } from "next/server";
+import { env } from "~/env";
 
 type GoogleUser = {
     sub: string;
@@ -50,7 +52,7 @@ export async function GET(request: Request): Promise<Response> {
         }
 
         if (!googleUser.email_verified) {
-            return new Response("Email not verified", {
+            new Response("Email not verified", {
                 status: 400
             });
         }
@@ -76,6 +78,16 @@ export async function GET(request: Request): Promise<Response> {
             });
         }
 
+        const emailExists = await db.user.findUnique({
+            where: {
+                email: googleUser.email
+            }
+        });
+
+        if (emailExists) {
+            return NextResponse.redirect(env.BASE_URL + "/auth/register?code=409")
+        }
+
         const newUser = await db.user.create({
             data: {
                 google_id: googleUser.sub,
@@ -97,6 +109,7 @@ export async function GET(request: Request): Promise<Response> {
         })
 
     } catch (error) {
+        console.log(error, "er");
         if (error instanceof OAuth2RequestError) {
             return new Response(null, {
                 status: 400
