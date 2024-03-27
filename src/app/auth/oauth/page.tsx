@@ -38,7 +38,7 @@ const Google = () => {
             setError("Id not provided")
             return;
         }
-    }, [])
+    }, [id])
 
     function onSubmit(
         values: IGoogleName

@@ -1,14 +1,21 @@
 import { type ActionResult } from 'next/dist/server/app-render/types';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { NextResponse } from 'next/server';
 import React from 'react'
 import { lucia, validateRequest } from '~/server/auth'
 
 const Page = async () => {
-    const { user } = await validateRequest();
+    const validate = await validateRequest();
+
+    if (validate instanceof NextResponse) {
+        return validate
+    }
+
+    const { user } = validate;
 
     if (!user) {
-        return redirect("/auth/login");
+        redirect('/auth/login')
     }
 
     return (
@@ -26,6 +33,7 @@ export default Page
 async function signout(): Promise<ActionResult> {
     "use server";
     const { session } = await validateRequest();
+
     if (!session) {
         return {
             error: "Unauthorized"

@@ -1,11 +1,10 @@
 "use server";
 
-import { type ILogin, loginSchema, type IRegister, registerSchema, IGoogleName, goolgeNameSchema } from "~/lib/validation";
+import { type ILogin, loginSchema, type IRegister, registerSchema, type IGoogleName, goolgeNameSchema } from "~/lib/validation";
 import { db } from "~/server/db";
 import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
 import { lucia, validateRequest } from "~/server/auth";
-import { NextResponse } from "next/server";
 
 export const login = async (values: ILogin): Promise<ActionResult> => {
     "use server";
@@ -142,13 +141,9 @@ export const register = async (values: IRegister): Promise<ActionResult> => {
 
 export const updateUsername = async (id: string, values: IGoogleName): Promise<ActionResult> => {
     "use server";
-    console.log("using server")
     const fields = goolgeNameSchema.safeParse(values);
 
-    console.log(fields, "fields");
-
     if (!fields.success) {
-        console.log("no success")
         return {
             error: "Invalid fields"
         }
@@ -156,17 +151,7 @@ export const updateUsername = async (id: string, values: IGoogleName): Promise<A
 
     const { username } = fields.data;
 
-    console.log(username, "user name")
-
     const validate = await validateRequest(true);
-
-    console.log(validate, "validate")
-
-    if ((validate instanceof NextResponse)) {
-        return {
-            error: "Unexpected response"
-        }
-    }
 
     if (!validate.user) {
         return {
@@ -186,16 +171,13 @@ export const updateUsername = async (id: string, values: IGoogleName): Promise<A
         }
     });
 
-    console.log(user, " user")
-
     if (!user) {
-        console.log("no user")
         return {
             error: "Invalid email"
         }
     }
 
-    const updatedUser = await db.user.update({
+    await db.user.update({
         where: {
             id
         },
@@ -204,7 +186,6 @@ export const updateUsername = async (id: string, values: IGoogleName): Promise<A
         }
     });
 
-    console.log("updated", updatedUser)
 
     return {
         success: "Username successfully set!"
