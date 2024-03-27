@@ -5,6 +5,8 @@ import { db } from "~/server/db";
 import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
 import { lucia } from "~/server/auth";
+import { Prisma } from "@prisma/client";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 export const login = async (values: ILogin): Promise<ActionResult> => {
     "use server";
@@ -80,14 +82,38 @@ export const register = async (values: IRegister): Promise<ActionResult> => {
     }
 
     const {
-        email, password
+        email, password, username: name
     } = fields.data;
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    const userExists = await db.user.findFirst({
+        where: {
+            OR: [
+                { email },
+                { name }
+            ]
+        }
+    });
+
+    if (userExists) {
+        if (userExists.email === email) {
+            return {
+                error: "Email already exists"
+            }
+        }
+
+        if (userExists.name === name) {
+            return {
+                error: "Username already exists"
+            }
+        }
+    }
+
     const newUser = await db.user.create({
         data: {
-            name: email,
+            name,
             password: hashedPassword,
+            email
         }
     });
 
@@ -112,6 +138,7 @@ export const register = async (values: IRegister): Promise<ActionResult> => {
     return {
         success: "We sent a verification link to your email!"
     }
+
 }
 
 interface ActionResult {

@@ -81,6 +81,8 @@ export async function GET(request: Request): Promise<Response> {
             data: {
                 google_id: googleUser.sub,
                 name: googleUser.name,
+                email: googleUser.email,
+                emailVerified: new Date()
             }
         });
 
