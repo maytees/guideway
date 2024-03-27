@@ -60,7 +60,7 @@ const LoginForm = () => {
                             <FormItem >
                                 <FormLabel>Email</FormLabel>
                                 <FormControl>
-                                    <Input type="email" placeholder='example@example.com' {...field} />
+                                    <Input type="email" disabled={isPending} placeholder='example@example.com' {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -79,7 +79,7 @@ const LoginForm = () => {
                                     </Link>
                                 </div>
                                 <FormControl>
-                                    <Input type="password" placeholder="••••••••" {...field} />
+                                    <Input type="password" disabled={isPending} placeholder="••••••••" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -88,11 +88,11 @@ const LoginForm = () => {
                     <div className="space-y-2 mt-5">
                         <ErrorComponent message={error} />
                         <SuccessComponent message={success} />
-                        <Button className="w-full" type='submit'>Log in</Button>
+                        <Button className="w-full" disabled={isPending} type='submit'>Log in</Button>
                         <p className="text-center w-full font-thin text-xs pt-2">OR</p>
                     </div>
                 </form>
-                <Button className="w-full gap-x-2 " variant={"outline"}
+                <Button className="w-full gap-x-2" disabled={isPending} variant={"outline"}
                     onClick={
                         () => {
                             router.push("/auth/google")

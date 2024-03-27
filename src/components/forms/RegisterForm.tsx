@@ -67,7 +67,7 @@ const RegisterForm = () => {
                             <FormItem >
                                 <FormLabel>Email</FormLabel>
                                 <FormControl>
-                                    <Input type="email" placeholder='example@example.com' {...field} />
+                                    <Input type="email" disabled={isPending} placeholder='example@example.com' {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -81,7 +81,7 @@ const RegisterForm = () => {
                             <FormItem >
                                 <FormLabel>Username</FormLabel>
                                 <FormControl>
-                                    <Input type="text" placeholder='jhon_doe' {...field} />
+                                    <Input type="text" disabled={isPending} placeholder='jhon_doe' {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -95,7 +95,7 @@ const RegisterForm = () => {
                             <FormItem className='mt-3'>
                                 <FormLabel htmlFor="password">Password</FormLabel>
                                 <FormControl>
-                                    <Input type="password" placeholder="Enter your password" {...field} />
+                                    <Input type="password" disabled={isPending} placeholder="Enter your password" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -109,7 +109,7 @@ const RegisterForm = () => {
                             <FormItem className='mt-3'>
                                 <FormLabel htmlFor="password">Confirm password</FormLabel>
                                 <FormControl>
-                                    <Input type="password" placeholder='Confirm your password' {...field} />
+                                    <Input type="password" disabled={isPending} placeholder='Confirm your password' {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
