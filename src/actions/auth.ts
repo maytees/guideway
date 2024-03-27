@@ -210,7 +210,7 @@ export const updateUsername = async (id: string, values: IGoogleName): Promise<A
     }
 }
 
-export const newVerification = async (token: string): Promise<ActionResult> => {
+const verifyUser = async (token: string): Promise<ActionResult> => {
     const existingToken = await db.verificationToken.findUnique({
         where: {
             token
