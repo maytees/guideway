@@ -8,10 +8,12 @@ import Link from 'next/link'
 import { useForm } from 'react-hook-form';
 import { type ILogin, loginSchema } from '~/lib/validation';
 import { zodResolver } from "@hookform/resolvers/zod";
-import { login } from '~/actions/auth';
+import { login, resendVerificationEmail } from '~/actions/auth';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { ErrorComponent } from './FormInfo';
 import { useRouter } from 'next/navigation';
+import { sendVerificationEmail } from '~/lib/email';
+import { genVerifiationToken } from '~/lib/tokens';
 
 const LoginForm = () => {
     const [error, setError] = useState<string | undefined>();
@@ -37,6 +39,11 @@ const LoginForm = () => {
                 .then((data) => {
                     if (data?.error) {
                         setError(data.error);
+                    }
+
+                    if (data?.success) {
+                        form.reset();
+                        router.push("/secret");
                     }
                 }).catch(() => {
                     setError("Something went wrong");

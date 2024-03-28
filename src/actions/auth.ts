@@ -5,6 +5,11 @@ import { db } from "~/server/db";
 import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
 import { lucia, validateRequest } from "~/server/auth";
+import { sendVerificationEmail } from "~/lib/email";
+import { genVerifiationToken } from "~/lib/tokens";
+import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
+import { env } from "~/env";
 
 interface ActionResult {
     error?: string;
@@ -127,7 +132,9 @@ export const register = async (values: IRegister): Promise<ActionResult> => {
         }
     }
 
-    // TODO: Create verification link, then send the email using Resend
+    const verificationToken = await genVerifiationToken(email);
+
+    await sendVerificationEmail(email, verificationToken, name);
 
     // TODO: Run this code on verification, not on sign up
     // ...................................................
@@ -143,6 +150,42 @@ export const register = async (values: IRegister): Promise<ActionResult> => {
         success: "We sent a verification link to your email!"
     }
 
+}
+
+export const resendVerificationEmail = async (email: string): Promise<ActionResult> => {
+    "use server";
+    console.log(email)
+    const user = await db.user.findUnique({
+        where: {
+            email
+        }
+    });
+
+    if (!user) {
+        return {
+            error: "Invalid email"
+        }
+    }
+
+    if (user.emailVerified) {
+        return {
+            error: "Email already verified"
+        }
+    }
+
+    if (!user.name) {
+        return {
+            error: "Username not set"
+        }
+    }
+
+    const verificationToken = await genVerifiationToken(email);
+
+    await sendVerificationEmail(email, verificationToken, user.name);
+
+    return {
+        success: "We sent a verification link to your email!"
+    }
 }
 
 export const updateUsername = async (id: string, values: IGoogleName): Promise<ActionResult> => {
@@ -210,7 +253,7 @@ export const updateUsername = async (id: string, values: IGoogleName): Promise<A
     }
 }
 
-const verifyUser = async (token: string): Promise<ActionResult> => {
+export const verifyUser = async (token: string): Promise<ActionResult> => {
     const existingToken = await db.verificationToken.findUnique({
         where: {
             token
@@ -258,6 +301,16 @@ const verifyUser = async (token: string): Promise<ActionResult> => {
             id: existingToken.id
         }
     });
+
+    // Run this code on verification, not on sign up
+    // ...................................................
+    const session = await lucia.createSession(existingUser.id, {});
+    const sessionCookie = lucia.createSessionCookie(session.id);
+    cookies().set(
+        sessionCookie.name,
+        sessionCookie.value,
+        sessionCookie.attributes
+    );
 
     return {
         success: "Email verified!"
