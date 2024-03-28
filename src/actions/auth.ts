@@ -7,9 +7,6 @@ import { cookies } from "next/headers";
 import { lucia, validateRequest } from "~/server/auth";
 import { sendVerificationEmail } from "~/lib/email";
 import { genVerifiationToken } from "~/lib/tokens";
-import { redirect } from "next/navigation";
-import { NextResponse } from "next/server";
-import { env } from "~/env";
 
 interface ActionResult {
     error?: string;
