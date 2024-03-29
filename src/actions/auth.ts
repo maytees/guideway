@@ -1,12 +1,12 @@
 "use server";
 
-import { type ILogin, loginSchema, type IRegister, registerSchema, type IGoogleName, goolgeNameSchema } from "~/lib/validation";
+import { type ILogin, loginSchema, type IRegister, registerSchema, type IGoogleName, goolgeNameSchema, type IForgotPassword, forgotPasswordSchema, type IPasswordReset, passwordResetSchema } from "~/lib/validation";
 import { db } from "~/server/db";
 import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
 import { lucia, validateRequest } from "~/server/auth";
-import { sendVerificationEmail } from "~/lib/email";
-import { genVerifiationToken } from "~/lib/tokens";
+import { sendPasswordResetEmail, sendVerificationEmail } from "~/lib/email";
+import { genResetPasswordToken, genVerifiationToken, getPasswordResetTokenByToken } from "~/lib/tokens";
 import { type LoginActions } from "~/lib/types";
 import { redirect } from "next/navigation";
 
@@ -146,7 +146,7 @@ export const register = async (values: IRegister): Promise<ActionResult> => {
     );
 
     return {
-        success: "We sent a verification link to your email!"
+        success: "Check your email!"
     }
 
 }
@@ -183,7 +183,7 @@ export const resendVerificationEmail = async (email: string): Promise<ActionResu
     await sendVerificationEmail(email, verificationToken, user.name);
 
     return {
-        success: "We sent a verification link to your email!"
+        success: "Check your email!"
     }
 }
 
@@ -332,4 +332,106 @@ export const verifyUser = async (token: string): Promise<ActionResult> => {
     return {
         success: "Email verified!"
     }
+}
+
+export const forgotPassword = async (values: IForgotPassword) => {
+    "use server";
+
+    const fields = forgotPasswordSchema.safeParse(values);
+
+    if (!fields.success) {
+        return {
+            error: "Invalid fields"
+        }
+    }
+
+    const {
+        email
+    } = fields.data;
+
+    const existingUser = await db.user.findUnique({
+        where: {
+            email
+        }
+    });
+
+    if (!existingUser) {
+        return {
+            error: "Invalid email"
+        }
+    }
+
+    if (!existingUser.name) {
+        return {
+            error: "Invalid email (2)"
+        }
+    }
+
+    const token = await genResetPasswordToken(email);
+
+    await sendPasswordResetEmail(email, token, existingUser.name);
+
+    return {
+        success: "Check your email!"
+    }
+}
+
+export const resetPassword = async (token: string | null, values: IPasswordReset): Promise<ActionResult> => {
+
+    if (!token) {
+        return { error: "Invalid link (missing token)!" };
+    }
+
+    const fields = passwordResetSchema.safeParse(values);
+
+    if (!fields.success) {
+        return { error: "Invalid fields" }
+    }
+
+    const { confirmPassword, newPassword } = fields.data
+
+    const existingToken = await getPasswordResetTokenByToken(token);
+
+    if (!existingToken) return { error: "Invalid link!" };
+
+    const hasExpired = new Date() > new Date(existingToken.expires);
+
+    if (hasExpired) {
+        return { error: "Link expired!" }
+    }
+
+    if (newPassword !== confirmPassword) {
+        return { error: "Passwords do not match!" }
+    }
+
+    const existingUser = await db.user.findUnique({
+        where: {
+            email: existingToken.email
+        }
+    });
+
+    if (!existingUser) {
+        return { error: "Email does not exist!" };
+    }
+
+    if (!existingUser?.password) {
+        return { error: "Invalid email! (This email is connected to an OAuth provider)" }
+    }
+
+    await db.user.update({
+        where: {
+            id: existingUser.id
+        },
+        data: {
+            password: await bcrypt.hash(newPassword, 10)
+        }
+    });
+
+    await db.passwordResetToken.delete({
+        where: {
+            id: existingToken.id
+        }
+    });
+
+    return { success: "Password has been reset!" };
 }
