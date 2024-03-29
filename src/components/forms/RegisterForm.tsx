@@ -51,7 +51,6 @@ const RegisterForm = () => {
             register(values)
                 .then((data) => {
                     if (data?.error) {
-                        form.reset();
                         setError(data.error);
                     }
 
@@ -90,7 +89,7 @@ const RegisterForm = () => {
                             control={form.control}
                             name="username"
                             render={({ field }) => (
-                                <FormItem >
+                                <FormItem className='mt-3'>
                                     <FormLabel>Username</FormLabel>
                                     <FormControl>
                                         <Input type="text" disabled={isPending} placeholder='jhon_doe' {...field} />
@@ -129,11 +128,11 @@ const RegisterForm = () => {
                         />
                         <div className="space-y-2 mt-5">
                             <ErrorComponent message={error} />
-                            <Button className="w-full" type='submit'>Register</Button>
+                            <Button className="w-full" type='submit' disabled={isPending}>Register</Button>
                             <p className="text-center pt-2 w-full font-thin text-xs">OR</p>
                         </div>
                     </form>
-                    <Button className="w-full gap-x-2" variant={"outline"}
+                    <Button className="w-full gap-x-2" variant={"outline"} disabled={isPending}
                         onClick={
                             () => router.push("/auth/google")
                         }
@@ -147,9 +146,10 @@ const RegisterForm = () => {
                     </div>
                 </Form >
                 :
-                <>
+                <div className='mx-auto w-full'>
                     <SuccessComponent message={success} />
-                </>
+                    <p className='text-center w-full font-normal text-sm mt-2'>Go <Link href="/" className="underline">home</Link></p>
+                </div>
             }
         </FormCard >
     )

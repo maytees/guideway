@@ -7,11 +7,13 @@ import { cookies } from "next/headers";
 import { lucia, validateRequest } from "~/server/auth";
 import { sendVerificationEmail } from "~/lib/email";
 import { genVerifiationToken } from "~/lib/tokens";
+import { type LoginActions } from "~/lib/types";
+import { redirect } from "next/navigation";
 
 interface ActionResult {
     error?: string;
     success?: string;
-    action?: "EMAIL_NOT_VERIFIED"
+    action?: LoginActions
 }
 
 export const login = async (values: ILogin): Promise<ActionResult> => {
@@ -55,12 +57,12 @@ export const login = async (values: ILogin): Promise<ActionResult> => {
         };
     }
 
-    if (!existingUser.emailVerified) {
-        return {
-            error: "Please verify your email",
-            action: "EMAIL_NOT_VERIFIED"
-        };
-    }
+    // if (!existingUser.emailVerified) {
+    //     return {
+    //         error: "Please verify your email",
+    //         action: "EMAIL_NOT_VERIFIED"
+    //     };
+    // }
 
     const session = await lucia.createSession(existingUser.id, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
@@ -135,13 +137,13 @@ export const register = async (values: IRegister): Promise<ActionResult> => {
 
     // TODO: Run this code on verification, not on sign up
     // ...................................................
-    // const session = await lucia.createSession(newUser.id, {});
-    // const sessionCookie = lucia.createSessionCookie(session.id);
-    // cookies().set(
-    //     sessionCookie.name,
-    //     sessionCookie.value,
-    //     sessionCookie.attributes
-    // );
+    const session = await lucia.createSession(newUser.id, {});
+    const sessionCookie = lucia.createSessionCookie(session.id);
+    cookies().set(
+        sessionCookie.name,
+        sessionCookie.value,
+        sessionCookie.attributes
+    );
 
     return {
         success: "We sent a verification link to your email!"
@@ -248,6 +250,24 @@ export const updateUsername = async (id: string, values: IGoogleName): Promise<A
     return {
         success: "Username successfully set!"
     }
+}
+
+export const signout = async (): Promise<ActionResult> => {
+    "use server";
+    const { session } = await validateRequest();
+
+    if (!session) {
+        return {
+            error: "Unauthorized"
+        }
+    }
+
+    await lucia.invalidateSession(session.id);
+
+    const sessionCookie = lucia.createBlankSessionCookie();
+    cookies()
+        .set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+    return redirect("/auth/login");
 }
 
 export const verifyUser = async (token: string): Promise<ActionResult> => {

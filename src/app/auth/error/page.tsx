@@ -1,42 +1,45 @@
-"use client";
+// "use client";
 
-import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react'
-import FormCard from '~/components/forms/FormCard';
-import { ErrorComponent } from '~/components/forms/FormInfo';
-import { Button } from '~/components/ui/button';
+// import { useRouter, useSearchParams } from 'next/navigation';
+// import React, { useEffect, useState } from 'react'
+// import FormCard from '~/components/forms/FormCard';
+// import { ErrorComponent } from '~/components/forms/FormInfo';
+// import { Button } from '~/components/ui/button';
 
-const Error = () => {
-    const searchParams = useSearchParams();
-    const errorCode = searchParams.get("code");
+// // Returns JSX page of error
+// const getErrorPage = (code: string | null): React.ReactNode | null => {
+//     switch (code) {
+//         case "409":
+//             return null
+//         case "410":
+//             return VerifyEmail()
+//         default:
+//             return null
+//     }
+// }
 
-    const [error, setError] = useState<string | undefined>();
+// const VerifyEmail = () => {
+//     return (
+//         <div>
+//             Email needs verifying
+//         </div>
+//     )
+// }
 
-    const router = useRouter();
+// const Error = () => {
+//     const searchParams = useSearchParams();
+//     const errorCode = searchParams.get("code");
 
-    useEffect(() => {
-        if (!errorCode) {
-            setError("Error not provided")
-            return;
-        }
+//     return getErrorPage(errorCode);
+//     // <FormCard title={"Oops.."} description={"Something went wrong.."}>
+//     //     <div className="mt-2 space-y-2">
+//     //         <ErrorComponent message={error} />
+//     //         <Button type="submit" className='w-full' onClick={() => {
+//     //             router.push("/auth/register")
+//     //         }}>Back to register</Button>
+//     //     </div>
+//     // </FormCard >
 
-        if (errorCode === "409") {
-            setError("Account with email already exists")
-            return;
-        }
+// }
 
-    }, [errorCode]);
-
-    return (
-        <FormCard title={"Oops.."} description={"Something went wrong.."}>
-            <div className="mt-2 space-y-2">
-                <ErrorComponent message={error} />
-                <Button type="submit" className='w-full' onClick={() => {
-                    router.push("/auth/register")
-                }}>Back to register</Button>
-            </div>
-        </FormCard >
-    )
-}
-
-export default Error
+// export default Error
