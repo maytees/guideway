@@ -1,5 +1,5 @@
-import React from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
+import React from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import Image from "next/image";
 
 const FormCard = (
@@ -26,7 +26,7 @@ const FormCard = (
                 {children}
             </CardContent>
         </Card>
-    )
-}
+    );
+};
 
-export default FormCard
+export default FormCard;

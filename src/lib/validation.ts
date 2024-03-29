@@ -32,18 +32,18 @@ export const passwordResetSchema = z.object({
             path: ["confirmPassword"],
         });
     }
-})
+});
 
 export const forgotPasswordSchema = z.object({
     email: z.string().email({ message: "Please use a valid email address" }),
-})
+});
 
 export const goolgeNameSchema = z.object({
     username: z.string().min(3, { message: "Username must be at least 3 characters long" })
         .refine(s => !s.includes(" "), "Username cannot contain spaces")
         .refine(s => s.length < 31, "Username must be less than 31 characters long")
         .refine(s => /^[a-z0-9_-]+$/.test(s), "Username can only contain letters, numbers, dashes and underscores")
-})
+});
 
 export type ILogin = z.infer<typeof loginSchema>;
 export type IRegister = z.infer<typeof registerSchema>;

@@ -5,7 +5,7 @@ import { env } from "~/env";
 import { cache } from "react";
 import { cookies } from "next/headers";
 import { Google } from "arctic";
-import { redirect } from "next/navigation"
+import { redirect } from "next/navigation";
 
 interface DatabaseUserAttributes {
   email: string;
@@ -30,7 +30,7 @@ export const lucia = new Lucia(adapter, {
       email: attributes.email,
       name: attributes.name,
       google_id: attributes.google_id,
-    }
+    };
   }
 });
 
@@ -53,7 +53,7 @@ export const validateRequest = cache(
       return {
         user: null,
         session: null
-      }
+      };
     }
 
     const res = await lucia.validateSession(sessionId);
@@ -70,12 +70,12 @@ export const validateRequest = cache(
     } catch { }
 
     if (res.user && !res.user.name && !noRedirect) {
-      return redirect(`${env.BASE_URL}/auth/oauth?requiresName=true&id=${res.user.id}`)
+      return redirect(`${env.BASE_URL}/auth/oauth?requiresName=true&id=${res.user.id}`);
     }
 
     return res;
   }
-)
+);
 
 export const google = new Google(
   env.GOOGLE_CLIENT_ID,

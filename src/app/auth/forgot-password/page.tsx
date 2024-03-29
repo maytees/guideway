@@ -1,6 +1,6 @@
 "use client";
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useState, useTransition } from 'react'
+import React, { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { forgotPassword } from '~/actions/auth';
 import FormCard from '~/components/forms/FormCard';
@@ -34,7 +34,7 @@ const ForgotPasswordPage = () => {
             }).catch(() => {
                 setError("Something went wrong");
             });
-        })
+        });
     }
     return (
         <FormCard title="Start new" description={success ? "Check your email" : "Send a password reset link"}>
@@ -66,8 +66,8 @@ const ForgotPasswordPage = () => {
                 </Form>
             </> : <EmailNotif message={success} email={form.getValues("email")} />}
         </FormCard>
-    )
-}
+    );
+};
 
 function EmailNotif(
     {
@@ -78,6 +78,7 @@ function EmailNotif(
         email: string
     }
 ) {
+
     return (
         <div className="flex flex-col space-y-2 justify-center">
             <SuccessComponent message={message} />
@@ -85,8 +86,8 @@ function EmailNotif(
                 <span className="font-bold">{email}</span>
             </h1>
         </div >
-    )
+    );
 }
 
 
-export default ForgotPasswordPage
+export default ForgotPasswordPage;

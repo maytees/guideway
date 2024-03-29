@@ -1,7 +1,7 @@
 "use client";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSearchParams } from 'next/navigation';
-import React, { useState, useTransition } from 'react'
+import React, { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { resetPassword } from '~/actions/auth';
 import FormCard from '~/components/forms/FormCard';
@@ -50,7 +50,7 @@ const ResetPasswordPage = () => {
                 setError("Something went wrong");
             });
 
-        })
+        });
     }
 
     return (
@@ -106,7 +106,7 @@ const ResetPasswordPage = () => {
                     <Button variant="default" className="w-full mt-5" onClick={() => router.push("/auth/login")}>Login</Button>
                 </div>}
         </FormCard>
-    )
-}
+    );
+};
 
-export default ResetPasswordPage
+export default ResetPasswordPage;

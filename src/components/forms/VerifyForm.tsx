@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react';
 import { verifyUser } from '~/actions/auth';
 import { HashLoader } from "react-spinners";
 import { Button } from '../ui/button';
@@ -25,14 +25,14 @@ const VerifyForm = () => {
 
         verifyUser(token).then((data) => {
             setError(data.error);
-            setSuccess(data.success)
+            setSuccess(data.success);
         }).catch(() => {
-            setError("Something went wrong")
+            setError("Something went wrong");
         });
     }, [token]);
 
     useEffect(() => {
-        onSubmit()
+        onSubmit();
     }, [onSubmit]);
 
     return (
@@ -46,7 +46,7 @@ const VerifyForm = () => {
                 onClick={() => router.push("/secret")}
             >Go home</Button>
         </FormCard>
-    )
-}
+    );
+};
 
-export default VerifyForm
+export default VerifyForm;

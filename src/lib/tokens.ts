@@ -23,10 +23,10 @@ export const genVerifiationToken = async (email: string) => {
             expires,
             email
         }
-    })
+    });
 
-    return token
-}
+    return token;
+};
 
 export const genResetPasswordToken = async (email: string) => {
     const token = uuidv4();
@@ -50,7 +50,7 @@ export const genResetPasswordToken = async (email: string) => {
     });
 
     return token;
-}
+};
 
 
 
@@ -66,7 +66,7 @@ export const getVerificationTokenByEmail = async (
     } catch {
         return null;
     }
-}
+};
 
 export const getVerificationTokenByToken = async (
     token: string
@@ -80,7 +80,7 @@ export const getVerificationTokenByToken = async (
     } catch {
         return null;
     }
-}
+};
 
 export const getPasswordResetTokenByToken = async (
     token: string
@@ -94,7 +94,7 @@ export const getPasswordResetTokenByToken = async (
     } catch {
         return null;
     }
-}
+};
 
 export const getPasswordResetTokenByEmail = async (
     email: string
@@ -108,4 +108,4 @@ export const getPasswordResetTokenByEmail = async (
     } catch {
         return null;
     }
-}
+};

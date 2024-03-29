@@ -85,7 +85,7 @@ export async function GET(request: Request): Promise<Response> {
         });
 
         if (emailExists) {
-            return NextResponse.redirect(env.BASE_URL + "/auth/register?code=409")
+            return NextResponse.redirect(env.BASE_URL + "/auth/register?code=409");
         }
 
         const newUser = await db.user.create({
@@ -106,7 +106,7 @@ export async function GET(request: Request): Promise<Response> {
             headers: {
                 Location: `/auth/oauth?requiresName=true&id=${newUser.id}`
             }
-        })
+        });
 
     } catch (error) {
         console.log(error, "er");

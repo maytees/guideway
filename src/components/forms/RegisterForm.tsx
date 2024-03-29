@@ -1,10 +1,10 @@
 "use client";
-import React, { useEffect, useState, useTransition } from 'react'
-import FormCard from './FormCard'
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
+import React, { useEffect, useState, useTransition } from 'react';
+import FormCard from './FormCard';
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
 import { FaGoogle } from "react-icons/fa";
-import Link from 'next/link'
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { registerSchema, type IRegister } from '~/lib/validation';
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -35,7 +35,7 @@ const RegisterForm = () => {
 
     useEffect(() => {
         if (errorCode === "409") {
-            setError("Account with email already exists")
+            setError("Account with email already exists");
             return;
         }
 
@@ -61,8 +61,8 @@ const RegisterForm = () => {
                 }).catch(() => {
                     form.reset();
                     setError("Something went wrong");
-                })
-        })
+                });
+        });
     }
 
     return (
@@ -152,7 +152,7 @@ const RegisterForm = () => {
                 </div>
             }
         </FormCard >
-    )
-}
+    );
+};
 
-export default RegisterForm
+export default RegisterForm;

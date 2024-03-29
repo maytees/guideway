@@ -23,7 +23,7 @@ export const login = async (values: ILogin): Promise<ActionResult> => {
     if (!fields.success) {
         return {
             error: "Invalid fields"
-        }
+        };
     }
 
     const {
@@ -75,8 +75,8 @@ export const login = async (values: ILogin): Promise<ActionResult> => {
 
     return {
         success: "Logged in"
-    }
-}
+    };
+};
 
 
 export const register = async (values: IRegister): Promise<ActionResult> => {
@@ -86,7 +86,7 @@ export const register = async (values: IRegister): Promise<ActionResult> => {
     if (!fields.success) {
         return {
             error: "Invalid fields"
-        }
+        };
     }
 
     const {
@@ -107,13 +107,13 @@ export const register = async (values: IRegister): Promise<ActionResult> => {
         if (userExists.email === email) {
             return {
                 error: "Email already exists"
-            }
+            };
         }
 
         if (userExists.name === name) {
             return {
                 error: "Username already exists"
-            }
+            };
         }
     }
 
@@ -128,7 +128,7 @@ export const register = async (values: IRegister): Promise<ActionResult> => {
     if (!newUser) {
         return {
             error: "Something went wrong when creating user"
-        }
+        };
     }
 
     const verificationToken = await genVerifiationToken(email);
@@ -147,13 +147,13 @@ export const register = async (values: IRegister): Promise<ActionResult> => {
 
     return {
         success: "Check your email!"
-    }
+    };
 
-}
+};
 
 export const resendVerificationEmail = async (email: string): Promise<ActionResult> => {
     "use server";
-    console.log(email)
+    console.log(email);
     const user = await db.user.findUnique({
         where: {
             email
@@ -163,19 +163,19 @@ export const resendVerificationEmail = async (email: string): Promise<ActionResu
     if (!user) {
         return {
             error: "Invalid email"
-        }
+        };
     }
 
     if (user.emailVerified) {
         return {
             error: "Email already verified"
-        }
+        };
     }
 
     if (!user.name) {
         return {
             error: "Username not set"
-        }
+        };
     }
 
     const verificationToken = await genVerifiationToken(email);
@@ -184,8 +184,8 @@ export const resendVerificationEmail = async (email: string): Promise<ActionResu
 
     return {
         success: "Check your email!"
-    }
-}
+    };
+};
 
 export const updateUsername = async (id: string, values: IGoogleName): Promise<ActionResult> => {
     "use server";
@@ -194,7 +194,7 @@ export const updateUsername = async (id: string, values: IGoogleName): Promise<A
     if (!fields.success) {
         return {
             error: "Invalid fields"
-        }
+        };
     }
 
     const { username } = fields.data;
@@ -204,13 +204,13 @@ export const updateUsername = async (id: string, values: IGoogleName): Promise<A
     if (!validate.user) {
         return {
             error: "Unauthorized (1)"
-        }
+        };
     }
 
     if (validate.user.name) {
         return {
             error: "Username already set"
-        }
+        };
     }
 
     const user = await db.user.findUnique({
@@ -222,7 +222,7 @@ export const updateUsername = async (id: string, values: IGoogleName): Promise<A
     if (!user) {
         return {
             error: "Invalid email"
-        }
+        };
     }
 
     const existsUsername = await db.user.findUnique({
@@ -234,7 +234,7 @@ export const updateUsername = async (id: string, values: IGoogleName): Promise<A
     if (existsUsername) {
         return {
             error: "Username already exists"
-        }
+        };
     }
 
     await db.user.update({
@@ -249,8 +249,8 @@ export const updateUsername = async (id: string, values: IGoogleName): Promise<A
 
     return {
         success: "Username successfully set!"
-    }
-}
+    };
+};
 
 export const signout = async (): Promise<ActionResult> => {
     "use server";
@@ -259,7 +259,7 @@ export const signout = async (): Promise<ActionResult> => {
     if (!session) {
         return {
             error: "Unauthorized"
-        }
+        };
     }
 
     await lucia.invalidateSession(session.id);
@@ -268,7 +268,7 @@ export const signout = async (): Promise<ActionResult> => {
     cookies()
         .set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
     return redirect("/auth/login");
-}
+};
 
 export const verifyUser = async (token: string): Promise<ActionResult> => {
     const existingToken = await db.verificationToken.findUnique({
@@ -280,7 +280,7 @@ export const verifyUser = async (token: string): Promise<ActionResult> => {
     if (!existingToken) {
         return {
             error: "Invalid link"
-        }
+        };
     }
 
     const hasExpired = new Date() > new Date(existingToken.expires);
@@ -288,7 +288,7 @@ export const verifyUser = async (token: string): Promise<ActionResult> => {
     if (hasExpired) {
         return {
             error: "Link expired"
-        }
+        };
     }
 
     const existingUser = await db.user.findUnique({
@@ -300,7 +300,7 @@ export const verifyUser = async (token: string): Promise<ActionResult> => {
     if (!existingUser) {
         return {
             error: "Email does not exist"
-        }
+        };
     }
 
     await db.user.update({
@@ -331,8 +331,8 @@ export const verifyUser = async (token: string): Promise<ActionResult> => {
 
     return {
         success: "Email verified!"
-    }
-}
+    };
+};
 
 export const forgotPassword = async (values: IForgotPassword) => {
     "use server";
@@ -342,7 +342,7 @@ export const forgotPassword = async (values: IForgotPassword) => {
     if (!fields.success) {
         return {
             error: "Invalid fields"
-        }
+        };
     }
 
     const {
@@ -358,13 +358,13 @@ export const forgotPassword = async (values: IForgotPassword) => {
     if (!existingUser) {
         return {
             error: "Invalid email"
-        }
+        };
     }
 
     if (!existingUser.name) {
         return {
             error: "Invalid email (2)"
-        }
+        };
     }
 
     const token = await genResetPasswordToken(email);
@@ -373,8 +373,8 @@ export const forgotPassword = async (values: IForgotPassword) => {
 
     return {
         success: "Check your email!"
-    }
-}
+    };
+};
 
 export const resetPassword = async (token: string | null, values: IPasswordReset): Promise<ActionResult> => {
 
@@ -385,10 +385,10 @@ export const resetPassword = async (token: string | null, values: IPasswordReset
     const fields = passwordResetSchema.safeParse(values);
 
     if (!fields.success) {
-        return { error: "Invalid fields" }
+        return { error: "Invalid fields" };
     }
 
-    const { confirmPassword, newPassword } = fields.data
+    const { confirmPassword, newPassword } = fields.data;
 
     const existingToken = await getPasswordResetTokenByToken(token);
 
@@ -397,11 +397,11 @@ export const resetPassword = async (token: string | null, values: IPasswordReset
     const hasExpired = new Date() > new Date(existingToken.expires);
 
     if (hasExpired) {
-        return { error: "Link expired!" }
+        return { error: "Link expired!" };
     }
 
     if (newPassword !== confirmPassword) {
-        return { error: "Passwords do not match!" }
+        return { error: "Passwords do not match!" };
     }
 
     const existingUser = await db.user.findUnique({
@@ -415,7 +415,7 @@ export const resetPassword = async (token: string | null, values: IPasswordReset
     }
 
     if (!existingUser?.password) {
-        return { error: "Invalid email! (This email is connected to an OAuth provider)" }
+        return { error: "Invalid email! (This email is connected to an OAuth provider)" };
     }
 
     await db.user.update({
@@ -434,4 +434,4 @@ export const resetPassword = async (token: string | null, values: IPasswordReset
     });
 
     return { success: "Password has been reset!" };
-}
+};

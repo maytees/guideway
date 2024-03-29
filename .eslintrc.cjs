@@ -10,9 +10,10 @@ const config = {
   "extends": [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended-type-checked",
-    "plugin:@typescript-eslint/stylistic-type-checked"
+    "plugin:@typescript-eslint/stylistic-type-checked",
   ],
   "rules": {
+    "semi": [2, "always"],
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/consistent-type-imports": [
@@ -41,5 +42,5 @@ const config = {
   ignorePatterns: [
     "src/components/ui"
   ]
-}
+};
 module.exports = config;

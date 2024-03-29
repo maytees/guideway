@@ -1,6 +1,6 @@
 "use client";
-import React from 'react'
-import { FaExclamationCircle } from 'react-icons/fa'
+import React from 'react';
+import { FaExclamationCircle } from 'react-icons/fa';
 
 type InfoType = {
     message: string | undefined
@@ -24,8 +24,8 @@ export const ErrorComponent = ({ message, children }: { message: string | undefi
                     {children}
                 </div>
             )
-    )
-}
+    );
+};
 
 export const SuccessComponent = ({ message }: InfoType) => {
     if (!message) return null;
@@ -35,5 +35,5 @@ export const SuccessComponent = ({ message }: InfoType) => {
             <FaExclamationCircle size={16} />
             <p>{message}</p>
         </div>
-    )
-}
+    );
+};

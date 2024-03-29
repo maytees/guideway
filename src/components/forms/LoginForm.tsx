@@ -1,10 +1,10 @@
 "use client";
-import React, { useState, useTransition } from 'react'
-import FormCard from './FormCard'
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
+import React, { useState, useTransition } from 'react';
+import FormCard from './FormCard';
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
 import { FaGoogle } from "react-icons/fa";
-import Link from 'next/link'
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { type ILogin, loginSchema } from '~/lib/validation';
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -44,8 +44,8 @@ const LoginForm = () => {
                     }
                 }).catch(() => {
                     setError("Something went wrong");
-                })
-        })
+                });
+        });
     }
 
     return (
@@ -94,7 +94,7 @@ const LoginForm = () => {
                 <Button className="w-full gap-x-2" disabled={isPending} variant={"outline"}
                     onClick={
                         () => {
-                            router.push("/auth/google")
+                            router.push("/auth/google");
                         }
                     }>
                     <FaGoogle size={15} />
@@ -106,7 +106,7 @@ const LoginForm = () => {
                 </div>
             </Form >
         </FormCard >
-    )
-}
+    );
+};
 
-export default LoginForm
+export default LoginForm;

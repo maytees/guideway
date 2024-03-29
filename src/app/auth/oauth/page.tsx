@@ -1,7 +1,7 @@
 "use client";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter, useSearchParams } from 'next/navigation'
-import React, { useEffect, useState, useTransition } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useEffect, useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { updateUsername } from '~/actions/auth';
 import FormCard from '~/components/forms/FormCard';
@@ -35,7 +35,7 @@ const Google = () => {
 
     useEffect(() => {
         if (!id) {
-            setError("Id not provided")
+            setError("Id not provided");
             return;
         }
 
@@ -45,7 +45,7 @@ const Google = () => {
         values: IGoogleName
     ) {
         if (!id) {
-            setError("Id not provided")
+            setError("Id not provided");
             return;
         }
 
@@ -67,7 +67,7 @@ const Google = () => {
                 }).catch(() => {
                     form.reset();
                     setError("Something went wrong");
-                })
+                });
         });
     }
 
@@ -107,7 +107,7 @@ const Google = () => {
                 }
             </FormCard>
         </>
-    )
-}
+    );
+};
 
-export default Google
+export default Google;
