@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 
 import { Poppins } from "next/font/google";
 import Navbar from "~/components/Navbar";
+import Footer from "~/components/Footer";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -23,9 +24,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`font-sans ${font.variable} anitaliased min-h-screen`}>
+      <body className={`font-sans ${font.variable} anitaliased min-h-screen `}>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

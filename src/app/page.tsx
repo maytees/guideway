@@ -50,7 +50,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center mt-48">
+    <div className=" flex flex-col items-center justify-center mt-48">
       <div className="relative">
         <h1 className="text-6xl font-bold text-center z-10">
           Empowering School<br />Clubs to Thrive</h1>
@@ -113,7 +113,7 @@ export default function HomePage() {
         </motion.div>
       </div>
 
-      <div className="mt-10 pb-96 flex flex-col items-center">
+      <div className="mt-10 flex flex-col items-center">
         <div className="pb-20 xl:pb-5">
           <motion.h1
             ref={convincedRef}
@@ -330,11 +330,8 @@ const Feature = (
 
   return (
     <Card
-      onClick={() => {
-        router.push(href);
-      }}
-      className={"hover:-translate-y-5 hover:-skew-y-1 hover:shadow-2xl hover:border-1 hover:border-black duration-300 transition-all ease-in-out max-w-80 md:max-w-72 lg:max-w-80 flex flex-col justify-between h-full hover:cursor-pointer" + className}>
-      <div className="relative hover:cursor-pointer" >
+      className={"hover:-translate-y-5 hover:-skew-y-1 hover:shadow-2xl hover:border-1 hover:border-black duration-300 transition-all ease-in-out max-w-80 md:max-w-72 lg:max-w-80 flex flex-col justify-between h-full" + className}>
+      <div className="relative" >
         <Image
           src={icon}
           alt={title}
@@ -343,11 +340,11 @@ const Feature = (
           height={64}
         />
       </div>
-      <CardHeader className="hover:cursor-pointer">
+      <CardHeader className="">
         <CardTitle>{title}</CardTitle>
         <CardDescription>{desc}</CardDescription>
       </CardHeader>
-      <CardFooter className="hover:cursor-pointer">
+      <CardFooter className="">
         <Button size="sm" disabled={href === "/"} className="group" onClick={() => {
           if (href !== "/") {
             router.push(href);
