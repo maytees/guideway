@@ -54,8 +54,8 @@ export default function HomePage() {
       <div className="relative">
         <h1 className="text-6xl font-bold text-center z-10">
           Empowering School<br />Clubs to Thrive</h1>
-        <div className="absolute -top-28 right-0 -z-10">
-          <div className="hidden md:block -z-10 w-[550px] h-[550px] rounded-full blur-3xl opacity-25 animate-spin bg-gradient-to-bl  from-[#FF5800] to-[#FFBC00]"></div>
+        <div className="absolute md:-top-28 md:right-0 -z-10">
+          <div className="-z-10 w-screen h-32 md:w-[550px] md:h-[550px] rounded-full blur-3xl opacity-25 animate-spin bg-gradient-to-bl  from-[#FF5800] to-[#FFBC00]"></div>
         </div>
         <p className="text-center font-semibold mt-5 z-10">An all-in-one platform that simplifies school club<br />
           management, empowering students to discover, join,
