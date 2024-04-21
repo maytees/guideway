@@ -81,7 +81,7 @@ export default function HomePage() {
       </TooltipProvider>
 
       <div className="mt-64 flex flex-col items-center">
-        <div className="pb-20 xl:pb-5">
+        <div className="xl:pb-5">
           <motion.h1
             ref={ref}
             variants={variants}
@@ -384,7 +384,7 @@ const Dash = () => {
   };
 
   return (
-    <svg ref={ref} width="472" className="mt-10" height="77" overflow={"visible"} viewBox="0 0 472 77" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg ref={ref} width="472" className="md:my-20 xl:my-0" height="77" overflow={"visible"} viewBox="0 0 472 77" fill="none" xmlns="http://www.w3.org/2000/svg">
       <motion.path
         variants={pathVariants}
         initial="hidden"
