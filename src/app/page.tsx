@@ -81,7 +81,7 @@ export default function HomePage() {
       </TooltipProvider>
 
       <div className="mt-64 flex flex-col items-center">
-        <div className="xl:pb-5">
+        <div className="pb-20 md:pb-0 xl:pb-5">
           <motion.h1
             ref={ref}
             variants={variants}
@@ -287,7 +287,7 @@ const Features = () => {
         animate={controls}
         initial="hidden"
         variants={cardVariants}
-        className="md:hidden xl:grid mt-20 flex flex-col items-center grid-cols-1 gap-20 xl:grid-cols-3 w-full"
+        className="md:hidden xl:grid flex flex-col items-center grid-cols-1 gap-20 xl:grid-cols-3 w-full"
       >
         {featuresTwo.map((feature) => (
           <Feature key={feature.title} {...feature} className={!feature.mid ? "lg:inline-block lg:mt-10" : ""} />
@@ -298,7 +298,7 @@ const Features = () => {
         animate={md}
         initial="hidden"
         variants={cardVariants}
-        className="hidden md:grid xl:hidden grid-cols-2 gap-20"
+        className="hidden md:grid xl:hidden grid-cols-2 gap-10"
       >
         {featuresTwo.map((feature) => (
           <Feature key={feature.title} {...feature} />
@@ -384,7 +384,7 @@ const Dash = () => {
   };
 
   return (
-    <svg ref={ref} width="472" className="md:my-20 xl:my-0" height="77" overflow={"visible"} viewBox="0 0 472 77" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg ref={ref} width="472" className="md:my-20 xl:my-10" height="77" overflow={"visible"} viewBox="0 0 472 77" fill="none" xmlns="http://www.w3.org/2000/svg">
       <motion.path
         variants={pathVariants}
         initial="hidden"
