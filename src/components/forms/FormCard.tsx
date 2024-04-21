@@ -14,7 +14,7 @@ const FormCard = (
     }
 ) => {
     return (
-        <Card className="mt-[10%] mx-auto max-w-md">
+        <Card className="mt-20 mx-auto max-w-md">
             <CardHeader className='flex flex-col items-center'>
                 <Image src={'/logo.svg'} alt={'Guideway'} width={80} height={80} />
                 <CardTitle className="flex w-full flex-col items-center">
