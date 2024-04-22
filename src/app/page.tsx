@@ -54,8 +54,8 @@ export default function HomePage() {
       <div className="relative">
         <h1 className="text-6xl font-bold text-center z-10">
           Empowering School<br />Clubs to Thrive</h1>
-        <div className="absolute md:-top-28 md:right-0 -z-10">
-          <div className="-z-10 w-screen h-32 md:w-[550px] md:h-[550px] rounded-full blur-3xl opacity-25 animate-spin bg-gradient-to-bl  from-[#FF5800] to-[#FFBC00]"></div>
+        <div className="absolute top-12 right-16 md:-top-28 md:right-0 -z-10">
+          <div className="-z-10 w-52 h-52 md:w-[550px] md:h-[550px] rounded-full blur-3xl opacity-25 animate-spin bg-gradient-to-bl  from-[#FF5800] to-[#FFBC00]"></div>
         </div>
         <p className="text-center font-semibold mt-5 z-10">An all-in-one platform that simplifies school club<br />
           management, empowering students to discover, join,
@@ -141,9 +141,9 @@ export default function HomePage() {
           className="flex flex-col items-center"
         >
           <div className="grid gap-10 grid-cols-3" id="notified">
-            <TwitterLogoIcon className="hover:cursor-pointer" onClick={() => router.push("")} width={40} height={40} />
-            <InstagramLogoIcon className="hover:cursor-pointer" onClick={() => router.push("")} width={40} height={40} />
-            <LinkedInLogoIcon className="hover:cursor-pointer" onClick={() => router.push("")} width={40} height={40} />
+            <TwitterLogoIcon className="hover:cursor-pointer transition-all hover:scale-105 duration-100 ease-in-out" onClick={() => router.push("")} width={40} height={40} />
+            <InstagramLogoIcon className="hover:cursor-pointer transition-all hover:scale-105 duration-100 ease-in-out" onClick={() => router.push("")} width={40} height={40} />
+            <LinkedInLogoIcon className="hover:cursor-pointer transition-all hover:scale-105 duration-100 ease-in-out" onClick={() => router.push("")} width={40} height={40} />
           </div>
 
           <span className="text-center font-semibold my-10">OR</span>
