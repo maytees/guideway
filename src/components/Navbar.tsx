@@ -40,9 +40,9 @@ const Navbar = () => {
                 </div>
 
 
-                <a href="/auth/register">
+                <a href="/#notified">
                     <Button className="shrink-0 font-semibold" size="lg" variant="default">
-                        Get started
+                        Get notified
                     </Button>
                 </a>
             </nav >
@@ -63,23 +63,30 @@ const Navbar = () => {
                         </Button>
                     </SheetTrigger>
                     <SheetContent side="right">
-                        <nav className="grid gap-6 text-lg font-medium">
-                            <Link className="flex items-center gap-2 text-lg font-semibold" href="/">
-                                <Image src="/logo.svg" alt="Guideway" width={ICON_WIDTH} height={ICON_WIDTH} />
-                                <span className="sr-only">Guideway</span>
-                            </Link>
-                            <Link className="text-foreground transition-colors hover:text-foreground" href="/features">
-                                Features
-                            </Link>
-                            <Link className={`text-black hover:text-muted-foreground ${currentPath === '/pricing' ? 'text-foreground' : ''}`} href="/pricing">
-                                Pricing
-                            </Link>
-                            <Link className={`text-black hover:text-muted-foreground ${currentPath === '/support' ? 'text-foreground' : ''}`} href="/support">
-                                Support
-                            </Link>
-                            <Link className={`text-black hover:text-muted-foreground ${currentPath === '/faq' ? 'text-foreground' : ''}`} href="/faq">
-                                FAQ
-                            </Link >
+                        <nav className="flex flex-col justify-between h-full">
+                            <div className='grid gap-6 text-lg font-medium'>
+                                <Link className="flex items-center gap-2 text-lg font-semibold" href="/">
+                                    <Image src="/logo.svg" alt="Guideway" width={ICON_WIDTH} height={ICON_WIDTH} />
+                                    <span className="sr-only">Guideway</span>
+                                </Link>
+                                <Link className="text-foreground transition-colors hover:text-foreground" href="/features">
+                                    Features
+                                </Link>
+                                <Link className={`text-black hover:text-muted-foreground ${currentPath === '/pricing' ? 'text-foreground' : ''}`} href="/pricing">
+                                    Pricing
+                                </Link>
+                                <Link className={`text-black hover:text-muted-foreground ${currentPath === '/support' ? 'text-foreground' : ''}`} href="/support">
+                                    Support
+                                </Link>
+                                <Link className={`text-black hover:text-muted-foreground ${currentPath === '/faq' ? 'text-foreground' : ''}`} href="/faq">
+                                    FAQ
+                                </Link >
+                            </div>
+                            <a href="/#notified">
+                                <Button className="shrink-0 font-semibold w-full" size="lg" variant="default">
+                                    Get notified
+                                </Button>
+                            </a>
                         </nav>
                     </SheetContent>
                 </Sheet>

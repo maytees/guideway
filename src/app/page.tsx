@@ -70,7 +70,7 @@ export default function HomePage() {
           <TooltipTrigger asChild>
             <a href="/#notified" className="z-10">
               <Button className="mt-4 font-semibold max-sm:w-64 max-sm:h-12 z-10">
-                Subscribe to updates
+                Stay in the loop
               </Button>
             </a>
           </TooltipTrigger>
@@ -174,6 +174,7 @@ interface IFeature {
   icon: string;
   href: string;
   mid?: boolean;
+  implemented?: boolean;
 };
 
 const featuresTwo: IFeature[] = [
