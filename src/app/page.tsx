@@ -70,7 +70,7 @@ export default function HomePage() {
           <TooltipTrigger asChild>
             <a href="/#notified" className="z-10">
               <Button className="mt-4 font-semibold max-sm:w-64 max-sm:h-12 z-10">
-                Stay in the loop
+                Subscribe to updates
               </Button>
             </a>
           </TooltipTrigger>

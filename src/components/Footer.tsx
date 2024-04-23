@@ -12,14 +12,12 @@ import Link from 'next/link';
 interface FooterLink {
     title: string;
     href: string;
-    impl?: boolean; // Implemented? if not, strike.
 }
 
 const resources: FooterLink[] = [
     {
         title: "Home",
         href: "/",
-        impl: true,
     },
     {
         title: "Getting Started",
@@ -147,7 +145,7 @@ const Footer = () => {
                                 key={link.title}
                                 href={link.href}
                                 className="transition-all hover:scale-105 duration-100 ease-in-out text-muted-foreground hover:text-foreground">
-                                {link.impl ? link.title : <del>{link.title}</del>}
+                                {link.title}
                             </Link>
                         ))}
                     </div>
@@ -159,7 +157,8 @@ const Footer = () => {
                                 key={link.title}
                                 href={link.href}
                                 className="transition-all hover:scale-105 duration-100 ease-in-out text-muted-foreground hover:text-foreground">
-                                {link.impl ? link.title : <del>{link.title}</del>}
+
+                                {link.title}
                             </Link>
                         ))}
                     </div>
@@ -170,7 +169,8 @@ const Footer = () => {
                                 key={link.title}
                                 href={link.href}
                                 className="transition-all hover:scale-105 duration-100 ease-in-out text-muted-foreground hover:text-foreground">
-                                {link.impl ? link.title : <del>{link.title}</del>}
+
+                                {link.title}
                             </Link>
                         ))}
                     </div>
@@ -181,7 +181,8 @@ const Footer = () => {
                                 key={link.title}
                                 href={link.href}
                                 className="transition-all hover:scale-105 duration-100 ease-in-out text-muted-foreground hover:text-foreground">
-                                {link.impl ? link.title : <del>{link.title}</del>}
+
+                                {link.title}
                             </Link>
                         ))}
                     </div>
@@ -199,7 +200,8 @@ const Footer = () => {
                                         key={link.title}
                                         href={link.href}
                                         className="transition-all hover:font-bold duration-100 ease-in-out pl-2">
-                                        {link.impl ? link.title : <del>{link.title}</del>}
+
+                                        {link.title}
                                     </Link>
                                 ))}
                             </div>
@@ -216,7 +218,8 @@ const Footer = () => {
                                         key={link.title}
                                         href={link.href}
                                         className="transition-all hover:font-bold duration-100 ease-in-out pl-2">
-                                        {link.impl ? link.title : <del>{link.title}</del>}
+
+                                        {link.title}
                                     </Link>
                                 ))}
                             </div>
@@ -234,7 +237,8 @@ const Footer = () => {
                                         key={link.title}
                                         href={link.href}
                                         className="transition-all hover:font-bold duration-100 ease-in-out pl-2">
-                                        {link.impl ? link.title : <del>{link.title}</del>}
+
+                                        {link.title}
                                     </Link>
                                 ))}
                             </div>
@@ -248,11 +252,12 @@ const Footer = () => {
                         <AccordionContent>
                             <div className="flex flex-col space-y-2">
                                 {support.map((link) => (
+
                                     <Link
                                         key={link.title}
                                         href={link.href}
                                         className="transition-all hover:font-bold duration-100 ease-in-out pl-2">
-                                        {link.impl ? link.title : <del>{link.title}</del>}
+                                        {link.title}
                                     </Link>
                                 ))}
                             </div>
