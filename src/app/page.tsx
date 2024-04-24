@@ -155,7 +155,6 @@ export default function HomePage() {
             </CardHeader>
             <CardContent className="gap-2 grid">
               {/* TODO: Make this a form */}
-              <Input placeholder="Full name" className="w-96" />
               <Input placeholder="Email" className="w-96" />
             </CardContent>
             <CardFooter className="flex justify-center">
