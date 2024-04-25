@@ -1,6 +1,5 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { sendSubscribeEmail } from "~/lib/email";
 import { type IUpdatesSignup, updatesSignupSchema } from "~/lib/validation";
 import { db } from "~/server/db";

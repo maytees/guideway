@@ -1,8 +1,6 @@
 "use client";
 import Image from 'next/image';
 import React from 'react';
-import { Input } from './ui/input';
-import { Button } from './ui/button';
 import { InstagramLogoIcon, LinkedInLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons';
 import { useRouter } from 'next/navigation';
 import { Separator } from './ui/separator';

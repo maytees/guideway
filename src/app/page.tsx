@@ -8,7 +8,6 @@ import { Card, CardDescription, CardHeader, CardTitle, CardFooter, CardContent }
 import { ChevronRightIcon, InstagramLogoIcon, LinkedInLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { Input } from "~/components/ui/input";
 import UpdatesSubscribeForm from "~/components/forms/UpdatesSubscribeForm";
 
 export default function HomePage() {
