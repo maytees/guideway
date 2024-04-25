@@ -1,10 +1,14 @@
 import "~/styles/globals.css";
 
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
+import Navbar from "~/components/Navbar";
+import Footer from "~/components/Footer";
+import { Toaster } from "~/components/ui/sonner";
 
-const inter = Inter({
+const font = Poppins({
   subsets: ["latin"],
   variable: "--font-sans",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata = {
@@ -20,8 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`font-sans ${inter.variable} anitaliased min-h-screen`}>{children}</body>
+    <html lang="en" className="scroll-smooth">
+      <body className={`font-sans ${font.variable} anitaliased min-h-screen `}>
+        <Navbar />
+        {children}
+        <Footer />
+        <Toaster />
+      </body>
     </html>
   );
 }
