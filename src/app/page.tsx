@@ -9,6 +9,7 @@ import { ChevronRightIcon, InstagramLogoIcon, LinkedInLogoIcon, TwitterLogoIcon 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Input } from "~/components/ui/input";
+import UpdatesSubscribeForm from "~/components/forms/UpdatesSubscribeForm";
 
 export default function HomePage() {
   const router = useRouter();
@@ -153,13 +154,13 @@ export default function HomePage() {
               <CardTitle className="text-center">Stay in the loop</CardTitle>
               <CardDescription className="text-center">via email updates.</CardDescription>
             </CardHeader>
-            <CardContent className="gap-2 grid">
-              {/* TODO: Make this a form */}
-              <Input placeholder="Email" className="w-96" />
+            <CardContent>
+              <UpdatesSubscribeForm
+                inputClass="w-96"
+                buttonClass="w-full"
+                containerClass="gap-2 grid"
+              />
             </CardContent>
-            <CardFooter className="flex justify-center">
-              <Button className="w-full" size="lg" variant="default" type="submit" onClick={() => alert("TODO: Subscribet for updates")}>Subscribe</Button>
-            </CardFooter>
           </Card>
         </motion.div>
       </div>

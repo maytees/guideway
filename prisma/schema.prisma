@@ -71,3 +71,9 @@ model TwoFactorConfirmation {
 
     @@unique([userId])
 }
+
+model UpdatesUser {
+    id        String @id @default(cuid())
+    email     String @unique
+    firstName String
+}

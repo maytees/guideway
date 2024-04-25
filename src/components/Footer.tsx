@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { Separator } from './ui/separator';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 import Link from 'next/link';
+import UpdatesSubscribeForm from './forms/UpdatesSubscribeForm';
 
 interface FooterLink {
     title: string;
@@ -122,10 +123,14 @@ const Footer = () => {
                         </div>
                     </div>
                     {/* TODO: Add subscribe form */}
-                    <div className="space-y-2 mt-10">
-                        <Input className="lg:w-96" placeholder='Enter your email' />
-                        <Button variant="default" className='w-full lg:w-96'>Subscribe</Button>
-                    </div>
+                    <UpdatesSubscribeForm
+                        inputClass='lg:w-96'
+                        buttonClass='w-full'
+                        containerClass='space-y-2 mt-10'
+                    />
+                    {/* <Input className="lg:w-96" placeholder='First Name' />
+                        <Input className="lg:w-96" placeholder='Email' />
+                        <Button variant="default" className='w-full lg:w-96'>Subscribe</Button> */}
                     <p className="text-muted-foreground text-center text-sm font-medium my-5 lg:w-96">
                         OR
                     </p>

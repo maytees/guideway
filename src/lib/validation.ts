@@ -1,5 +1,6 @@
 import z from "zod";
 
+// Auth
 export const loginSchema = z.object({
     email: z.string().email({ message: "Invalid email" }),
     password: z.string().min(6, { message: "Password must be at least 6 characters long" }),
@@ -50,3 +51,11 @@ export type IRegister = z.infer<typeof registerSchema>;
 export type IPasswordReset = z.infer<typeof passwordResetSchema>;
 export type IForgotPassword = z.infer<typeof forgotPasswordSchema>;
 export type IGoogleName = z.infer<typeof goolgeNameSchema>;
+
+// Email Updates
+export const updatesSignupSchema = z.object({
+    firstName: z.string().min(3, { message: "First name must be at least 3 characters long" }),
+    email: z.string().email({ message: "Please use a valid email address" }),
+});
+
+export type IUpdatesSignup = z.infer<typeof updatesSignupSchema>;
