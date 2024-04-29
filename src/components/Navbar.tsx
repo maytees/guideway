@@ -24,15 +24,15 @@ const Navbar = () => {
                         </Link>
                     </div>
                     <div className='flex gap-5 lg:gap-10 *:text-center *:font-semibold'>
-                        <Link className="text-foreground transition-colors hover:text-foreground" href="/features">
+                        {/* <Link className="text-foreground transition-colors hover:text-foreground" href="/features">
                             Features
-                        </Link>
-                        <Link className={`text-black hover:text-muted-foreground ${currentPath === '/pricing' ? 'text-foreground' : ''}`} href="/pricing">
+                        </Link> */}
+                        {/* <Link className={`text-black hover:text-muted-foreground ${currentPath === '/pricing' ? 'text-foreground' : ''}`} href="/pricing">
                             Pricing
-                        </Link>
-                        <Link className={`text-black hover:text-muted-foreground ${currentPath === '/support' ? 'text-foreground' : ''}`} href="/support">
+                        </Link> */}
+                        {/* <Link className={`text-black hover:text-muted-foreground ${currentPath === '/support' ? 'text-foreground' : ''}`} href="/support">
                             Support
-                        </Link>
+                        </Link> */}
                         <Link className={`text-black hover:text-muted-foreground ${currentPath === '/faq' ? 'text-foreground' : ''}`} href="/faq">
                             FAQ
                         </Link >
@@ -68,15 +68,15 @@ const Navbar = () => {
                                 <Image src="/logo.svg" alt="Guideway" width={ICON_WIDTH} height={ICON_WIDTH} />
                                 <span className="sr-only">Guideway</span>
                             </Link>
-                            <Link className="text-foreground transition-colors hover:text-foreground" href="/features">
+                            {/* <Link className="text-foreground transition-colors hover:text-foreground" href="/features">
                                 Features
-                            </Link>
-                            <Link className={`text-black hover:text-muted-foreground ${currentPath === '/pricing' ? 'text-foreground' : ''}`} href="/pricing">
+                            </Link> */}
+                            {/* <Link className={`text-black hover:text-muted-foreground ${currentPath === '/pricing' ? 'text-foreground' : ''}`} href="/pricing">
                                 Pricing
-                            </Link>
-                            <Link className={`text-black hover:text-muted-foreground ${currentPath === '/support' ? 'text-foreground' : ''}`} href="/support">
+                            </Link> */}
+                            {/* <Link className={`text-black hover:text-muted-foreground ${currentPath === '/support' ? 'text-foreground' : ''}`} href="/support">
                                 Support
-                            </Link>
+                            </Link> */}
                             <Link className={`text-black hover:text-muted-foreground ${currentPath === '/faq' ? 'text-foreground' : ''}`} href="/faq">
                                 FAQ
                             </Link >

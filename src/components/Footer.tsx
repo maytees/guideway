@@ -18,30 +18,30 @@ const resources: FooterLink[] = [
         title: "Home",
         href: "/",
     },
-    {
-        title: "Getting Started",
-        href: "/docs/getting-started"
-    },
+    // {
+    //     title: "Getting Started",
+    //     href: "/docs/getting-started"
+    // },
     {
         title: "Features",
         href: "/features",
     },
-    {
-        title: "Demo",
-        href: "/demo",
-    },
-    {
-        title: "Docs",
-        href: "/docs",
-    },
+    // {
+    //     title: "Demo",
+    //     href: "/demo",
+    // },
+    // {
+    //     title: "Docs",
+    //     href: "/docs",
+    // },
     {
         title: "Pricing",
         href: "/pricing",
     },
-    {
-        title: "Tutorials",
-        href: "/docs/tutorials",
-    }
+    // {
+    //     title: "Tutorials",
+    //     href: "/docs/tutorials",
+    // }
 ];
 
 const legal: FooterLink[] = [
@@ -87,10 +87,10 @@ const support: FooterLink[] = [
         title: "Report a Bug",
         href: "/support/ticket?type=bug",
     },
-    {
-        title: "Feature Request",
-        href: "/support/ticket?type=feature",
-    },
+    // {
+    //     title: "Feature Request",
+    //     href: "/support/ticket?type=feature",
+    // },
     {
         title: "Feedback",
         href: "/support/ticket?type=feedback",
