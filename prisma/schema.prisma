@@ -14,6 +14,111 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+enum ClubCategory {
+    ACADEMIC
+    ARTS_AND_CULTURE
+    BUSINESS_AND_ENTREPRENEURSHIP
+    COMMUNITY_SERVICE_AND_VOLUNTEERING
+    ENVIRONMENTAL_AND_SUSTAINABILITY
+    HEALTH_AND_WELLNESS
+    HOBBIES_AND_INTERESTS
+    IDENTITY_AND_DIVERSITY
+    MEDIA_AND_JOURNALISM
+    POLITICAL_AND_ACTIVISM
+    RELIGIOUS_AND_SPIRITUAL
+    SOCIAL_AND_NETWORKING
+    SPORTS_AND_RECREATION
+    TECHNOLOGY_AND_INNOVATION
+}
+
+model Group {
+    id           String       @id @default(cuid())
+    name         String
+    description  String
+    category     ClubCategory
+    created_at   DateTime     @default(now())
+    updated_at   DateTime     @default(now())
+    owner        User         @relation("GroupOwner", fields: [owner_id], references: [id])
+    owner_id     String       @unique
+    members      User[]       @relation("GroupMembers")
+    logo         String?
+    website      String?
+    email        String?
+    member_count Int
+    posts        Post[]
+}
+
+// model Group {
+//     id           String       @id @default(cuid())
+//     name         String
+//     description  String
+//     category     ClubCategory
+//     created_at   DateTime     @default(now())
+//     updated_at   DateTime     @default(now())
+//     owner        User         @relation(fields: [owner_id], references: [id])
+//     owner_id     String       @unique @map("owner_id")
+//     members      User[]       @relation(fields: [members_id], references: [id])
+//     members_id   String[]     @map("members_id")
+//     logo         String?
+//     website      String?
+//     email        String?
+//     member_count Int
+//     posts        Post[]
+// }
+
+model Post {
+    id             Int       @id @default(autoincrement())
+    title          String
+    content        String
+    created_at     DateTime  @default(now())
+    updated_at     DateTime  @default(now())
+    author         User      @relation(fields: [author_id], references: [id])
+    author_id      String    @map("author_id")
+    club           Group     @relation(fields: [club_id], references: [id])
+    club_id        String    @map("club_id")
+    likes          Like[]
+    comments       Comment[]
+    isAnnouncement Boolean   @default(false)
+    isDraft        Boolean   @default(false)
+    isPinned       Boolean   @default(false)
+    viewCount      Int       @default(0)
+    shareCount     Int       @default(0)
+}
+
+model Comment {
+    id         Int           @id @default(autoincrement())
+    content    String
+    created_at DateTime      @default(now())
+    updated_at DateTime      @default(now())
+    author_id  String        @map("author_id")
+    author     User          @relation(fields: [author_id], references: [id])
+    post       Post          @relation(fields: [post_id], references: [id])
+    post_id    Int           @map("post_id")
+    likes      CommentLike[]
+}
+
+model Like {
+    id         Int      @id @default(autoincrement())
+    created_at DateTime @default(now())
+    user_id    String   @map("user_id")
+    user       User     @relation(fields: [user_id], references: [id])
+    post_id    Int      @map("post_id")
+    post       Post     @relation(fields: [post_id], references: [id])
+
+    @@unique([user_id, post_id])
+}
+
+model CommentLike {
+    id         Int      @id @default(autoincrement())
+    created_at DateTime @default(now())
+    user_id    String   @map("user_id")
+    user       User     @relation(fields: [user_id], references: [id])
+    comment_id Int
+    comment    Comment  @relation(fields: [comment_id], references: [id])
+
+    @@unique([user_id, comment_id])
+}
+
 model User {
     id                    String                 @id @default(cuid())
     name                  String?                @unique // This is required due to OAuth usernames
@@ -27,6 +132,14 @@ model User {
     Session               Session[]
 
     google_id String? @unique
+
+    Post        Post[]
+    Comment     Comment[]
+    Like        Like[]
+    CommentLike CommentLike[]
+
+    ownedGroups Group?  @relation("GroupOwner")
+    groups      Group[] @relation("GroupMembers")
 }
 
 model Session {

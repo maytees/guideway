@@ -18,63 +18,63 @@ const resources: FooterLink[] = [
         title: "Home",
         href: "/",
     },
-    {
-        title: "Getting Started",
-        href: "/docs/getting-started"
-    },
-    {
-        title: "Features",
-        href: "/features",
-    },
-    {
-        title: "Demo",
-        href: "/demo",
-    },
-    {
-        title: "Docs",
-        href: "/docs",
-    },
-    {
-        title: "Pricing",
-        href: "/pricing",
-    },
-    {
-        title: "Tutorials",
-        href: "/docs/tutorials",
-    }
+    // {
+    //     title: "Getting Started",
+    //     href: "/docs/getting-started"
+    // },
+    // {
+    //     title: "Features",
+    //     href: "/features",
+    // },
+    // {
+    //     title: "Demo",
+    //     href: "/demo",
+    // },
+    // {
+    //     title: "Docs",
+    //     href: "/docs",
+    // },
+    // {
+    //     title: "Pricing",
+    //     href: "/pricing",
+    // },
+    // {
+    //     title: "Tutorials",
+    //     href: "/docs/tutorials",
+    // }
 ];
 
 const legal: FooterLink[] = [
-    {
-        title: "Terms of Service",
-        href: "/terms",
-    },
-    {
-        title: "Privacy Policy",
-        href: "/privacy",
-    },
-    {
-        title: "Cookie Policy",
-        href: "/cookies",
-    }
+    // {
+    //     title: "Terms of Service",
+    //     href: "/terms",
+    // },
+    // {
+    //     title: "Privacy Policy",
+    //     href: "/privacy",
+    // },
+    // {
+    //     title: "Cookie Policy",
+    //     href: "/cookies",
+    // }
 ];
 
 const company: FooterLink[] = [
-    {
-        title: "About Us",
-        href: "/about",
-    },
-    {
-        title: "Contact Us",
-        href: "/contact",
-    },
-    {
-        title: "Our Team",
-        href: "/team",
-    },
+    // {
+    //     title: "About Us",
+    //     href: "/about",
+    // },
+    // {
+    //     title: "Contact Us",
+    //     href: "/contact",
+    // },
+    // {
+    //     title: "Our Team",
+    //     href: "/team",
+    // },
     {
         title: "News",
-        href: "/news",
+        href: "/#notified",
     },
 ];
 
@@ -83,22 +83,22 @@ const support: FooterLink[] = [
         title: "FAQ",
         href: "/faq",
     },
-    {
-        title: "Report a Bug",
-        href: "/support/ticket?type=bug",
-    },
-    {
-        title: "Feature Request",
-        href: "/support/ticket?type=feature",
-    },
-    {
-        title: "Feedback",
-        href: "/support/ticket?type=feedback",
-    },
-    {
-        title: "Socials",
-        href: "/socials",
-    }
+    // {
+    //     title: "Report a Bug",
+    //     href: "/support/ticket?type=bug",
+    // },
+    // {
+    //     title: "Feature Request",
+    //     href: "/support/ticket?type=feature",
+    // },
+    // {
+    //     title: "Feedback",
+    //     href: "/support/ticket?type=feedback",
+    // },
+    // {
+    //     title: "Socials",
+    //     href: "/socials",
+    // }
 ];
 
 const Footer = () => {
