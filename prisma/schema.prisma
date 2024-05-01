@@ -48,24 +48,6 @@ model Group {
     posts        Post[]
 }
 
-// model Group {
-//     id           String       @id @default(cuid())
-//     name         String
-//     description  String
-//     category     ClubCategory
-//     created_at   DateTime     @default(now())
-//     updated_at   DateTime     @default(now())
-//     owner        User         @relation(fields: [owner_id], references: [id])
-//     owner_id     String       @unique @map("owner_id")
-//     members      User[]       @relation(fields: [members_id], references: [id])
-//     members_id   String[]     @map("members_id")
-//     logo         String?
-//     website      String?
-//     email        String?
-//     member_count Int
-//     posts        Post[]
-// }
-
 model Post {
     id             Int       @id @default(autoincrement())
     title          String
