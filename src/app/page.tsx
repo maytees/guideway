@@ -1,14 +1,31 @@
 "use client";
+import {
+  ChevronRightIcon,
+  InstagramLogoIcon,
+  LinkedInLogoIcon,
+  TwitterLogoIcon,
+} from "@radix-ui/react-icons";
+import { type Variants, motion, useAnimation } from "framer-motion";
 import Image from "next/image";
-import { type Variants, motion, useAnimation } from 'framer-motion';
-import { useInView } from "react-intersection-observer";
-import { Button } from "~/components/ui/button";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
-import { Card, CardDescription, CardHeader, CardTitle, CardFooter, CardContent } from "~/components/ui/card";
-import { ChevronRightIcon, InstagramLogoIcon, LinkedInLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 import UpdatesSubscribeForm from "~/components/forms/UpdatesSubscribeForm";
+import { Button } from "~/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "~/components/ui/tooltip";
 
 export default function HomePage() {
   const router = useRouter();
@@ -32,36 +49,48 @@ export default function HomePage() {
     if (convincedInView) {
       void convincedControls.start("visible");
     }
-  }, [controls, convincedControls, convincedInView, featuresHeadingInView, inView]);
+  }, [
+    controls,
+    convincedControls,
+    convincedInView,
+    featuresHeadingInView,
+    inView,
+  ]);
 
   const variants = {
     hidden: {
       opacity: 0,
-      y: 100
+      y: 100,
     },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.5,
-        delay: 0.5
-      }
-    }
+        delay: 0.5,
+      },
+    },
   };
 
   return (
-    <div className=" flex flex-col items-center justify-center mt-48">
+    <div className=" mt-48 flex flex-col items-center justify-center">
       <div className="relative">
-        <h1 className="text-6xl font-bold text-center z-10">
-          Empowering School<br />Clubs to Thrive</h1>
-        <div className="absolute top-12 right-16 md:-top-28 md:right-0 -z-10">
-          <div className="-z-10 w-52 h-52 md:w-[550px] md:h-[550px] rounded-full blur-3xl opacity-25 animate-spin bg-gradient-to-bl  from-[#FF5800] to-[#FFBC00]"></div>
+        <h1 className="z-10 text-center text-6xl font-bold">
+          Empowering School
+          <br />
+          Clubs to Thrive
+        </h1>
+        <div className="absolute right-16 top-12 -z-10 md:-top-28 md:right-0">
+          <div className="-z-10 h-52 w-52 animate-spin rounded-full bg-gradient-to-bl from-[#FF5800] to-[#FFBC00] opacity-25 blur-3xl  md:h-[550px] md:w-[550px]"></div>
         </div>
-        <p className="text-center font-semibold mt-5 z-10">An all in one platform that simplifies school club<br />
+        <p className="z-10 mt-5 text-center font-semibold">
+          An all in one platform that simplifies school club
+          <br />
           management, allowing students to discover, join,
-          <br />and thrive in clubs they love.
+          <br />
+          and thrive in clubs they love.
         </p>
-        <div className="hidden md:block absolute top-20 -right-2">
+        <div className="absolute -right-2 top-20 hidden md:block">
           <ArrowSVG />
         </div>
       </div>
@@ -69,7 +98,7 @@ export default function HomePage() {
         <Tooltip delayDuration={100}>
           <TooltipTrigger asChild>
             <a href="/#notified" className="z-10">
-              <Button className="mt-4 font-semibold max-sm:w-64 max-sm:h-12 z-10">
+              <Button className="z-10 mt-4 font-semibold max-sm:h-12 max-sm:w-64">
                 Subscribe to updates
               </Button>
             </a>
@@ -87,14 +116,16 @@ export default function HomePage() {
             variants={variants}
             initial="hidden"
             animate={controls}
-            className="text-4xl text-center font-bold mt-28">What do we offer?
+            className="mt-28 text-center text-4xl font-bold"
+          >
+            What do we offer?
           </motion.h1>
           <motion.p
             ref={ref}
             variants={variants}
             initial="hidden"
             animate={controls}
-            className="text-center font-semibold text-lg text-muted-foreground"
+            className="text-center text-lg font-semibold text-muted-foreground"
           >
             Here are a list of features we offer
           </motion.p>
@@ -109,7 +140,12 @@ export default function HomePage() {
         >
           <Button
             className="mt-10"
-            size="lg" variant="default" onClick={() => router.push("/features")}>View all features</Button>
+            size="lg"
+            variant="default"
+            onClick={() => router.push("/features")}
+          >
+            View all features
+          </Button>
         </motion.div>
       </div>
 
@@ -120,14 +156,16 @@ export default function HomePage() {
             variants={variants}
             initial="hidden"
             animate={convincedControls}
-            className="text-4xl text-center font-bold mt-28">Are you convinced yet?
+            className="mt-28 text-center text-4xl font-bold"
+          >
+            Are you convinced yet?
           </motion.h1>
           <motion.p
             ref={convincedRef}
             variants={variants}
             initial="hidden"
             animate={convincedControls}
-            className="text-center font-semibold text-lg text-muted-foreground"
+            className="text-center text-lg font-semibold text-muted-foreground"
           >
             Get notified when Guideway is released
           </motion.p>
@@ -140,18 +178,35 @@ export default function HomePage() {
           animate={convincedControls}
           className="flex flex-col items-center"
         >
-          <div className="grid gap-10 grid-cols-3" id="notified">
-            <TwitterLogoIcon className="hover:cursor-pointer transition-all hover:scale-105 duration-100 ease-in-out" onClick={() => router.push("")} width={40} height={40} />
-            <InstagramLogoIcon className="hover:cursor-pointer transition-all hover:scale-105 duration-100 ease-in-out" onClick={() => router.push("")} width={40} height={40} />
-            <LinkedInLogoIcon className="hover:cursor-pointer transition-all hover:scale-105 duration-100 ease-in-out" onClick={() => router.push("")} width={40} height={40} />
+          <div className="grid grid-cols-3 gap-10" id="notified">
+            <TwitterLogoIcon
+              className="transition-all duration-100 ease-in-out hover:scale-105 hover:cursor-pointer"
+              onClick={() => router.push("")}
+              width={40}
+              height={40}
+            />
+            <InstagramLogoIcon
+              className="transition-all duration-100 ease-in-out hover:scale-105 hover:cursor-pointer"
+              onClick={() => router.push("")}
+              width={40}
+              height={40}
+            />
+            <LinkedInLogoIcon
+              className="transition-all duration-100 ease-in-out hover:scale-105 hover:cursor-pointer"
+              onClick={() => router.push("")}
+              width={40}
+              height={40}
+            />
           </div>
 
-          <span className="text-center font-semibold my-10">OR</span>
+          <span className="my-10 text-center font-semibold">OR</span>
 
           <Card>
             <CardHeader>
               <CardTitle className="text-center">Stay in the loop</CardTitle>
-              <CardDescription className="text-center">via email updates.</CardDescription>
+              <CardDescription className="text-center">
+                via email updates.
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <UpdatesSubscribeForm
@@ -163,7 +218,7 @@ export default function HomePage() {
           </Card>
         </motion.div>
       </div>
-    </div >
+    </div>
   );
 }
 
@@ -175,7 +230,7 @@ interface IFeature {
   mid?: boolean;
   long: string;
   implemented?: boolean;
-};
+}
 
 const featuresTwo: IFeature[] = [
   {
@@ -183,7 +238,7 @@ const featuresTwo: IFeature[] = [
     desc: "Showcase your clubs achievements, events, and news to the entire school community.",
     long: "Showcase your club's achievements, events, and news to the entire school community with Guideway's promotion features. Create club  profiles, share photos & videos, and highlight your club's unique culture and values. Leverage Guideway's social sharing tools to spread  the word about upcoming events, fundraisers, and drives. Attract new members and build a strong reputation for your club.",
     icon: "/megaphone.svg",
-    href: "/docs"
+    href: "/docs",
   },
   {
     title: "Quick Onboarding",
@@ -193,15 +248,15 @@ const featuresTwo: IFeature[] = [
     `,
     href: "/docs",
     icon: "/rocket.svg",
-    mid: true
+    mid: true,
   },
   {
     title: "Polls & Voting",
     desc: "Can't decide? Then allow your club memebers to. Create polls on various topics, gather member opinions, and analyze results easily.",
     long: "Make important club decisions democratically with Guideway's polls and  voting system. Create polls on various topics, gather member opinions,  and analyze results easily. Whether you're electing club officers,  choosing event themes, or making budget allocations, Guideway ensures  that every member's voice is heard. Foster a sense of ownership and  engagement within your club.",
     href: "/docs",
-    icon: "/vote.svg"
-  }
+    icon: "/vote.svg",
+  },
 ];
 
 const features: IFeature[] = [
@@ -212,7 +267,7 @@ const features: IFeature[] = [
     Establish and maintain your club's guidelines and bylaws with Guideway's  constitution feature. Store and display your club's mission statement,  membership criteria, and governing rules in a centralized location.  Ensure transparency by making your club's  constitution easily accessible to all members. 
     `,
     icon: "/scroll.svg",
-    href: "/docs"
+    href: "/docs",
   },
   {
     title: "Club Management",
@@ -222,7 +277,7 @@ const features: IFeature[] = [
     `,
     icon: "/tri.svg",
     href: "/docs",
-    mid: true
+    mid: true,
   },
   {
     title: "Communication",
@@ -231,7 +286,7 @@ const features: IFeature[] = [
     Stay connected and engaged with your club members through Guideway's  communication features. Our platform offers a club  chat system, allowing members to discuss ideas, collaborate on projects,  and build strong relationships. With Guideway, your club will never  miss a beat.
     `,
     icon: "/paperplane.svg",
-    href: "/docs"
+    href: "/docs",
   },
 ];
 
@@ -262,7 +317,7 @@ const Features = () => {
   const cardVariants: Variants = {
     hidden: {
       opacity: 0,
-      y: 150
+      y: 150,
     },
     visible: {
       opacity: 1,
@@ -270,9 +325,9 @@ const Features = () => {
       transition: {
         duration: 0.3,
         ease: "easeOut",
-        delay: 0.5
-      }
-    }
+        delay: 0.5,
+      },
+    },
   };
 
   return (
@@ -282,10 +337,14 @@ const Features = () => {
         animate={featureOne}
         initial="hidden"
         variants={cardVariants}
-        className="md:hidden xl:grid lg:mt-28 flex flex-col lg:pb-18 items-center grid-cols-1 gap-20 xl:grid-cols-3 w-full"
+        className="lg:pb-18 flex w-full grid-cols-1 flex-col items-center gap-20 md:hidden lg:mt-28 xl:grid xl:grid-cols-3"
       >
         {features.map((feature) => (
-          <Feature key={feature.title} {...feature} className={!feature.mid ? "lg:inline-block lg:mt-10" : ""} />
+          <Feature
+            key={feature.title}
+            {...feature}
+            className={!feature.mid ? "lg:mt-10 lg:inline-block" : ""}
+          />
         ))}
       </motion.div>
       <Dash />
@@ -294,10 +353,14 @@ const Features = () => {
         animate={controls}
         initial="hidden"
         variants={cardVariants}
-        className="md:hidden xl:grid flex flex-col items-center grid-cols-1 gap-20 xl:grid-cols-3 w-full"
+        className="flex w-full grid-cols-1 flex-col items-center gap-20 md:hidden xl:grid xl:grid-cols-3"
       >
         {featuresTwo.map((feature) => (
-          <Feature key={feature.title} {...feature} className={!feature.mid ? "lg:inline-block lg:mt-10" : ""} />
+          <Feature
+            key={feature.title}
+            {...feature}
+            className={!feature.mid ? "lg:mt-10 lg:inline-block" : ""}
+          />
         ))}
       </motion.div>
       <motion.div
@@ -305,7 +368,7 @@ const Features = () => {
         animate={md}
         initial="hidden"
         variants={cardVariants}
-        className="hidden md:grid xl:hidden grid-cols-2 gap-10"
+        className="hidden grid-cols-2 gap-10 md:grid xl:hidden"
       >
         {featuresTwo.map((feature) => (
           <Feature key={feature.title} {...feature} />
@@ -318,31 +381,33 @@ const Features = () => {
   );
 };
 
-const Feature = (
-  {
-    title,
-    desc,
-    icon,
-    href,
-    className
-  }: {
-    title: string,
-    desc: string,
-    icon: string,
-    href: string,
-    className?: string
-  }
-) => {
+const Feature = ({
+  title,
+  desc,
+  icon,
+  href,
+  className,
+}: {
+  title: string;
+  desc: string;
+  icon: string;
+  href: string;
+  className?: string;
+}) => {
   const router = useRouter();
 
   return (
     <Card
-      className={"hover:-translate-y-5 hover:-skew-y-1 hover:shadow-2xl hover:border-1 hover:border-black duration-300 transition-all ease-in-out max-w-80 md:max-w-72 lg:max-w-80 flex flex-col justify-between min-h-52 " + className}>
-      <div className="relative" >
+      className={
+        "hover:border-1 flex min-h-52 max-w-80 flex-col justify-between transition-all duration-300 ease-in-out hover:-translate-y-5 hover:-skew-y-1 hover:border-black hover:shadow-2xl md:max-w-72 lg:max-w-80 " +
+        className
+      }
+    >
+      <div className="relative">
         <Image
           src={icon}
           alt={title}
-          className="absolute -top-8 -left-8"
+          className="absolute -left-8 -top-8"
           width={64}
           height={64}
         />
@@ -352,13 +417,18 @@ const Feature = (
         <CardDescription>{desc}</CardDescription>
       </CardHeader>
       <CardFooter className="flex flex-row justify-end">
-        <Button size="sm" disabled={href === "/"} className="group" onClick={() => {
-          if (href !== "/") {
-            router.push(href);
-          }
-        }}>
+        <Button
+          size="sm"
+          disabled={href === "/"}
+          className="group"
+          onClick={() => {
+            if (href !== "/") {
+              router.push(href);
+            }
+          }}
+        >
           <p>View docs</p>
-          <ChevronRightIcon className="group-hover:translate-x-1 duration-75 transition-all ease-in-out mt-1 h-3 w-4" />
+          <ChevronRightIcon className="mt-1 h-3 w-4 transition-all duration-75 ease-in-out group-hover:translate-x-1" />
         </Button>
       </CardFooter>
     </Card>
@@ -385,23 +455,36 @@ const Dash = () => {
       pathLength: 1,
       transition: {
         duration: 2,
-        ease: 'easeInOut',
+        ease: "easeInOut",
       },
     },
   };
 
   return (
-    <svg ref={ref} width="472" className="md:my-20 xl:my-10" height="77" overflow={"visible"} viewBox="0 0 472 77" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      ref={ref}
+      width="472"
+      className="md:my-20 xl:my-10"
+      height="77"
+      overflow={"visible"}
+      viewBox="0 0 472 77"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <motion.path
         variants={pathVariants}
         initial="hidden"
         animate={controls}
         fillRule="evenodd"
         clipRule="evenodd"
-        className="hidden md:block pt-10"
-        d="M2 74.7579C20.3333 41.4245 76 -15.2421 152 24.7579C247 74.7579 328.361 -13.0667 368 4C440 35 407.5 54.2579 470.5 54.2579" stroke="black" strokeWidth="3" strokeLinecap={"round"} strokeDasharray="6 6" />
+        className="hidden pt-10 md:block"
+        d="M2 74.7579C20.3333 41.4245 76 -15.2421 152 24.7579C247 74.7579 328.361 -13.0667 368 4C440 35 407.5 54.2579 470.5 54.2579"
+        stroke="black"
+        strokeWidth="3"
+        strokeLinecap={"round"}
+        strokeDasharray="6 6"
+      />
     </svg>
-
   );
 };
 const ArrowSVG = () => {
@@ -415,13 +498,21 @@ const ArrowSVG = () => {
       pathLength: 1,
       transition: {
         duration: 5,
-        ease: 'easeInOut',
+        ease: "easeInOut",
       },
     },
   };
 
   return (
-    <svg width="170" height="300" viewBox="0 0 300 300" overflow={"visible"} fill="none" xmlns="http://www.w3.org/2000/svg" className="hidden md:block">
+    <svg
+      width="170"
+      height="300"
+      viewBox="0 0 300 300"
+      overflow={"visible"}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="hidden md:block"
+    >
       <motion.path
         variants={pathVariants}
         initial="hidden"

@@ -23,7 +23,7 @@ export const lucia = new Lucia(adapter, {
     attributes: {
       // Sets to true for https
       secure: env.NODE_ENV === "production",
-    }
+    },
   },
   getUserAttributes: (attributes): DatabaseUserAttributes => {
     return {
@@ -31,13 +31,13 @@ export const lucia = new Lucia(adapter, {
       name: attributes.name,
       google_id: attributes.google_id,
     };
-  }
+  },
 });
 
 declare module "lucia" {
   interface Register {
-    Lucia: typeof lucia
-    DatabaseUserAttributes: DatabaseUserAttributes
+    Lucia: typeof lucia;
+    DatabaseUserAttributes: DatabaseUserAttributes;
   }
 }
 
@@ -45,14 +45,17 @@ declare module "lucia" {
 // then update the cookie if necessary. Use cache() to prevent
 // unnecessary database calls
 export const validateRequest = cache(
-  async (noRedirect?: boolean): Promise<{ user: User; session: Session; } | { user: null; session: null; }> => {
-    const sessionId =
-      cookies().get(lucia.sessionCookieName)?.value ?? null;
+  async (
+    noRedirect?: boolean,
+  ): Promise<
+    { user: User; session: Session } | { user: null; session: null }
+  > => {
+    const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
 
     if (!sessionId) {
       return {
         user: null,
-        session: null
+        session: null,
       };
     }
 
@@ -61,24 +64,34 @@ export const validateRequest = cache(
     try {
       if (res.session && res.session.fresh) {
         const sessionCookie = lucia.createSessionCookie(res.session.id);
-        cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+        cookies().set(
+          sessionCookie.name,
+          sessionCookie.value,
+          sessionCookie.attributes,
+        );
       }
       if (!res.session) {
         const sessionCookie = lucia.createBlankSessionCookie();
-        cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+        cookies().set(
+          sessionCookie.name,
+          sessionCookie.value,
+          sessionCookie.attributes,
+        );
       }
-    } catch { }
+    } catch {}
 
     if (res.user && !res.user.name && !noRedirect) {
-      return redirect(`${env.BASE_URL}/auth/oauth?requiresName=true&id=${res.user.id}`);
+      return redirect(
+        `${env.BASE_URL}/auth/oauth?requiresName=true&id=${res.user.id}`,
+      );
     }
 
     return res;
-  }
+  },
 );
 
 export const google = new Google(
   env.GOOGLE_CLIENT_ID,
   env.GOOGLE_CLIENT_SECRET,
-  `${env.BASE_URL}/auth/google/callback`
+  `${env.BASE_URL}/auth/google/callback`,
 );

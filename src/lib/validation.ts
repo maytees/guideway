@@ -2,48 +2,68 @@ import z from "zod";
 
 // Auth
 export const loginSchema = z.object({
-    email: z.string().email({ message: "Invalid email" }),
-    password: z.string().min(6, { message: "Password must be at least 6 characters long" }),
+  email: z.string().email({ message: "Invalid email" }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters long" }),
 });
 
-export const registerSchema = z.object({
+export const registerSchema = z
+  .object({
     email: z.string().email({ message: "Please use a valid email address" }),
-    username: z.string().min(3, { message: "Username must be at least 3 characters long" })
-        .refine(s => !s.includes(" "), "Username cannot contain spaces"),
-    password: z.string().min(6, { message: "Password must be at least 6 characters long" }),
+    username: z
+      .string()
+      .min(3, { message: "Username must be at least 3 characters long" })
+      .refine((s) => !s.includes(" "), "Username cannot contain spaces"),
+    password: z
+      .string()
+      .min(6, { message: "Password must be at least 6 characters long" }),
     confirmPassword: z.string(),
-}).superRefine(({ confirmPassword, password }, ctx) => {
+  })
+  .superRefine(({ confirmPassword, password }, ctx) => {
     if (confirmPassword !== password) {
-        ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: "Passwords do not match",
-            path: ["confirmPassword"],
-        });
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Passwords do not match",
+        path: ["confirmPassword"],
+      });
     }
-});
+  });
 
-export const passwordResetSchema = z.object({
-    newPassword: z.string().min(6, { message: "Password must be at least 6 characters long" }),
+export const passwordResetSchema = z
+  .object({
+    newPassword: z
+      .string()
+      .min(6, { message: "Password must be at least 6 characters long" }),
     confirmPassword: z.string(),
-}).superRefine(({ confirmPassword, newPassword }, ctx) => {
+  })
+  .superRefine(({ confirmPassword, newPassword }, ctx) => {
     if (confirmPassword !== newPassword) {
-        ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: "Passwords do not match",
-            path: ["confirmPassword"],
-        });
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Passwords do not match",
+        path: ["confirmPassword"],
+      });
     }
-});
+  });
 
 export const forgotPasswordSchema = z.object({
-    email: z.string().email({ message: "Please use a valid email address" }),
+  email: z.string().email({ message: "Please use a valid email address" }),
 });
 
 export const goolgeNameSchema = z.object({
-    username: z.string().min(3, { message: "Username must be at least 3 characters long" })
-        .refine(s => !s.includes(" "), "Username cannot contain spaces")
-        .refine(s => s.length < 31, "Username must be less than 31 characters long")
-        .refine(s => /^[a-z0-9_-]+$/.test(s), "Username can only contain letters, numbers, dashes and underscores")
+  username: z
+    .string()
+    .min(3, { message: "Username must be at least 3 characters long" })
+    .refine((s) => !s.includes(" "), "Username cannot contain spaces")
+    .refine(
+      (s) => s.length < 31,
+      "Username must be less than 31 characters long",
+    )
+    .refine(
+      (s) => /^[a-z0-9_-]+$/.test(s),
+      "Username can only contain letters, numbers, dashes and underscores",
+    ),
 });
 
 export type ILogin = z.infer<typeof loginSchema>;
@@ -54,8 +74,10 @@ export type IGoogleName = z.infer<typeof goolgeNameSchema>;
 
 // Email Updates
 export const updatesSignupSchema = z.object({
-    firstName: z.string().min(3, { message: "First name must be at least 3 characters long" }),
-    email: z.string().email({ message: "Please use a valid email address" }),
+  firstName: z
+    .string()
+    .min(3, { message: "First name must be at least 3 characters long" }),
+  email: z.string().email({ message: "Please use a valid email address" }),
 });
 
 export type IUpdatesSignup = z.infer<typeof updatesSignupSchema>;
