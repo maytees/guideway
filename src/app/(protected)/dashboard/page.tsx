@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { validateRequest } from "~/server/auth";
 import { db } from "~/server/db";
 import AllGroups from "./_components/AllGroups";
+import JoinGroup from "./_components/JoinGroup";
 
 async function getData(userId: string) {
   const user = await db.user.findUnique({
@@ -43,12 +44,15 @@ const Page = async () => {
   const data = await getData(user.id);
 
   return (
-    <div className="mt-6 px-10 md:px-20 lg:px-40 2xl:px-80">
+    <div className="mt-20 px-10 md:px-20 lg:px-40 2xl:px-80">
       {/* <h1>Welcome, {user.name}</h1>
       <form action={signout}>
         <button type="submit">Log out</button>
       </form> */}
-      <h1 className="text-3xl font-semibold">Group explorer</h1>
+      <div className="flex flex-row items-center gap-5">
+        <h1 className="text-3xl font-semibold">Group explorer</h1>
+        <JoinGroup />
+      </div>
       <div className="mr-4 flex-1">
         <AllGroups groups={data!} />
       </div>

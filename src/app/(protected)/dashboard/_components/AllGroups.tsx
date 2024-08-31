@@ -1,10 +1,10 @@
 "use client";
 import { type Group } from "@prisma/client";
-import { Mail, Users } from "lucide-react";
-import Link from "next/link";
+import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
+import { Calendar, Clock, School, Star, Users } from "lucide-react";
 import { useState } from "react";
-import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -22,13 +22,31 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
+import { formatCategory, stringToRawCategory } from "~/lib/utils";
+
+enum ClubCategory {
+  ACADEMIC,
+  ARTS_AND_CULTURE,
+  BUSINESS_AND_ENTREPRENEURSHIP,
+  COMMUNITY_SERVICE_AND_VOLUNTEERING,
+  ENVIRONMENTAL_AND_SUSTAINABILITY,
+  HEALTH_AND_WELLNESS,
+  HOBBIES_AND_INTERESTS,
+  IDENTITY_AND_DIVERSITY,
+  MEDIA_AND_JOURNALISM,
+  POLITICAL_AND_ACTIVISM,
+  RELIGIOUS_AND_SPIRITUAL,
+  SOCIAL_AND_NETWORKING,
+  SPORTS_AND_RECREATION,
+  TECHNOLOGY_AND_INNOVATION,
+}
 
 const mockGroups = [
   {
     id: "1",
     name: "Computer Science Club",
     description:
-      "A group for CS enthusiasts to share knowledge and collaborate on projects. Members meet regularly to discuss the latest trends in technology and work on coding challenges together. The club also hosts workshops and invites guest speakers from the tech industry to provide valuable insights and networking opportunities.collaborate on projects. Members meet regularly to discuss the latest trends in technology and work on coding challenges together. The club also hosts workshops and invites guest speakers from the tech industry to provide valuable insights and networking opportunities. ",
+      "Join CS enthusiasts to share knowledge, collaborate on projects, and explore the latest tech trends!",
     category: "TECHNOLOGY_AND_INNOVATION",
     created_at: new Date("2023-01-01"),
     updated_at: new Date("2023-05-15"),
@@ -43,7 +61,7 @@ const mockGroups = [
     id: "2",
     name: "Environmental Awareness Group",
     description:
-      "Dedicated to promoting environmental sustainability and conservation efforts. Members organize local clean-up initiatives and awareness campaigns on campus. The club also partners with community organizations to implement eco-friendly practices in the area.",
+      "Promote environmental sustainability through local clean-up initiatives and awareness campaigns!",
     category: "ENVIRONMENTAL_AND_SUSTAINABILITY",
     created_at: new Date("2023-02-15"),
     updated_at: new Date("2023-05-20"),
@@ -58,7 +76,7 @@ const mockGroups = [
     id: "3",
     name: "Debate Society",
     description:
-      "A platform for students to hone their public speaking and critical thinking skills. The society holds regular debates on current affairs and philosophical topics. Members participate in inter-collegiate debate competitions and organize an annual debate tournament.",
+      "Hone your public speaking and critical thinking skills through regular debates and competitions!",
     category: "ACADEMIC",
     created_at: new Date("2023-03-10"),
     updated_at: new Date("2023-06-01"),
@@ -73,7 +91,7 @@ const mockGroups = [
     id: "4",
     name: "Art Collective",
     description:
-      "A community of artists across various mediums, including painting, sculpture, and digital art. The collective organizes exhibitions, workshops, and collaborative projects. Members have access to shared studio space and resources for their artistic endeavors.",
+      "Connect with fellow artists to create, exhibit, and collaborate across various artistic mediums!",
     category: "ARTS_AND_CULTURE",
     created_at: new Date("2023-04-05"),
     updated_at: new Date("2023-07-20"),
@@ -88,7 +106,7 @@ const mockGroups = [
     id: "5",
     name: "Fitness Fanatics",
     description:
-      "A group dedicated to promoting physical health and wellness. Members participate in group workouts, share nutrition tips, and organize sports tournaments. The club also arranges fitness challenges and invites fitness experts for workshops.",
+      "Boost your physical health through group workouts, nutrition tips, and exciting sports tournaments!",
     category: "SPORTS_AND_RECREATION",
     created_at: new Date("2023-05-20"),
     updated_at: new Date("2023-08-15"),
@@ -103,7 +121,7 @@ const mockGroups = [
     id: "6",
     name: "Entrepreneurship Network",
     description:
-      "A community for aspiring entrepreneurs and business enthusiasts. The network organizes startup pitch events, mentorship programs, and networking sessions with successful entrepreneurs. Members collaborate on business ideas and participate in business plan competitions.",
+      "Collaborate on business ideas and connect with successful entrepreneurs through pitch events and mentorship programs!",
     category: "BUSINESS_AND_ENTREPRENEURSHIP",
     created_at: new Date("2023-06-15"),
     updated_at: new Date("2023-09-01"),
@@ -118,7 +136,7 @@ const mockGroups = [
     id: "7",
     name: "Film Appreciation Society",
     description:
-      "A group for cinema enthusiasts to explore and discuss various genres and eras of film. The society hosts weekly movie screenings followed by discussions, organizes film festivals, and invites filmmakers for Q&A sessions. Members also collaborate on short film projects.",
+      "Explore cinema through weekly screenings, discussions, and collaborative film projects!",
     category: "ARTS_AND_CULTURE",
     created_at: new Date("2023-07-01"),
     updated_at: new Date("2023-09-30"),
@@ -133,7 +151,7 @@ const mockGroups = [
     id: "8",
     name: "Volunteer Corps",
     description:
-      "A service-oriented group committed to making a positive impact in the community. Members participate in various volunteer activities, including tutoring underprivileged children, organizing food drives, and assisting at local shelters. The corps also coordinates with NGOs for larger community service projects.",
+      "Make a positive impact in the community through various volunteer activities and service projects!",
     category: "COMMUNITY_SERVICE_AND_VOLUNTEERING",
     created_at: new Date("2023-08-10"),
     updated_at: new Date("2023-10-15"),
@@ -148,7 +166,7 @@ const mockGroups = [
     id: "9",
     name: "Robotics Club",
     description:
-      "A group for robotics enthusiasts to design, build, and program robots. Members work on various robotics projects, participate in robotics competitions, and organize workshops on topics like Arduino, Raspberry Pi, and AI. The club also collaborates with industry partners for internship opportunities.",
+      "Design, build, and program robots while participating in competitions and industry collaborations!",
     category: "TECHNOLOGY_AND_INNOVATION",
     created_at: new Date("2023-09-05"),
     updated_at: new Date("2023-11-20"),
@@ -163,7 +181,7 @@ const mockGroups = [
     id: "10",
     name: "Mental Health Awareness Alliance",
     description:
-      "A supportive community dedicated to promoting mental health awareness and well-being. The alliance organizes support groups, mindfulness workshops, and stress management seminars. They also work to reduce stigma around mental health issues through campus-wide campaigns and events.",
+      "Promote mental health awareness and well-being through support groups, workshops, and campus-wide campaigns!",
     category: "HEALTH_AND_WELLNESS",
     created_at: new Date("2023-10-01"),
     updated_at: new Date("2023-12-15"),
@@ -178,7 +196,7 @@ const mockGroups = [
     id: "11",
     name: "Multicultural Student Association",
     description:
-      "A group celebrating cultural diversity and promoting intercultural understanding. The association organizes cultural festivals, language exchange programs, and educational events about different cultures and traditions. They also advocate for inclusive policies on campus.",
+      "Celebrate cultural diversity through festivals, language exchanges, and educational events!",
     category: "IDENTITY_AND_DIVERSITY",
     created_at: new Date("2023-10-15"),
     updated_at: new Date("2023-12-20"),
@@ -193,7 +211,7 @@ const mockGroups = [
     id: "12",
     name: "Campus News Network",
     description:
-      "A student-run media organization covering campus news, events, and issues. Members gain hands-on experience in journalism, broadcasting, and digital media production. The network produces a weekly newspaper, operates a radio station, and maintains an online news portal.",
+      "Gain hands-on experience in journalism, broadcasting, and digital media production while covering campus news and events!",
     category: "MEDIA_AND_JOURNALISM",
     created_at: new Date("2023-11-01"),
     updated_at: new Date("2024-01-05"),
@@ -208,7 +226,7 @@ const mockGroups = [
     id: "13",
     name: "Political Science Association",
     description:
-      "A non-partisan group fostering political awareness and civic engagement. The association organizes debates on current political issues, hosts mock elections, and invites political speakers from various ideologies. They also encourage students to participate in local and national political processes.",
+      "Foster political awareness and civic engagement through debates, mock elections, and guest speaker events!",
     category: "POLITICAL_AND_ACTIVISM",
     created_at: new Date("2023-11-15"),
     updated_at: new Date("2024-01-20"),
@@ -223,7 +241,7 @@ const mockGroups = [
     id: "14",
     name: "Interfaith Dialogue Group",
     description:
-      "A community promoting understanding and respect among different faith traditions. The group organizes interfaith discussions, visits to various places of worship, and collaborative community service projects. They also work to foster a more inclusive and tolerant campus environment.",
+      "Promote understanding and respect among different faith traditions through discussions, visits to places of worship, and collaborative projects!",
     category: "RELIGIOUS_AND_SPIRITUAL",
     created_at: new Date("2023-12-01"),
     updated_at: new Date("2024-02-05"),
@@ -238,7 +256,7 @@ const mockGroups = [
     id: "15",
     name: "Board Game Enthusiasts",
     description:
-      "A club for lovers of board games, card games, and tabletop RPGs. The group hosts regular game nights, organizes tournaments, and introduces members to new and classic games. They also design and playtest their own games, fostering creativity and strategic thinking.",
+      "Enjoy regular game nights, tournaments, and game design workshops for lovers of board games, card games, and tabletop RPGs!",
     category: "HOBBIES_AND_INTERESTS",
     created_at: new Date("2023-12-15"),
     updated_at: new Date("2024-02-20"),
@@ -253,7 +271,7 @@ const mockGroups = [
 
 const AllGroups = (props: { groups: Group[] }) => {
   const [groups, setGroups] = useState(mockGroups);
-  const [categoryFilter, setCategoryFilter] = useState("All");
+  const [categoryFilter, setCategoryFilter] = useState<string>("All");
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredGroups = groups.filter(
@@ -322,89 +340,77 @@ const AllGroups = (props: { groups: Group[] }) => {
         </Select>
       </div>
 
-      {filteredGroups.length == 0 ? (
-        <Card>
-          <CardHeader>
-            <CardTitle>Hmm... there seems to be a problem.</CardTitle>
-            <CardDescription>
-              Sadly, we couldn{"'"}t find any clubs with the filters you added..
-            </CardDescription>
-          </CardHeader>
-        </Card>
-      ) : (
-        filteredGroups.map((group) => (
-          <Card key={group.id} className="mb-10">
-            <CardHeader className="space-y-0 pb-2">
-              <CardTitle className="flex flex-row justify-between">
-                <div className="flex items-center space-x-2">
+      <div className="flex flex-wrap items-center gap-10">
+        {filteredGroups.length == 0 ? (
+          <Card className="w-full">
+            <CardHeader>
+              <CardTitle>
+                <QuestionMarkCircledIcon className="size-10" />
+              </CardTitle>
+              <CardTitle>Hmm... there seems to be a problem.</CardTitle>
+              <CardDescription>
+                Sadly, we couldn{"'"}t find any clubs with the filters you
+                added..
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        ) : (
+          filteredGroups.map((group) => (
+            <Card key={group.id} className="w-full">
+              <CardHeader className="space-y-0 pb-2">
+                <div className="mb-4 flex flex-row items-center justify-between">
                   <Avatar>
-                    <AvatarImage
-                      src={
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEZuT1CDTg-N6EMe8cAlh000s1VjUxeVbnKw&s"
-                      }
-                    />
+                    <AvatarImage src={group.logo} />
                     <AvatarFallback>
                       {group.name.substring(0, 2)}
                     </AvatarFallback>
                   </Avatar>
-                  <span>{group.name}</span>
+                  <Badge variant={"secondary"} className="h-fit rounded-full">
+                    {formatCategory(stringToRawCategory(group.category))}
+                  </Badge>
                 </div>
-                <div className="flex items-center text-lg">
-                  <Users className="mr-2 h-4 w-4" />
-                  <span>{group.member_count}</span>
+                <CardTitle className="flex flex-row justify-between pb-1">
+                  <div className="flex items-center space-x-2 text-2xl font-semibold">
+                    <span>{group.name}</span>
+                  </div>
+                </CardTitle>
+                <CardDescription className="mt-0 flex">
+                  <School className="mr-1 size-4" />
+                  <span>South Lakes High School</span>
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="mt-1">
+                <div className="flex items-center justify-between"></div>
+                <p className="font-medium">{group.description}</p>
+
+                <div className="mt-8 grid grid-cols-2 grid-rows-2 xl:w-96">
+                  <div className="flex items-center gap-2">
+                    <Users className="size-4" />
+                    <span>{group.member_count} Members</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="size-4" />
+                    <span>Meets Weekly</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Star className="size-4" />
+                    <span>4.8 Rating</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="size-4" />
+                    <span>Since 2004</span>
+                  </div>
                 </div>
-              </CardTitle>
-              <CardDescription>
-                {group.category.replace(/_/g, " ")}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center justify-between"></div>
-              <p>{group.description}</p>
-            </CardContent>
-            <CardFooter className="flex flex-col items-start justify-between space-y-5">
-              <div className="flex flex-row gap-6">
-                {/* Map club socials... */}
-                <Link
-                  href="insta"
-                  target="_blank"
-                  className="transition-all duration-150 ease-in-out hover:scale-110"
-                >
-                  <FaInstagram className="size-6" />
-                </Link>
-                <Link
-                  href="insta"
-                  target="_blank"
-                  className="transition-all duration-150 ease-in-out hover:scale-110"
-                >
-                  <FaTiktok className="size-6" />
-                </Link>
-                <Link
-                  href="insta"
-                  target="_blank"
-                  className="transition-all duration-150 ease-in-out hover:scale-110"
-                >
-                  <FaFacebook className="size-6" />
-                </Link>
-                <Link
-                  href="insta"
-                  target="_blank"
-                  className="transition-all duration-150 ease-in-out hover:scale-110"
-                >
-                  <Mail className="size-6" />
-                </Link>
-              </div>
-              <Button
-                variant="outline"
-                size="lg"
-                className="px-16 max-md:w-full"
-              >
-                Open
-              </Button>
-            </CardFooter>
-          </Card>
-        ))
-      )}
+              </CardContent>
+              <CardFooter className="flex flex-col items-start justify-between space-y-5">
+                <Button size="lg" className="w-full">
+                  Open
+                </Button>
+              </CardFooter>
+            </Card>
+          ))
+        )}
+      </div>
     </div>
   );
 };
