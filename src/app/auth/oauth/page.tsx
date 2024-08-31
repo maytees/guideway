@@ -1,7 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { updateUsername } from "~/actions/auth";
 import FormCard from "~/components/forms/FormCard";
@@ -30,7 +30,7 @@ const Google = () => {
   const router = useRouter();
 
   if (!requiresName) {
-    router.push("/secret");
+    router.push("/dashboard");
   }
 
   const form = useForm<IGoogleName>({
@@ -117,7 +117,10 @@ const Google = () => {
         ) : (
           <>
             <SuccessComponent message={success} />
-            <Button className="w-full" onClick={() => router.push("/secret")}>
+            <Button
+              className="w-full"
+              onClick={() => router.push("/dashboard")}
+            >
               Go home
             </Button>
           </>

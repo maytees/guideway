@@ -1,12 +1,12 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useCallback, useEffect, useState } from "react";
-import { verifyUser } from "~/actions/auth";
+import { useCallback, useEffect, useState } from "react";
 import { HashLoader } from "react-spinners";
+import { verifyUser } from "~/actions/auth";
 import { Button } from "../ui/button";
-import { ErrorComponent, SuccessComponent } from "./FormInfo";
 import FormCard from "./FormCard";
+import { ErrorComponent, SuccessComponent } from "./FormInfo";
 
 const VerifyForm = () => {
   const [error, setError] = useState<string | undefined>();
@@ -54,7 +54,7 @@ const VerifyForm = () => {
       <Button
         variant="default"
         className="w-full"
-        onClick={() => router.push("/secret")}
+        onClick={() => router.push("/dashboard")}
       >
         Go home
       </Button>

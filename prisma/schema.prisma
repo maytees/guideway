@@ -41,6 +41,7 @@ model Group {
     owner        User         @relation("GroupOwner", fields: [owner_id], references: [id])
     owner_id     String       @unique
     members      User[]       @relation("GroupMembers")
+    join_code    String
     logo         String?
     website      String?
     email        String?

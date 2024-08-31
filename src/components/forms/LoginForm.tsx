@@ -1,14 +1,13 @@
 "use client";
-import React, { useState, useTransition } from "react";
-import FormCard from "./FormCard";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { FaGoogle } from "react-icons/fa";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { type ILogin, loginSchema } from "~/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { FaGoogle } from "react-icons/fa";
 import { login } from "~/actions/auth";
+import { type ILogin, loginSchema } from "~/lib/validation";
+import { Button } from "../ui/button";
 import {
   Form,
   FormControl,
@@ -17,8 +16,9 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
+import { Input } from "../ui/input";
+import FormCard from "./FormCard";
 import { ErrorComponent } from "./FormInfo";
-import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const [error, setError] = useState<string | undefined>();
@@ -45,7 +45,7 @@ const LoginForm = () => {
 
           if (data?.success) {
             form.reset();
-            router.push("/secret");
+            router.push("/dashboard");
           }
         })
         .catch(() => {

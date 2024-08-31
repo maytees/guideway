@@ -1,17 +1,22 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
-import { Button } from "./ui/button";
 import { usePathname, useRouter } from "next/navigation";
+import React from "react";
+import { Button } from "./ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 
 const ICON_WIDTH = 64;
 
 const Navbar = () => {
   const currentPath = usePathname();
-
   const router = useRouter();
+
+  // This is very stupid. I had problems with layout so this is a solution for now..
+  if (currentPath.includes("dashboard")) {
+    return;
+  }
+
   return (
     <div className="top-0 z-50 mt-10 flex h-16 items-center gap-4 px-10 pb-10 pt-10 md:px-6">
       <nav className="container hidden flex-row gap-24 md:flex md:items-center md:justify-between md:px-14 lg:px-32">

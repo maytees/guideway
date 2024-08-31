@@ -6,7 +6,7 @@ const Page = async () => {
   const { session } = await validateRequest();
 
   if (session) {
-    return redirect("/app");
+    return redirect("/dashboard");
   }
   return <Landing />;
 };
