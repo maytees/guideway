@@ -1,3 +1,4 @@
+import { ClubCategory } from "@prisma/client";
 import z from "zod";
 
 // Auth
@@ -67,13 +68,31 @@ export const goolgeNameSchema = z.object({
 });
 
 // Dashboard
-
 export const joinGroupSchema = z.object({
   joinCode: z.string().length(8, { message: "Join code invalid!" }),
 });
 
+// TODO: Add logo
+export const createGroupSchema = z.object({
+  name: z
+    .string()
+    .min(3, { message: "Group name must be at least 3 characters long" })
+    .max(32, { message: "Group name length musn't exceed 32 characters" }),
+  description: z
+    .string()
+    .min(1, { message: "Group description must be at least 1 character long" })
+    .max(256, {
+      message: "Group description length musn't exceed 256 characters",
+    }),
+  category: z.enum(Object.values(ClubCategory) as [string, ...string[]], {
+    required_error: "Please select a valid club category",
+    invalid_type_error: "Please select a club category",
+  }),
+});
+
 // Dashboard interfaces
 export type IJoinGroupCode = z.infer<typeof joinGroupSchema>;
+export type ICreateGroup = z.infer<typeof createGroupSchema>;
 
 export type ILogin = z.infer<typeof loginSchema>;
 export type IRegister = z.infer<typeof registerSchema>;

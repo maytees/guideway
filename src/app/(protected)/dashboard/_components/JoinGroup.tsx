@@ -24,7 +24,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { type IJoinGroupCode, joinGroupSchema } from "~/lib/validation";
 
-const JoinGroup = () => {
+const JoinGroup = (props: { size?: "lg" | undefined }) => {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const form = useForm<IJoinGroupCode>({
     resolver: zodResolver(joinGroupSchema),
@@ -46,7 +46,7 @@ const JoinGroup = () => {
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>
-        <Button size={"sm"} className="gap-2">
+        <Button size={props.size || "sm"} className="gap-2">
           Join Group
           <Plus className="size-4" />
         </Button>

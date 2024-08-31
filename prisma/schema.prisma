@@ -32,21 +32,20 @@ enum ClubCategory {
 }
 
 model Group {
-    id           String       @id @default(cuid())
-    name         String
-    description  String
-    category     ClubCategory
-    created_at   DateTime     @default(now())
-    updated_at   DateTime     @default(now())
-    owner        User         @relation("GroupOwner", fields: [owner_id], references: [id])
-    owner_id     String       @unique
-    members      User[]       @relation("GroupMembers")
-    join_code    String
-    logo         String?
-    website      String?
-    email        String?
-    member_count Int
-    posts        Post[]
+    id          String       @id @default(cuid())
+    name        String
+    description String
+    category    ClubCategory
+    created_at  DateTime     @default(now())
+    updated_at  DateTime     @default(now())
+    owner       User         @relation("GroupOwner", fields: [owner_id], references: [id])
+    owner_id    String
+    members     User[]       @relation("GroupMembers")
+    logo        String?
+    website     String?
+    email       String?
+    join_code   String       @unique
+    posts       Post[]
 }
 
 model Post {
@@ -121,7 +120,7 @@ model User {
     Like        Like[]
     CommentLike CommentLike[]
 
-    ownedGroups Group?  @relation("GroupOwner")
+    ownedGroups Group[] @relation("GroupOwner")
     groups      Group[] @relation("GroupMembers")
 }
 

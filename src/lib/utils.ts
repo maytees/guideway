@@ -50,3 +50,10 @@ export function stringToRawCategory(
 export function rawCategoryToString(category: ClubCategory): string {
   return ClubCategory[category];
 }
+
+export function dashify(code: string) {
+  if (code.length !== 8) {
+    throw new Error("Input must be exactly 8 characters long");
+  }
+  return `${code.slice(0, 4)}-${code.slice(4)}`;
+}
