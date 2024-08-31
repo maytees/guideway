@@ -66,6 +66,15 @@ export const goolgeNameSchema = z.object({
     ),
 });
 
+// Dashboard
+
+export const joinGroupSchema = z.object({
+  joinCode: z.string().length(8, { message: "Join code invalid!" }),
+});
+
+// Dashboard interfaces
+export type IJoinGroupCode = z.infer<typeof joinGroupSchema>;
+
 export type ILogin = z.infer<typeof loginSchema>;
 export type IRegister = z.infer<typeof registerSchema>;
 export type IPasswordReset = z.infer<typeof passwordResetSchema>;
