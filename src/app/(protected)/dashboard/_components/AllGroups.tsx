@@ -160,37 +160,23 @@ const AllGroups = (props: { groups: GroupWithMembers[] }) => {
 
       <div className="flex flex-wrap items-center gap-10">
         {filteredGroups.length == 0 ? (
-          props.groups.length == 0 ? (
-            <Card className="w-full">
-              <CardHeader>
-                <CardTitle>
-                  <QuestionMarkCircledIcon className="size-10" />
-                </CardTitle>
-                <CardTitle>Hmm... there seems to be a problem.</CardTitle>
-                <CardDescription>
-                  Sadly, we couldn{"'"}t find any clubs with the filters you
-                  added..
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          ) : (
-            <Card className="w-full">
-              <CardHeader>
-                <CardTitle>
-                  <QuestionMarkCircledIcon className="size-10" />
-                </CardTitle>
-                <CardTitle>Whoops...</CardTitle>
-                <CardDescription>
-                  Doesn't seem like you're in any groups. Would you like to join
-                  or create one?
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-x-8">
-                <JoinGroup size="lg" />
-                <CreateGroup size="lg" />
-              </CardContent>
-            </Card>
-          )
+          <Card className="w-full">
+            <CardHeader>
+              <CardTitle>
+                <QuestionMarkCircledIcon className="size-10" />
+              </CardTitle>
+              <CardTitle>Whoops...</CardTitle>
+              <CardDescription>
+                We couldn't find any groups{" "}
+                {searchTerm ? "matching " + searchTerm : ""}in the{" "}
+                {categoryFilter} category
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-x-4">
+              <JoinGroup />
+              <CreateGroup />
+            </CardContent>
+          </Card>
         ) : (
           filteredGroups.map((group) => (
             <Card key={group.id} className="w-full">
