@@ -73,7 +73,7 @@ export default function Landing() {
   };
 
   return (
-    <div className=" mt-48 flex flex-col items-center justify-center">
+    <div className="mb-32 mt-48 flex flex-col items-center justify-center">
       <div className="relative">
         <h1 className="z-10 text-center text-6xl font-bold">
           Empowering School

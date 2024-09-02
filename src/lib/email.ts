@@ -11,7 +11,7 @@ export const sendVerificationEmail = async (
   const link = `${env.BASE_URL}/auth/verify?token=${token}`;
 
   await resend.emails.send({
-    from: "no-reply@roport.dev",
+    from: "no-reply@guideway.co",
     to: email,
     subject: "Verify your email",
     html: VerificationEmail(name, link),
@@ -26,7 +26,7 @@ export const sendPasswordResetEmail = async (
   const link = `${env.BASE_URL}/auth/password-reset?token=${token}`;
 
   await resend.emails.send({
-    from: "no-reply@roport.dev",
+    from: "no-reply@guideway.co",
     to: email,
     subject: "Reset your password",
     html: PasswordRestEmail(name, link),
@@ -35,7 +35,7 @@ export const sendPasswordResetEmail = async (
 
 export const sendSubscribeEmail = async (email: string, name: string) => {
   await resend.emails.send({
-    from: "no-reply@roport.dev",
+    from: "no-reply@guideway.co",
     to: email,
     subject: "Thanks for subscribing to Guideway updates",
     html: SubscribeEmail(name),
