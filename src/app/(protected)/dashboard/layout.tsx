@@ -57,7 +57,7 @@ export default async function Layout({
   const data = await getData(user.id);
 
   return (
-    <div className="flex">
+    <div className="flex min-h-screen ">
       <Sidebar groups={data as GroupWithMembers[]} />
       <main className="flex-1 p-4">{children}</main>
     </div>

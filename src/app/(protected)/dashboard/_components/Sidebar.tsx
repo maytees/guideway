@@ -64,7 +64,7 @@ export default function Sidebar(props: { groups: GroupWithMembers[] }) {
   const pathname = usePathname();
 
   return (
-    <div className="grid h-full min-h-screen md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+    <div className="grid min-h-screen md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden h-full border-r bg-muted/40 pt-10 md:block">
         <div className="flex h-full  flex-col gap-2">
           <div className="flex h-14 items-center border-b lg:h-[60px] lg:px-4">

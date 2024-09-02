@@ -113,7 +113,7 @@ const Footer = () => {
   const router = useRouter();
 
   return (
-    <footer className="mt-28 border border-t-2 px-10 pb-20 pt-20 md:px-14 xl:px-40">
+    <footer className="border border-t-2 px-10 pb-20 pt-20 md:px-14 xl:px-40">
       <div className="flex flex-col justify-center lg:flex-row lg:space-x-10 xl:justify-between 2xl:justify-center 2xl:space-x-32">
         <div>
           <div className="flex flex-row items-center space-x-2 lg:items-start">
