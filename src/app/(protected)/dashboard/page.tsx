@@ -56,15 +56,17 @@ const Page = async () => {
 
   return (
     <TooltipProvider>
-      <div className="mt-10 px-2 md:px-3 2xl:px-40">
+      <div className="mt-10 px-2 md:px-3 2xl:px-40 max-sm:mt-20">
         {/* <h1>Welcome, {user.name}</h1>
       <form action={signout}>
         <button type="submit">Log out</button>
       </form> */}
-        <div className="flex flex-row items-center gap-5">
-          <h1 className="text-3xl font-semibold">Group explorer</h1>
-          <JoinGroup />
-          <CreateGroup />
+        <div className="flex flex-col w-full sm:flex-row sm:items-center sm:justify-between lg:justify-start lg:gap-5 3xl:gap-10">
+          <h1 className="text-2xl sm:text-2xl lg:text-3xl font-semibold mb-2 sm:mb-0">Group explorer</h1>
+          <div className="flex gap-2 3xl:gap-4">
+            <JoinGroup />
+            <CreateGroup />
+          </div>
         </div>
         <div className="mr-4 flex-1">
           <AllGroups groups={data as GroupWithMembers[]} />

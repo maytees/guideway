@@ -3,10 +3,10 @@ import {
   Club,
   Compass,
   LogOut,
-  Menu,
   Settings,
+  SidebarOpen,
   UserCircle,
-  UserPlus
+  UserPlus,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -111,9 +111,9 @@ export default function Sidebar(props: { groups: GroupWithMembers[] }) {
             <Button
               variant="outline"
               size="icon"
-              className="absolute shrink-0 md:hidden"
+              className="absolute left-5 top-8 shrink-0 md:hidden"
             >
-              <Menu className="h-5 w-5" />
+              <SidebarOpen className="h-5 w-5" />
               <span className="sr-only">Toggle navigation menu</span>
             </Button>
           </SheetTrigger>
