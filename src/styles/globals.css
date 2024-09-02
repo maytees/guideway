@@ -96,3 +96,7 @@
 ::-webkit-scrollbar-button {
   display: none;
 }
+
+* {
+  font-family: monospace;
+}

@@ -1,13 +1,11 @@
 import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
+import React from "react";
 import { toast } from "sonner";
-import { TooltipProvider } from "~/components/ui/tooltip";
 import { GroupWithMembers } from "~/lib/types";
 import { validateRequest } from "~/server/auth";
 import { db } from "~/server/db";
-import AllGroups from "./_components/AllGroups";
-import CreateGroup from "./_components/CreateGroup";
-import JoinGroup from "./_components/JoinGroup";
+import Sidebar from "./_components/Sidebar";
 
 async function getData(userId: string) {
   const user = await db.user.findUnique({
@@ -39,7 +37,11 @@ async function getData(userId: string) {
   ];
 }
 
-const Page = async () => {
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const validate = await validateRequest();
 
   if (validate instanceof NextResponse) {
@@ -55,23 +57,9 @@ const Page = async () => {
   const data = await getData(user.id);
 
   return (
-    <TooltipProvider>
-      <div className="mt-10 px-2 md:px-3 2xl:px-40">
-        {/* <h1>Welcome, {user.name}</h1>
-      <form action={signout}>
-        <button type="submit">Log out</button>
-      </form> */}
-        <div className="flex flex-row items-center gap-5">
-          <h1 className="text-3xl font-semibold">Group explorer</h1>
-          <JoinGroup />
-          <CreateGroup />
-        </div>
-        <div className="mr-4 flex-1">
-          <AllGroups groups={data as GroupWithMembers[]} />
-        </div>
-      </div>
-    </TooltipProvider>
+    <div className="flex">
+      <Sidebar groups={data as GroupWithMembers[]} />
+      <main className="flex-1 p-4">{children}</main>
+    </div>
   );
-};
-
-export default Page;
+}

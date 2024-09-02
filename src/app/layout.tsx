@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`font-sans ${font.variable} anitaliased min-h-screen `}>
+      <body className={`font-sans ${font.variable} anitaliased`}>
         <Navbar />
         {children}
         <Footer />
