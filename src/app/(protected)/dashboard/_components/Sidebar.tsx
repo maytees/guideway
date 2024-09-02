@@ -15,7 +15,7 @@ import { usePathname } from "next/navigation";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
-import { GroupWithMembers } from "~/lib/types";
+import { type GroupWithMembers } from "~/lib/types";
 
 type SidebarLink = {
   href: string;
@@ -157,7 +157,4 @@ export default function Sidebar(props: { groups: GroupWithMembers[] }) {
       </div>
     </div>
   );
-}
-function getData(id: any) {
-  throw new Error("Function not implemented.");
 }
