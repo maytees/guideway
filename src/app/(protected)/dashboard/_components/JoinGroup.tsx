@@ -46,7 +46,7 @@ const JoinGroup = (props: { size?: "lg" | undefined }) => {
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>
-        <Button size={props.size || "sm"} className="gap-2">
+        <Button size={props.size} className="gap-2">
           Join Group
           <Plus className="size-4" />
         </Button>
