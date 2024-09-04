@@ -1,4 +1,4 @@
-  "use server";
+"use server";
 
 import { validateRequest } from "~/server/auth";
 import { db } from "~/server/db";
@@ -23,7 +23,7 @@ export async function togglePin(groupId: string): Promise<ActionResult> {
   // Fetch the user with their current pinned groups
   const currentUser = await db.user.findUnique({
     where: { id: user.id },
-    include: { pinnedGroups: true, groups: true }
+    include: { pinnedGroups: true, groups: true },
   });
 
   if (!currentUser) {
@@ -32,12 +32,16 @@ export async function togglePin(groupId: string): Promise<ActionResult> {
     };
   }
 
-  const isPinned = currentUser.pinnedGroups.some(group => group.id === groupId);
+  const isPinned = currentUser.pinnedGroups.some(
+    (group) => group.id === groupId,
+  );
   let updatedPinnedGroups;
 
   if (isPinned) {
     // Remove the group from pinned groups
-    updatedPinnedGroups = currentUser.pinnedGroups.filter(group => group.id !== groupId);
+    updatedPinnedGroups = currentUser.pinnedGroups.filter(
+      (group) => group.id !== groupId,
+    );
   } else {
     // Add the group to pinned groups
     updatedPinnedGroups = [...currentUser.pinnedGroups, { id: groupId }];
@@ -48,7 +52,7 @@ export async function togglePin(groupId: string): Promise<ActionResult> {
     where: { id: user.id },
     data: {
       pinnedGroups: {
-        set: updatedPinnedGroups.map(group => ({ id: group.id })),
+        set: updatedPinnedGroups.map((group) => ({ id: group.id })),
       },
     },
   });
@@ -56,7 +60,7 @@ export async function togglePin(groupId: string): Promise<ActionResult> {
   const group = await db.group.findUnique({ where: { id: groupId } });
 
   return {
-    success: `Successfully ${isPinned ? 'unpinned' : 'pinned'} ${group?.name || 'group'}`,
+    success: `Successfully ${isPinned ? "unpinned" : "pinned"} ${group?.name ?? "group"}`,
     isPinned: !isPinned,
   };
 }

@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 import React from "react";
 import { toast } from "sonner";
-import { GroupWithMembers } from "~/lib/types";
+import { type GroupWithMembers } from "~/lib/types";
 import { validateRequest } from "~/server/auth";
 import { db } from "~/server/db";
 import Sidebar from "./_components/Sidebar";
