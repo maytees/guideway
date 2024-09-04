@@ -1,11 +1,11 @@
 import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
-import { Lucia, type Session, type User } from "lucia";
-import { db } from "./db";
-import { env } from "~/env";
-import { cache } from "react";
-import { cookies } from "next/headers";
 import { Google } from "arctic";
+import { Lucia, type Session, type User } from "lucia";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { cache } from "react";
+import { env } from "~/env";
+import { db } from "./db";
 
 interface DatabaseUserAttributes {
   email: string;

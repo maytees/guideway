@@ -46,6 +46,7 @@ export async function joinGroup(values: IJoinGroupCode): Promise<ActionResult> {
     },
     include: {
       members: true,
+      pinnedBy: true,
     },
   });
 

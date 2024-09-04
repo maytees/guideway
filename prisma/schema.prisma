@@ -46,6 +46,9 @@ model Group {
     email       String?
     join_code   String       @unique
     posts       Post[]
+    userId      String?
+
+    pinnedBy User[]
 }
 
 model Post {
@@ -122,6 +125,8 @@ model User {
 
     ownedGroups Group[] @relation("GroupOwner")
     groups      Group[] @relation("GroupMembers")
+    Group       Group?  @relation(fields: [groupId], references: [id])
+    groupId     String?
 }
 
 model Session {

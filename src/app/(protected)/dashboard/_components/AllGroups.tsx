@@ -1,16 +1,20 @@
 "use client";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
+import { type User } from "lucia";
 import {
   BookKey,
   Calendar,
   Clock,
   Copy,
+  Loader2,
+  Pin,
   School,
   Star,
   Users,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { togglePin } from "~/actions/dashboard/pin-group";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
@@ -35,30 +39,13 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "~/components/ui/tooltip";
-import { GroupWithMembers } from "~/lib/types";
-import { dashify, formatCategory, stringToRawCategory } from "~/lib/utils";
+import { type GroupWithMembers } from "~/lib/types";
+import { cn, dashify, formatCategory, stringToRawCategory } from "~/lib/utils";
 import { useGroupStore } from "~/stores/group-store";
 import CreateGroup from "./CreateGroup";
 import JoinGroup from "./JoinGroup";
 
-enum ClubCategory {
-  ACADEMIC,
-  ARTS_AND_CULTURE,
-  BUSINESS_AND_ENTREPRENEURSHIP,
-  COMMUNITY_SERVICE_AND_VOLUNTEERING,
-  ENVIRONMENTAL_AND_SUSTAINABILITY,
-  HEALTH_AND_WELLNESS,
-  HOBBIES_AND_INTERESTS,
-  IDENTITY_AND_DIVERSITY,
-  MEDIA_AND_JOURNALISM,
-  POLITICAL_AND_ACTIVISM,
-  RELIGIOUS_AND_SPIRITUAL,
-  SOCIAL_AND_NETWORKING,
-  SPORTS_AND_RECREATION,
-  TECHNOLOGY_AND_INNOVATION,
-}
-
-const AllGroups = (props: { groups: GroupWithMembers[] }) => {
+const AllGroups = (props: { groups: GroupWithMembers[]; user: User }) => {
   const { groups, setGroups } = useGroupStore();
   const [categoryFilter, setCategoryFilter] = useState<string>("All");
   const [searchTerm, setSearchTerm] = useState("");
@@ -83,19 +70,69 @@ const AllGroups = (props: { groups: GroupWithMembers[] }) => {
 
   useEffect(() => {
     setGroups(props.groups);
-  }, [setGroups]);
+  }, [props.groups, setGroups]);
+
+  const [isPinning, setIsPinning] = useState<string | null>(null);
+
+  const handleTogglePin = async (groupId: string) => {
+    setIsPinning(groupId);
+    try {
+      const result = await togglePin(groupId);
+      if (result.success) {
+        toast.success(result.success);
+        // Update the local state to reflect the change
+        setGroups(groups.map(group => 
+          group.id === groupId 
+            ? { 
+                ...group, 
+                pinnedBy: result.isPinned 
+                  ? [...(group.pinnedBy || []), { 
+                      id: props.user.id,
+                      name: props.user.name,
+                      email: props.user.email,
+                      emailVerified: null,
+                      phone: null,
+                      image: null,
+                      password: null,
+                      isTwoFactorEnabled: false,
+                      google_id: null,
+                      groupId: null
+                    }]
+                  : (group.pinnedBy || []).filter(u => u.id !== props.user.id) 
+              }
+            : group
+        ));
+      } else if (result.error) {
+        toast.error(result.error);
+      }
+    } catch (error) {
+      toast.error("An error occurred while toggling pin");
+    } finally {
+      setIsPinning(null);
+    }
+  };
 
   const filteredGroups = Array.isArray(groups)
-    ? groups.filter((group) => {
-        if (!group || typeof group.name !== "string") {
-          return false;
-        }
+    ? groups
+        .filter((group) => {
+          if (!group || typeof group.name !== "string") {
+            return false;
+          }
 
-        return (
-          group.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-          (categoryFilter === "All" || group.category === categoryFilter)
-        );
-      })
+          return (
+            group.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+            (categoryFilter === "All" || group.category === categoryFilter)
+          );
+        })
+        .sort((a, b) => {
+          const isPinnedA =
+            a.pinnedBy?.some((user) => user.id === props.user.id) ?? false;
+          const isPinnedB =
+            b.pinnedBy?.some((user) => user.id === props.user.id) ?? false;
+          if (isPinnedA && !isPinnedB) return -1;
+          if (!isPinnedA && isPinnedB) return 1;
+          return 0;
+        })
     : [];
 
   return (
@@ -167,7 +204,7 @@ const AllGroups = (props: { groups: GroupWithMembers[] }) => {
               </CardTitle>
               <CardTitle>Whoops...</CardTitle>
               <CardDescription>
-                We couldn't find any groups{" "}
+                We couldn&apos;t find any groups{" "}
                 {searchTerm ? "matching " + searchTerm : ""}in the{" "}
                 {categoryFilter} category
               </CardDescription>
@@ -183,14 +220,49 @@ const AllGroups = (props: { groups: GroupWithMembers[] }) => {
               <CardHeader className="space-y-0 pb-2">
                 <div className="mb-4 flex flex-row items-center justify-between">
                   <Avatar>
-                    <AvatarImage src={group.logo || ""} />
+                    <AvatarImage src={group.logo ?? ""} />
                     <AvatarFallback>
                       {group.name.substring(0, 2)}
                     </AvatarFallback>
                   </Avatar>
-                  <Badge variant={"secondary"} className="h-fit rounded-full">
-                    {formatCategory(stringToRawCategory(group.category))}
-                  </Badge>
+                  <div className="flex items-center gap-2">
+                    <Badge variant={"secondary"} className="h-fit rounded-full">
+                      {formatCategory(stringToRawCategory(group.category))}
+                    </Badge>
+                    <Tooltip delayDuration={150}>
+          <TooltipTrigger asChild>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="h-8 w-8"
+              onClick={() => handleTogglePin(group.id)}
+              disabled={isPinning === group.id}
+            >
+              {isPinning === group.id ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Pin className={cn(
+                  "h-4 w-4",
+                  group.pinnedBy?.some(user => user.id === props.user.id) && "fill-current"
+                )} />
+              )}
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{group.pinnedBy?.some(user => user.id === props.user.id) ? "Unpin" : "Pin"} group</p>
+          </TooltipContent>
+        </Tooltip>
+                    {/* <Tooltip delayDuration={150}>
+                      <TooltipTrigger asChild>
+                        <Button variant="ghost" size="icon" className="h-8 w-8">
+                          <Pin className="h-4 w-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Pin group</p>
+                      </TooltipContent>
+                    </Tooltip> */}
+                  </div>
                 </div>
                 <CardTitle className="flex flex-row justify-between pb-1">
                   <div className="flex items-center space-x-2 text-2xl font-semibold">

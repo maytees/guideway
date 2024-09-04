@@ -1,7 +1,7 @@
 "use server";
 
 import { type ClubCategory } from "@prisma/client";
-import { GroupWithMembers } from "~/lib/types";
+import { type GroupWithMembers } from "~/lib/types";
 import { createGroupSchema, type ICreateGroup } from "~/lib/validation";
 import { validateRequest } from "~/server/auth";
 import { db } from "~/server/db";
@@ -89,6 +89,7 @@ export async function createGroup(values: ICreateGroup): Promise<ActionResult> {
     },
     include: {
       members: true,
+      pinnedBy: true,
     },
   });
 

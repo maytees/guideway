@@ -1,10 +1,10 @@
 import { create } from "zustand";
-import { GroupWithMembers } from "~/lib/types";
+import { type GroupWithMembers } from "~/lib/types";
 
 type GroupStore = {
   groups: GroupWithMembers[];
   addGroup: (group: GroupWithMembers) => void;
-  setGroups: (group: GroupWithMembers[]) => void;
+  setGroups: (groups: GroupWithMembers[]) => void;
 };
 
 export const useGroupStore = create<GroupStore>((set) => ({

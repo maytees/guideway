@@ -71,7 +71,7 @@ const Page = async () => {
           </div>
         </div>
         <div className="mr-4 flex-1">
-          <AllGroups groups={data as GroupWithMembers[]} />
+          <AllGroups groups={data as GroupWithMembers[]} user={user} />
         </div>
       </div>
     </TooltipProvider>
