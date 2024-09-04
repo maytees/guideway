@@ -69,7 +69,7 @@ export const goolgeNameSchema = z.object({
 
 // Dashboard
 export const joinGroupSchema = z.object({
-  joinCode: z.string().length(8, { message: "Join code invalid!" }),
+  joinCode: z.string().min(8, { message: "Join code invalid!" }),
 });
 
 // TODO: Add logo

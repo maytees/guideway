@@ -37,7 +37,7 @@ import { Textarea } from "~/components/ui/textarea";
 import { createGroupSchema, type ICreateGroup } from "~/lib/validation";
 import { useGroupStore } from "~/stores/group-store";
 
-const CreateGroup = (props: { size?: "lg" | undefined }) => {
+const CreateGroup = () => {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
@@ -91,7 +91,7 @@ const CreateGroup = (props: { size?: "lg" | undefined }) => {
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>
-        <Button size={props.size || "sm"} variant={"outline"} className="gap-2">
+        <Button size="sm" variant={"outline"} className="gap-2">
           Create Group
           <Plus className="size-4" />
         </Button>
@@ -209,8 +209,8 @@ const CreateGroup = (props: { size?: "lg" | undefined }) => {
                 </FormItem>
               )}
             />
-            <ErrorComponent message={error || ""} />
-            <SuccessComponent message={success || ""} />
+            <ErrorComponent message={error} />
+            <SuccessComponent message={success} />
             <div className="mt-20 flex items-center gap-2">
               <Button type="submit" disabled={isPending}>
                 Create Group

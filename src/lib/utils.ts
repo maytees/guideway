@@ -6,6 +6,26 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export function formatJoinCode(code: string): string | null {
+  // Remove any non-alphanumeric characters
+  const cleanedCode = code.replace(/[^a-zA-Z0-9]/g, "");
+
+  // Check if the cleaned code is exactly 8 characters long
+  if (cleanedCode.length !== 8) {
+    return null;
+  }
+
+  // Convert to uppercase
+  const formattedCode = cleanedCode.toUpperCase();
+
+  // Check if the formatted code contains only valid characters (A-Z and 0-9)
+  if (!/^[A-Z0-9]{8}$/.test(formattedCode)) {
+    return null;
+  }
+
+  return formattedCode;
+}
+
 export function formatCategory(category: ClubCategory | undefined): string {
   switch (category) {
     case ClubCategory.ACADEMIC:
