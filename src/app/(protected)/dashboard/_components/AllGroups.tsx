@@ -81,32 +81,34 @@ const AllGroups = (props: { groups: GroupWithMembers[]; user: User }) => {
       if (result.success) {
         toast.success(result.success);
         // Update the local state to reflect the change
-        setGroups(groups.map(group => 
-          group.id === groupId 
-            ? { 
-                ...group, 
-                pinnedBy: result.isPinned 
-                  ? [...(group.pinnedBy || []), { 
-                      id: props.user.id,
-                      name: props.user.name,
-                      email: props.user.email,
-                      emailVerified: null,
-                      phone: null,
-                      image: null,
-                      password: null,
-                      isTwoFactorEnabled: false,
-                      google_id: null,
-                      groupId: null
-                    }]
-                  : (group.pinnedBy || []).filter(u => u.id !== props.user.id) 
-              }
+        setGroups(groups.map(group =>
+          group.id === groupId
+            ? {
+              ...group,
+              pinnedBy: result.isPinned
+                ? [...(group.pinnedBy || []), {
+                  id: props.user.id,
+                  name: props.user.name,
+                  email: props.user.email,
+                  emailVerified: null,
+                  phone: null,
+                  image: null,
+                  password: null,
+                  isTwoFactorEnabled: false,
+                  google_id: null,
+                  groupId: null
+                }]
+                : (group.pinnedBy || []).filter(u => u.id !== props.user.id)
+            }
             : group
         ));
       } else if (result.error) {
         toast.error(result.error);
       }
     } catch (error) {
-      toast.error("An error occurred while toggling pin");
+      toast.error("An error occurred while toggling pin", {
+        description: error instanceof Error ? error.message : "Unknown error",
+      });
     } finally {
       setIsPinning(null);
     }
@@ -114,25 +116,25 @@ const AllGroups = (props: { groups: GroupWithMembers[]; user: User }) => {
 
   const filteredGroups = Array.isArray(groups)
     ? groups
-        .filter((group) => {
-          if (!group || typeof group.name !== "string") {
-            return false;
-          }
+      .filter((group) => {
+        if (!group || typeof group.name !== "string") {
+          return false;
+        }
 
-          return (
-            group.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-            (categoryFilter === "All" || group.category === categoryFilter)
-          );
-        })
-        .sort((a, b) => {
-          const isPinnedA =
-            a.pinnedBy?.some((user) => user.id === props.user.id) ?? false;
-          const isPinnedB =
-            b.pinnedBy?.some((user) => user.id === props.user.id) ?? false;
-          if (isPinnedA && !isPinnedB) return -1;
-          if (!isPinnedA && isPinnedB) return 1;
-          return 0;
-        })
+        return (
+          group.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+          (categoryFilter === "All" || group.category === categoryFilter)
+        );
+      })
+      .sort((a, b) => {
+        const isPinnedA =
+          a.pinnedBy?.some((user) => user.id === props.user.id) ?? false;
+        const isPinnedB =
+          b.pinnedBy?.some((user) => user.id === props.user.id) ?? false;
+        if (isPinnedA && !isPinnedB) return -1;
+        if (!isPinnedA && isPinnedB) return 1;
+        return 0;
+      })
     : [];
 
   return (
@@ -230,38 +232,28 @@ const AllGroups = (props: { groups: GroupWithMembers[]; user: User }) => {
                       {formatCategory(stringToRawCategory(group.category))}
                     </Badge>
                     <Tooltip delayDuration={150}>
-          <TooltipTrigger asChild>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="h-8 w-8"
-              onClick={() => handleTogglePin(group.id)}
-              disabled={isPinning === group.id}
-            >
-              {isPinning === group.id ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <Pin className={cn(
-                  "h-4 w-4",
-                  group.pinnedBy?.some(user => user.id === props.user.id) && "fill-current"
-                )} />
-              )}
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>{group.pinnedBy?.some(user => user.id === props.user.id) ? "Unpin" : "Pin"} group</p>
-          </TooltipContent>
-        </Tooltip>
-                    {/* <Tooltip delayDuration={150}>
                       <TooltipTrigger asChild>
-                        <Button variant="ghost" size="icon" className="h-8 w-8">
-                          <Pin className="h-4 w-4" />
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8"
+                          onClick={() => handleTogglePin(group.id)}
+                          disabled={isPinning === group.id}
+                        >
+                          {isPinning === group.id ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            <Pin className={cn(
+                              "h-4 w-4",
+                              group.pinnedBy?.some(user => user.id === props.user.id) && "fill-current"
+                            )} />
+                          )}
                         </Button>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Pin group</p>
+                        <p>{group.pinnedBy?.some(user => user.id === props.user.id) ? "Unpin" : "Pin"} group</p>
                       </TooltipContent>
-                    </Tooltip> */}
+                    </Tooltip>
                   </div>
                 </div>
                 <CardTitle className="flex flex-row justify-between pb-1">

@@ -20,53 +20,43 @@ export async function togglePin(groupId: string): Promise<ActionResult> {
     };
   }
 
-  const group = await db.group.findUnique({
-    where: {
-      id: groupId,
-    },
-    include: {
-      pinnedBy: true,
-    },
+  // Fetch the user with their current pinned groups
+  const currentUser = await db.user.findUnique({
+    where: { id: user.id },
+    include: { pinnedGroups: true, groups: true }
   });
 
-  if (!group) {
+  if (!currentUser) {
     return {
-      error: "Could not find group with id",
+      error: "User not found",
     };
   }
 
-  const isPinned = group.pinnedBy.some((pinnedUser) => pinnedUser.id === user.id);
+  const isPinned = currentUser.pinnedGroups.some(group => group.id === groupId);
+  let updatedPinnedGroups;
 
   if (isPinned) {
-    await db.group.update({
-      where: {
-        id: groupId,
-      },
-      data: {
-        pinnedBy: {
-          disconnect: {
-            id: user.id,
-          },
-        },
-      },
-    });
+    // Remove the group from pinned groups
+    updatedPinnedGroups = currentUser.pinnedGroups.filter(group => group.id !== groupId);
   } else {
-    await db.group.update({
-      where: {
-        id: groupId,
-      },
-      data: {
-        pinnedBy: {
-          connect: {
-            id: user.id,
-          },
-        },
-      },
-    });
+    // Add the group to pinned groups
+    updatedPinnedGroups = [...currentUser.pinnedGroups, { id: groupId }];
   }
 
+  // Update the user's pinned groups
+  await db.user.update({
+    where: { id: user.id },
+    data: {
+      pinnedGroups: {
+        set: updatedPinnedGroups.map(group => ({ id: group.id })),
+      },
+    },
+  });
+
+  const group = await db.group.findUnique({ where: { id: groupId } });
+
   return {
-    success: `Successfully ${isPinned ? 'unpinned' : 'pinned'} ${group.name}`,
+    success: `Successfully ${isPinned ? 'unpinned' : 'pinned'} ${group?.name || 'group'}`,
     isPinned: !isPinned,
   };
 }

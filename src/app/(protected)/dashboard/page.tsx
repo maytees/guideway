@@ -18,6 +18,7 @@ async function getData(userId: string) {
       groups: {
         include: {
           members: true,
+          pinnedBy: true
         },
       },
       ownedGroups: {

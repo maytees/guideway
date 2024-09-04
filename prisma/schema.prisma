@@ -48,7 +48,7 @@ model Group {
     posts       Post[]
     userId      String?
 
-    pinnedBy User[]
+    pinnedBy User[] @relation("UserPinnedGroups")
 }
 
 model Post {
@@ -125,8 +125,9 @@ model User {
 
     ownedGroups Group[] @relation("GroupOwner")
     groups      Group[] @relation("GroupMembers")
-    Group       Group?  @relation(fields: [groupId], references: [id])
     groupId     String?
+
+    pinnedGroups Group[] @relation("UserPinnedGroups")
 }
 
 model Session {
