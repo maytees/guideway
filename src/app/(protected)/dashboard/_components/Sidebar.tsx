@@ -8,14 +8,15 @@ import {
   UserCircle,
   UserPlus,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { type User } from "@prisma/client";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
 import { type GroupWithMembers } from "~/lib/types";
+import SidebarProfile from "./SidebarProfile";
 
 type SidebarLink = {
   href: string;
@@ -60,21 +61,18 @@ const sidebarLinks: SidebarLink[] = [
   },
 ];
 
-export default function Sidebar(props: { groups: GroupWithMembers[] }) {
+export default function Sidebar(props: {
+  groups: GroupWithMembers[];
+  user: User;
+}) {
   const pathname = usePathname();
 
   return (
-    <div className="grid min-h-screen md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+    <div className="grid min-h-screen md:grid-cols-[240px_1fr] lg:grid-cols-[300px_1fr]">
       <div className="hidden h-full border-r bg-muted/40 pt-10 md:block">
         <div className="flex h-full  flex-col gap-2">
           <div className="flex h-14 items-center border-b lg:h-[60px] lg:px-4">
-            <Link
-              href="/dashboard"
-              className="flex items-center gap-2 font-semibold"
-            >
-              <Image src={"/logo.svg"} alt={""} width={50} height={50} />
-              <span className="text-xl">Guideway</span>
-            </Link>
+            <SidebarProfile user={props.user} />
           </div>
           <div className="flex-1">
             <nav className="grid items-start gap-2 px-2 text-sm font-medium lg:px-4">
@@ -119,13 +117,7 @@ export default function Sidebar(props: { groups: GroupWithMembers[] }) {
           </SheetTrigger>
           <SheetContent side="left" className="flex flex-col">
             <div className="flex h-14 items-center border-b lg:h-[60px] lg:px-4">
-              <Link
-                href="/dashboard"
-                className="flex items-center gap-2 font-semibold"
-              >
-                <Image src={"/logo.svg"} alt={""} width={50} height={50} />
-                <span className="text-xl">Guideway</span>
-              </Link>
+              <SidebarProfile user={props.user} />
             </div>
             <nav className="grid items-start gap-2 px-2 text-sm font-medium lg:px-4">
               {sidebarLinks.map((link, index) => {

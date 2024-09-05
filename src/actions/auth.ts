@@ -1,21 +1,8 @@
 "use server";
 
-import {
-  type ILogin,
-  loginSchema,
-  type IRegister,
-  registerSchema,
-  type IGoogleName,
-  goolgeNameSchema,
-  type IForgotPassword,
-  forgotPasswordSchema,
-  type IPasswordReset,
-  passwordResetSchema,
-} from "~/lib/validation";
-import { db } from "~/server/db";
 import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
-import { lucia, validateRequest } from "~/server/auth";
+import { redirect } from "next/navigation";
 import { sendPasswordResetEmail, sendVerificationEmail } from "~/lib/email";
 import {
   genResetPasswordToken,
@@ -23,7 +10,20 @@ import {
   getPasswordResetTokenByToken,
 } from "~/lib/tokens";
 import { type LoginActions } from "~/lib/types";
-import { redirect } from "next/navigation";
+import {
+  forgotPasswordSchema,
+  goolgeNameSchema,
+  type IForgotPassword,
+  type IGoogleName,
+  type ILogin,
+  type IPasswordReset,
+  type IRegister,
+  loginSchema,
+  passwordResetSchema,
+  registerSchema,
+} from "~/lib/validation";
+import { lucia, validateRequest } from "~/server/auth";
+import { db } from "~/server/db";
 
 interface ActionResult {
   error?: string;

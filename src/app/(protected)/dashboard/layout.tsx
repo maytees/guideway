@@ -7,36 +7,6 @@ import { validateRequest } from "~/server/auth";
 import { db } from "~/server/db";
 import Sidebar from "./_components/Sidebar";
 
-async function getData(userId: string) {
-  const user = await db.user.findUnique({
-    where: {
-      id: userId,
-    },
-    include: {
-      groups: {
-        include: {
-          members: true,
-        },
-      },
-      ownedGroups: {
-        include: {
-          members: true,
-        },
-      },
-    },
-  });
-
-  if (!user) {
-    toast.error("Could not fetch user!");
-    return null;
-  }
-
-  return [
-    ...(user.groups || []),
-    ...(user.ownedGroups ? [user.ownedGroups] : []),
-  ];
-}
-
 export default async function Layout({
   children,
 }: {
@@ -54,11 +24,37 @@ export default async function Layout({
     redirect("/auth/login");
   }
 
-  const data = await getData(user.id);
+  const dbUser = await db.user.findUnique({
+    where: {
+      id: user.id,
+    },
+    include: {
+      groups: {
+        include: {
+          members: true,
+        },
+      },
+      ownedGroups: {
+        include: {
+          members: true,
+        },
+      },
+    },
+  });
+
+  if (!dbUser) {
+    toast.error("Could not fetch user!");
+    return null;
+  }
+
+  const thing = [
+    ...(dbUser.groups || []),
+    ...(dbUser.ownedGroups ? [dbUser.ownedGroups] : []),
+  ];
 
   return (
     <div className="flex min-h-screen ">
-      <Sidebar groups={data as GroupWithMembers[]} />
+      <Sidebar user={dbUser} groups={thing as GroupWithMembers[]} />
       <main className="flex-1 p-4">{children}</main>
     </div>
   );

@@ -6,12 +6,22 @@ await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
 const config = {
-    reactStrictMode: false,
-    swcMinify: true,
-    i18n: {
-        locales: ["en"],
-        defaultLocale: "en",
-    },
+  reactStrictMode: false,
+  swcMinify: true,
+  i18n: {
+    locales: ["en"],
+    defaultLocale: "en",
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "api.dicebear.com",
+        port: "",
+        pathname: "/9.x/**",
+      },
+    ],
+  },
 };
 
 export default config;
