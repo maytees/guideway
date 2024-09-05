@@ -82,7 +82,7 @@ export const validateRequest = cache(
 
     if (res.user && !res.user.name && !noRedirect) {
       return redirect(
-        `${env.BASE_URL}/auth/oauth?requiresName=true&id=${res.user.id}`,
+        `${env.NODE_ENV === "production" ? "https://www.guideway.co" : env.BASE_URL}/auth/oauth?requiresName=true&id=${res.user.id}`,
       );
     }
 
@@ -93,5 +93,5 @@ export const validateRequest = cache(
 export const google = new Google(
   env.GOOGLE_CLIENT_ID,
   env.GOOGLE_CLIENT_SECRET,
-  `${env.BASE_URL}/auth/google/callback`,
+  `${env.NODE_ENV === "production" ? "https://www.guideway.co" : env.BASE_URL}/auth/google/callback`,
 );
