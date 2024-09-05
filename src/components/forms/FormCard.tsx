@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import {
   Card,
@@ -6,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import Image from "next/image";
 
 const FormCard = ({
   children,
@@ -18,7 +18,7 @@ const FormCard = ({
   description: string;
 }) => {
   return (
-    <Card className="mx-auto mt-20 max-w-md">
+    <Card className="mx-auto my-20 max-w-md">
       <CardHeader className="flex flex-col items-center">
         <Image src={"/logo.svg"} alt={"Guideway"} width={80} height={80} />
         <CardTitle className="flex w-full flex-col items-center">
