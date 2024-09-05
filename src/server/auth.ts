@@ -82,7 +82,7 @@ export const validateRequest = cache(
 
     if (res.user && !res.user.name && !noRedirect) {
       return redirect(
-        `${process.env.VERCEL_URL}/auth/oauth?requiresName=true&id=${res.user.id}`,
+        `${env.BASE_URL}/auth/oauth?requiresName=true&id=${res.user.id}`,
       );
     }
 
@@ -93,5 +93,5 @@ export const validateRequest = cache(
 export const google = new Google(
   env.GOOGLE_CLIENT_ID,
   env.GOOGLE_CLIENT_SECRET,
-  `${process.env.VERCEL_URL}/auth/google/callback`,
+  `${env.BASE_URL}/auth/google/callback`,
 );
