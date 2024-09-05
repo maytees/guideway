@@ -70,8 +70,8 @@ export default function Sidebar(props: {
   return (
     <div className="grid min-h-screen md:grid-cols-[240px_1fr] lg:grid-cols-[300px_1fr]">
       <div className="hidden h-full border-r bg-muted/40 pt-10 md:block">
-        <div className="flex h-full  flex-col gap-2">
-          <div className="flex h-14 items-center border-b lg:h-[60px] lg:px-4">
+        <div className="flex h-full flex-col gap-2">
+          <div className="flex items-center pb-2 lg:h-[60px] lg:px-4">
             <SidebarProfile user={props.user} />
           </div>
           <div className="flex-1">
