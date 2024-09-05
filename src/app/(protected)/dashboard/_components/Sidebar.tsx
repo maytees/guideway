@@ -55,7 +55,7 @@ const sidebarLinks: SidebarLink[] = [
     label: "Account",
   },
   {
-    href: "/dashboard/settings",
+    href: "/auth/logout",
     icon: <LogOut className="h-5 w-5" />,
     label: "Log out",
   },
