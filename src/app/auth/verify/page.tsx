@@ -1,4 +1,3 @@
-import React from "react";
 import VerifyForm from "~/components/forms/VerifyForm";
 
 const Verify = () => {
