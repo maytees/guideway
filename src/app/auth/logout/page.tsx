@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 import { signout } from "~/actions/auth";
@@ -23,7 +24,10 @@ const LogoutPage = async () => {
       title={"Sad to see you leave.."}
       description={"Press the button below to log out."}
     >
-      <form action={signout}>
+      <form action={signout} className="space-y-3">
+        <Button className="w-full" variant={"outline"} asChild>
+          <Link href="/dashboard">Take me back</Link>
+        </Button>
         <Button className="w-full" type="submit">
           Log out
         </Button>
