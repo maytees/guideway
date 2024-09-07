@@ -1,10 +1,10 @@
 "use server";
+import { revalidatePath } from "next/cache";
 import { type GroupWithMembers } from "~/lib/types";
 import { formatJoinCode } from "~/lib/utils";
 import { type IJoinGroupCode, joinGroupSchema } from "~/lib/validation";
 import { validateRequest } from "~/server/auth";
 import { db } from "~/server/db";
-
 interface ActionResult {
   error?: string;
   success?: string;
@@ -95,6 +95,8 @@ export async function joinGroup(values: IJoinGroupCode): Promise<ActionResult> {
       },
     },
   });
+
+  revalidatePath('/dashboard')
 
   return {
     success: "Successfully joined new group",

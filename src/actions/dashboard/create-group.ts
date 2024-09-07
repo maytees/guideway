@@ -1,6 +1,7 @@
 "use server";
 
 import { type ClubCategory } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 import { type GroupWithMembers } from "~/lib/types";
 import { createGroupSchema, type ICreateGroup } from "~/lib/validation";
 import { validateRequest } from "~/server/auth";
@@ -98,6 +99,8 @@ export async function createGroup(values: ICreateGroup): Promise<ActionResult> {
       error: "There was a problem creating the group",
     };
   }
+
+  revalidatePath('/dashboard')
 
   return {
     success: "Successfully created new group",
