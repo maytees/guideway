@@ -39,6 +39,7 @@ import {
   TooltipTrigger,
 } from "~/components/ui/tooltip";
 import { type GroupWithMembersAndPosts } from "~/lib/types";
+import ReadMore from "./Readmore";
 
 const Posts = (props: {
   group: GroupWithMembersAndPosts;
@@ -146,7 +147,9 @@ const Posts = (props: {
           </CardHeader>
           <CardContent>
             <h4 className="mb-2 text-lg font-semibold">{post.title}</h4>
-            <p>{post.content}</p>
+            <p className="w-full whitespace-pre text-pretty break-all">
+              <ReadMore maxLength={500}>{post.content}</ReadMore>
+            </p>
           </CardContent>
           <CardFooter className="mt-2 flex flex-col gap-2">
             <div className="flex w-full items-center justify-between">
