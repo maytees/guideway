@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
-import { GroupWithMembersAndPosts } from "~/lib/types";
+import { type GroupWithMembersAndPosts } from "~/lib/types";
 import { validateRequest } from "~/server/auth";
 import { db } from "~/server/db";
 import GroupSidebar from "./_components/GroupSidebar";
@@ -103,7 +103,10 @@ const GroupPage = async (props: {
         <Separator className="mt-4" />
       </div>
       <div className="mt-8 flex flex-row gap-10">
-        <Posts group={data as GroupWithMembersAndPosts} currentUser={currentUser} />
+        <Posts
+          group={data as GroupWithMembersAndPosts}
+          currentUser={currentUser}
+        />
         <GroupSidebar group={data as GroupWithMembersAndPosts} />
       </div>
     </div>

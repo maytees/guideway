@@ -1,7 +1,20 @@
 "use client";
-import { User } from "@prisma/client";
+import { type User } from "@prisma/client";
 import { formatDistanceToNow } from "date-fns";
-import { Bookmark, ChevronDown, ChevronUp, EllipsisVertical, Eye, Flag, MessageSquare, Pencil, PinIcon, Share2, ThumbsUp, Trash } from "lucide-react";
+import {
+  Bookmark,
+  ChevronDown,
+  ChevronUp,
+  EllipsisVertical,
+  Eye,
+  Flag,
+  MessageSquare,
+  Pencil,
+  PinIcon,
+  Share2,
+  ThumbsUp,
+  Trash,
+} from "lucide-react";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
@@ -12,12 +25,25 @@ import {
   CardFooter,
   CardHeader,
 } from "~/components/ui/card";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "~/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "~/components/ui/dropdown-menu";
 import { Input } from "~/components/ui/input";
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "~/components/ui/tooltip";
 import { type GroupWithMembersAndPosts } from "~/lib/types";
 
-const Posts = (props: { group: GroupWithMembersAndPosts; currentUser: User }) => {
+const Posts = (props: {
+  group: GroupWithMembersAndPosts;
+  currentUser: User;
+}) => {
   // Sort posts to bring pinned posts to the top
   const sortedPosts = [...props.group.posts].sort((a, b) => {
     if (a.isPinned && !b.isPinned) return -1;
@@ -25,13 +51,13 @@ const Posts = (props: { group: GroupWithMembersAndPosts; currentUser: User }) =>
     return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
   });
 
-  const [showComments, setShowComments] = useState<{ [key: string]: boolean }>({});
-  const commentInputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
+  const [showComments, setShowComments] = useState<Record<string, boolean>>({});
+  const commentInputRefs = useRef<Record<string, HTMLInputElement | null>>({});
 
   const toggleComments = (postId: string) => {
-    setShowComments(prev => ({
+    setShowComments((prev) => ({
       ...prev,
-      [postId]: !prev[postId]
+      [postId]: !prev[postId],
     }));
   };
 
@@ -45,7 +71,7 @@ const Posts = (props: { group: GroupWithMembersAndPosts; currentUser: User }) =>
   };
 
   return (
-    <div className="space-y-4 w-9/12">
+    <div className="w-9/12 space-y-4">
       {sortedPosts.map((post) => (
         <Card key={post.id}>
           <CardHeader className="flex flex-row items-center justify-between">
@@ -53,7 +79,17 @@ const Posts = (props: { group: GroupWithMembersAndPosts; currentUser: User }) =>
               <Avatar>
                 <AvatarImage src={post.author.image!} />
                 <AvatarFallback>
-                  <Image className="aspect-square rounded-full size-10" src={post.author.image ?? 'https://api.dicebear.com/9.x/miniavs/svg?seed=' + post.author.name} alt={post.author.name ?? 'User'} width={32} height={32} />
+                  <Image
+                    className="aspect-square size-10 rounded-full"
+                    src={
+                      post.author.image ??
+                      "https://api.dicebear.com/9.x/miniavs/svg?seed=" +
+                        post.author.name
+                    }
+                    alt={post.author.name ?? "User"}
+                    width={32}
+                    height={32}
+                  />
                 </AvatarFallback>
               </Avatar>
               <div className="flex-grow">
@@ -112,7 +148,7 @@ const Posts = (props: { group: GroupWithMembersAndPosts; currentUser: User }) =>
             <h4 className="mb-2 text-lg font-semibold">{post.title}</h4>
             <p>{post.content}</p>
           </CardContent>
-          <CardFooter className="flex flex-col gap-2 mt-2">
+          <CardFooter className="mt-2 flex flex-col gap-2">
             <div className="flex w-full items-center justify-between">
               <div className="flex gap-4">
                 <Tooltip>
@@ -128,7 +164,11 @@ const Posts = (props: { group: GroupWithMembersAndPosts; currentUser: User }) =>
                 </Tooltip>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant="outline" size="sm" onClick={() => focusCommentInput(post.id.toString())}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => focusCommentInput(post.id.toString())}
+                    >
                       <MessageSquare className="h-4 w-4" />
                       <span className="ml-1">{post.comments.length}</span>
                     </Button>
@@ -172,7 +212,7 @@ const Posts = (props: { group: GroupWithMembersAndPosts; currentUser: User }) =>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <div className="text-sm text-gray-500">
-                    <Eye className="h-4 w-4 inline-block mr-1" />
+                    <Eye className="mr-1 inline-block h-4 w-4" />
                     {post.viewCount}
                   </div>
                 </TooltipTrigger>
@@ -184,9 +224,7 @@ const Posts = (props: { group: GroupWithMembersAndPosts; currentUser: User }) =>
             <div className="mt-1 w-full">
               <div className="mb-6 flex items-center space-x-2">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage
-                    src={props.currentUser.image ?? undefined}
-                  />
+                  <AvatarImage src={props.currentUser.image ?? undefined} />
                   <AvatarFallback>
                     {props.currentUser.name?.substring(0, 2)}
                   </AvatarFallback>
@@ -204,7 +242,7 @@ const Posts = (props: { group: GroupWithMembersAndPosts; currentUser: User }) =>
               </div>
               {post.comments.length > 0 && (
                 <>
-                  <div className="flex justify-between items-center mb-2">
+                  <div className="mb-2 flex items-center justify-between">
                     <h5 className="font-semibold">Comments</h5>
                     <Button
                       variant="ghost"
@@ -222,39 +260,46 @@ const Posts = (props: { group: GroupWithMembersAndPosts; currentUser: User }) =>
                       )}
                     </Button>
                   </div>
-                  {showComments[post.id] && post.comments.map((comment) => (
-                    <div
-                      key={comment.id}
-                      className="mb-2 flex items-start space-x-2"
-                    >
-                      <Avatar className="h-8 w-8">
-                        <AvatarImage src={comment.author.image ?? undefined} />
-                        <AvatarFallback>
-                          {comment.author.name?.substring(0, 2)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="flex-grow rounded-lg bg-gray-100 p-2">
-                        <p className="text-sm flex items-center justify-between font-semibold">
-                          {comment.author.name}
-                          <span className="text-xs text-gray-500">
-                            {formatDistanceToNow(new Date(comment.created_at), {
-                              addSuffix: true,
-                            })}
-                          </span>
-                        </p>
-                        <p className="text-sm">{comment.content}</p>
-                        <div className="mt-1 flex items-center space-x-2 text-xs text-gray-500">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="h-6 px-2 py-1"
-                          >
-                            <ThumbsUp className="h-4 w-4 mr-1" /> ({comment.likes.length})
-                          </Button>
+                  {showComments[post.id] &&
+                    post.comments.map((comment) => (
+                      <div
+                        key={comment.id}
+                        className="mb-2 flex items-start space-x-2"
+                      >
+                        <Avatar className="h-8 w-8">
+                          <AvatarImage
+                            src={comment.author.image ?? undefined}
+                          />
+                          <AvatarFallback>
+                            {comment.author.name?.substring(0, 2)}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex-grow rounded-lg bg-gray-100 p-2">
+                          <p className="flex items-center justify-between text-sm font-semibold">
+                            {comment.author.name}
+                            <span className="text-xs text-gray-500">
+                              {formatDistanceToNow(
+                                new Date(comment.created_at),
+                                {
+                                  addSuffix: true,
+                                },
+                              )}
+                            </span>
+                          </p>
+                          <p className="text-sm">{comment.content}</p>
+                          <div className="mt-1 flex items-center space-x-2 text-xs text-gray-500">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-6 px-2 py-1"
+                            >
+                              <ThumbsUp className="mr-1 h-4 w-4" /> (
+                              {comment.likes.length})
+                            </Button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
                 </>
               )}
             </div>

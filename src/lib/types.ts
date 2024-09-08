@@ -6,7 +6,9 @@ import {
   type User,
 } from "@prisma/client";
 
-type GroupInclude = {
+export type LoginActions = "EMAIL_NOT_VERIFIED";
+
+export type GroupInclude = {
   members: true;
   pinnedBy: true;
   posts: {
@@ -27,23 +29,50 @@ type GroupInclude = {
   };
 };
 
+export type UserWithPosts = Prisma.UserGetPayload<{
+  include: {
+    posts: true;
+    groups: {
+      include: {
+        members: true;
+      };
+    };
+  };
+}>;
+
 export type GroupWithMembersAndPosts = Prisma.GroupGetPayload<{
   include: GroupInclude;
 }>;
 
-export interface GroupWithMembers extends GroupWithMembersAndPosts {}
+export type GroupMembers = User[];
+
+export type GroupPosts = PostWithAuthor[];
+
+export type PostAuthor = Prisma.UserGetPayload<{ include: { Post: true } }>;
+
+export type PostLikes = User[];
+
+export type PostComments = CommentsWithAuthor[];
+
+export type CommentAuthor = User;
+
+export type CommentLikes = User[];
+
+export interface GroupWithMembers extends GroupWithMembersAndPosts {
+  members: GroupMembers;
+}
 
 export interface GroupWithPosts extends Group {
-  posts: PostWithAuthor[];
+  posts: GroupPosts;
 }
 
 export interface PostWithAuthor extends Post {
-  author: Prisma.UserGetPayload<{ include: { Post: true } }>;
-  likes: User[];
-  comments: CommentsWithAuthor[];
+  author: PostAuthor;
+  likes: PostLikes;
+  comments: PostComments;
 }
 
 export interface CommentsWithAuthor extends Comment {
-  author: User;
-  likes: User[];
+  author: CommentAuthor;
+  likes: CommentLikes;
 }

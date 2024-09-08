@@ -78,7 +78,6 @@ export async function createGroup(values: ICreateGroup): Promise<ActionResult> {
 
   const newGroup = await db.group.create({
     data: {
-      // Does this work??!?!
       category: category as ClubCategory,
       name,
       description,
@@ -91,6 +90,22 @@ export async function createGroup(values: ICreateGroup): Promise<ActionResult> {
     include: {
       members: true,
       pinnedBy: true,
+      posts: {
+        include: {
+          author: true,
+          likes: {
+            include: {
+              user: true,
+            },
+          },
+          comments: {
+            include: {
+              likes: true,
+              author: true,
+            },
+          },
+        },
+      },
     },
   });
 
@@ -100,10 +115,10 @@ export async function createGroup(values: ICreateGroup): Promise<ActionResult> {
     };
   }
 
-  revalidatePath('/dashboard')
+  revalidatePath("/dashboard");
 
   return {
     success: "Successfully created new group",
-    group: newGroup,
+    group: newGroup as GroupWithMembers,
   };
 }
