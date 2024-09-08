@@ -84,7 +84,7 @@ const Posts = (props: {
                     src={
                       post.author.image ??
                       "https://api.dicebear.com/9.x/miniavs/svg?seed=" +
-                        post.author.name
+                      post.author.name
                     }
                     alt={post.author.name ?? "User"}
                     width={32}
