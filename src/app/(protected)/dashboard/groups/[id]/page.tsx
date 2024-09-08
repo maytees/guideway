@@ -4,19 +4,49 @@ import { redirect } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
+import { GroupWithMembersAndPosts } from "~/lib/types";
 import { validateRequest } from "~/server/auth";
 import { db } from "~/server/db";
+import GroupSidebar from "./_components/GroupSidebar";
 import InviteDialog from "./_components/InviteDialog";
+import Posts from "./_components/Posts";
 
-async function getData(groupId: string) {
-  return await db.group.findUnique({
-    where: {
-      id: groupId,
-    },
-    include: {
-      members: true,
-    },
-  });
+async function getData(groupId: string, userId: string) {
+  return {
+    data: await db.group.findUnique({
+      where: {
+        id: groupId,
+      },
+      include: {
+        members: true,
+        pinnedBy: true,
+        posts: {
+          include: {
+            likes: {
+              include: {
+                user: true,
+              },
+            },
+            comments: {
+              include: {
+                likes: true,
+                author: true,
+              },
+            },
+            author: true,
+          },
+          orderBy: {
+            created_at: "desc",
+          },
+        },
+      },
+    }),
+    user: await db.user.findUnique({
+      where: {
+        id: userId,
+      },
+    }),
+  };
 }
 
 const GroupPage = async (props: {
@@ -30,9 +60,9 @@ const GroupPage = async (props: {
     return redirect("/auth/login");
   }
 
-  const data = await getData(props.params.id);
+  const { data, user: currentUser } = await getData(props.params.id, user.id);
 
-  if (!data) {
+  if (!data || !currentUser) {
     return redirect("/404");
   }
 
@@ -40,6 +70,7 @@ const GroupPage = async (props: {
   if (!data.members.some((u) => u.id === user.id)) {
     return redirect("/404");
   }
+
   return (
     <div className="mt-8 flex flex-col px-10">
       <div>
@@ -62,7 +93,7 @@ const GroupPage = async (props: {
             <InviteDialog
               joinCode={`${data.join_code.slice(0, 4)}-${data.join_code.slice(4, 8)}`}
             />
-            <Button variant={"outline"} asChild>
+            <Button variant={"outline"} asChild className="p-2">
               <Link href={`/dashboard/${data.id}/settings`}>
                 <Settings className="size-5" />
               </Link>
@@ -70,6 +101,10 @@ const GroupPage = async (props: {
           </div>
         </div>
         <Separator className="mt-4" />
+      </div>
+      <div className="mt-8 flex flex-row gap-10">
+        <Posts group={data as GroupWithMembersAndPosts} currentUser={currentUser} />
+        <GroupSidebar group={data as GroupWithMembersAndPosts} />
       </div>
     </div>
   );

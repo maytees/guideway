@@ -6,7 +6,7 @@ const SidebarProfile = (props: { user: User }) => {
     <div className="ml-2 flex items-center gap-2 font-semibold">
       <Avatar>
         <AvatarImage
-          src={`https://api.dicebear.com/9.x/shapes/svg?seed=${props.user.name}`}
+          src={props.user.image || `https://api.dicebear.com/9.x/shapes/svg?seed=${props.user.name}`}
         />
         <AvatarFallback>{props.user.name?.substring(0, 2)}</AvatarFallback>
       </Avatar>

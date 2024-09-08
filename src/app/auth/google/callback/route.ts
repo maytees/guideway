@@ -1,9 +1,9 @@
-import { google, lucia } from "../../../../server/auth";
-import { cookies } from "next/headers";
 import { OAuth2RequestError } from "arctic";
-import { db } from "~/server/db";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { env } from "~/env";
+import { db } from "~/server/db";
+import { google, lucia } from "../../../../server/auth";
 
 type GoogleUser = {
   sub: string;
@@ -105,6 +105,7 @@ export async function GET(request: Request): Promise<Response> {
         google_id: googleUser.sub,
         email: googleUser.email,
         emailVerified: new Date(),
+        image: googleUser.picture
       },
     });
 

@@ -1,15 +1,15 @@
 import "~/styles/globals.css";
 
-import { Poppins } from "next/font/google";
 import Footer from "~/components/Footer";
 import Navbar from "~/components/Navbar";
 import { Toaster } from "~/components/ui/sonner";
+import { TooltipProvider } from "~/components/ui/tooltip";
 
-const font = Poppins({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
+// const font = Poppins({
+//   subsets: ["latin"],
+//   variable: "--font-sans",
+//   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+// });
 
 export const metadata = {
   title: "Guideway",
@@ -26,12 +26,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`font-sans ${font.variable} anitaliased h-full min-h-screen`}
+        className={`font-sans  anitaliased h-full min-h-screen`}
       >
-        <Navbar />
-        {children}
-        <Footer />
-        <Toaster />
+        <TooltipProvider>
+          <Navbar />
+          {children}
+          <Footer />
+          <Toaster />
+        </TooltipProvider>
       </body>
     </html>
   );
