@@ -90,9 +90,16 @@ export const createGroupSchema = z.object({
   }),
 });
 
+export const postSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  content: z.string().min(1, "Content is required"),
+  isPinned: z.boolean().default(false),
+});
+
 // Dashboard interfaces
 export type IJoinGroupCode = z.infer<typeof joinGroupSchema>;
 export type ICreateGroup = z.infer<typeof createGroupSchema>;
+export type IPost = z.infer<typeof postSchema>;
 
 export type ILogin = z.infer<typeof loginSchema>;
 export type IRegister = z.infer<typeof registerSchema>;

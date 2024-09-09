@@ -7,6 +7,7 @@ import { Separator } from "~/components/ui/separator";
 import { type GroupWithMembersAndPosts } from "~/lib/types";
 import { validateRequest } from "~/server/auth";
 import { db } from "~/server/db";
+import CreatePostButton from "./_components/CreatePostButton";
 import GroupSidebar from "./_components/GroupSidebar";
 import InviteDialog from "./_components/InviteDialog";
 import Posts from "./_components/Posts";
@@ -22,6 +23,7 @@ async function getData(groupId: string, userId: string) {
         pinnedBy: true,
         posts: {
           include: {
+            tags: true,
             likes: {
               include: {
                 user: true,
@@ -90,6 +92,7 @@ const GroupPage = async (props: {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <CreatePostButton group={data} currentUser={currentUser} />
             <InviteDialog
               joinCode={`${data.join_code.slice(0, 4)}-${data.join_code.slice(4, 8)}`}
             />

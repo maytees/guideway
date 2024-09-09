@@ -16,7 +16,7 @@ import {
   Trash,
 } from "lucide-react";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
 import {
@@ -39,14 +39,17 @@ import {
   TooltipTrigger,
 } from "~/components/ui/tooltip";
 import { type GroupWithMembersAndPosts } from "~/lib/types";
+import { usePostStore } from "~/stores/post-store";
 import ReadMore from "./Readmore";
+import { colors } from "./TagsSetting";
 
 const Posts = (props: {
   group: GroupWithMembersAndPosts;
   currentUser: User;
 }) => {
   // Sort posts to bring pinned posts to the top
-  const sortedPosts = [...props.group.posts].sort((a, b) => {
+  const { posts, setPosts } = usePostStore();
+  const sortedPosts = [...posts].sort((a, b) => {
     if (a.isPinned && !b.isPinned) return -1;
     if (!a.isPinned && b.isPinned) return 1;
     return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
@@ -71,12 +74,16 @@ const Posts = (props: {
     }
   };
 
+  useEffect(() => {
+    setPosts(props.group.posts);
+  }, [props.group.posts, setPosts]);
+
   return (
     <div className="w-9/12 space-y-4">
       {sortedPosts.map((post) => (
         <Card key={post.id}>
           <CardHeader className="flex flex-row items-center justify-between">
-            <div className="flex flex-row items-center space-x-4">
+            <div className="flex flex-row items-start">
               <Avatar>
                 <AvatarImage src={post.author.image!} />
                 <AvatarFallback>
@@ -85,7 +92,7 @@ const Posts = (props: {
                     src={
                       post.author.image ??
                       "https://api.dicebear.com/9.x/miniavs/svg?seed=" +
-                      post.author.name
+                        post.author.name
                     }
                     alt={post.author.name ?? "User"}
                     width={32}
@@ -93,7 +100,7 @@ const Posts = (props: {
                   />
                 </AvatarFallback>
               </Avatar>
-              <div className="flex-grow">
+              <div className="mx-2 mr-5 flex-grow">
                 <h3 className="font-semibold">{post.author.name}</h3>
                 <p className="text-sm text-gray-500">
                   {formatDistanceToNow(new Date(post.created_at), {
@@ -101,16 +108,30 @@ const Posts = (props: {
                   })}
                 </p>
               </div>
-              {post.isAnnouncement && (
-                <span className="rounded bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-800">
-                  Announcement
-                </span>
-              )}
-              {post.isPinned && (
-                <span className="rounded bg-yellow-100 px-2 py-1 text-xs font-semibold text-yellow-800">
-                  Pinned
-                </span>
-              )}
+              {/* Pinned tag should always be first? */}
+              <div className="flex flex-row items-center gap-2">
+                {post.isPinned && (
+                  <span className="rounded bg-yellow-100 px-2 py-1 text-xs font-semibold text-yellow-800">
+                    Pinned
+                  </span>
+                )}
+                {post.tags.map((tag, index) => {
+                  const colorObj =
+                    colors.find((c) => c.bg === tag.color) ?? colors[0];
+                  return (
+                    <span
+                      key={index}
+                      className="rounded px-2 py-1 text-xs font-semibold"
+                      style={{
+                        backgroundColor: colorObj?.bg ?? colors[0]?.bg,
+                        color: colorObj?.text ?? colors[0]?.text,
+                      }}
+                    >
+                      {tag.value}
+                    </span>
+                  );
+                })}
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <DropdownMenu>
@@ -147,9 +168,9 @@ const Posts = (props: {
           </CardHeader>
           <CardContent>
             <h4 className="mb-2 text-lg font-semibold">{post.title}</h4>
-            <p className="w-full whitespace-pre text-pretty break-all">
+            <span className="w-full whitespace-pre text-pretty break-words">
               <ReadMore maxLength={500}>{post.content}</ReadMore>
-            </p>
+            </span>
           </CardContent>
           <CardFooter className="mt-2 flex flex-col gap-2">
             <div className="flex w-full items-center justify-between">

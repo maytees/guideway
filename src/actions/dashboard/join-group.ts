@@ -1,6 +1,6 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { GroupWithMembersAndPosts } from "~/lib/types";
+import { type GroupWithMembersAndPosts } from "~/lib/types";
 import { formatJoinCode } from "~/lib/utils";
 import { type IJoinGroupCode, joinGroupSchema } from "~/lib/validation";
 import { validateRequest } from "~/server/auth";

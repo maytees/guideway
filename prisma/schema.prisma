@@ -51,23 +51,31 @@ model Group {
     pinnedBy User[] @relation("UserPinnedGroups")
 }
 
+model PostTag {
+    id     Int    @id @default(autoincrement())
+    value  String // Text
+    color  String // Hex value
+    Post   Post?  @relation(fields: [postId], references: [id])
+    postId Int?
+}
+
 model Post {
-    id             Int       @id @default(autoincrement())
-    title          String
-    content        String
-    created_at     DateTime  @default(now())
-    updated_at     DateTime  @default(now())
-    author         User      @relation(fields: [author_id], references: [id])
-    author_id      String    @map("author_id")
-    club           Group     @relation(fields: [club_id], references: [id])
-    club_id        String    @map("club_id")
-    likes          Like[]
-    comments       Comment[]
-    isAnnouncement Boolean   @default(false)
-    isDraft        Boolean   @default(false)
-    isPinned       Boolean   @default(false)
-    viewCount      Int       @default(0)
-    shareCount     Int       @default(0)
+    id         Int       @id @default(autoincrement())
+    title      String
+    content    String
+    created_at DateTime  @default(now())
+    updated_at DateTime  @default(now())
+    author     User      @relation(fields: [author_id], references: [id])
+    author_id  String    @map("author_id")
+    club       Group     @relation(fields: [club_id], references: [id])
+    club_id    String    @map("club_id")
+    likes      Like[]
+    comments   Comment[]
+    isDraft    Boolean   @default(false)
+    isPinned   Boolean   @default(false)
+    viewCount  Int       @default(0)
+    shareCount Int       @default(0)
+    tags       PostTag[]
 }
 
 model Comment {

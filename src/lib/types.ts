@@ -1,9 +1,8 @@
 import {
   type Comment,
   type Group,
-  type Post,
   type Prisma,
-  type User,
+  type User
 } from "@prisma/client";
 
 export type LoginActions = "EMAIL_NOT_VERIFIED";
@@ -13,6 +12,7 @@ export type GroupInclude = {
   pinnedBy: true;
   posts: {
     include: {
+      tags: true;
       likes: {
         include: {
           user: true;
@@ -44,6 +44,24 @@ export type GroupWithMembersAndPosts = Prisma.GroupGetPayload<{
   include: GroupInclude;
 }>;
 
+export type PostWithAuthor = Prisma.PostGetPayload<{
+  include: {
+    tags: true;
+    likes: {
+      include: {
+        user: true;
+      };
+    };
+    comments: {
+      include: {
+        likes: true;
+        author: true;
+      };
+    };
+    author: true;
+  };
+}>;
+
 export type GroupMembers = User[];
 
 export type GroupPosts = PostWithAuthor[];
@@ -66,13 +84,12 @@ export interface GroupWithPosts extends Group {
   posts: GroupPosts;
 }
 
-export interface PostWithAuthor extends Post {
-  author: PostAuthor;
-  likes: PostLikes;
-  comments: PostComments;
-}
-
 export interface CommentsWithAuthor extends Comment {
   author: CommentAuthor;
   likes: CommentLikes;
 }
+
+export type Tag = {
+  value: string; // Text
+  color: string; // Hex color
+};
