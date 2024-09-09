@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { PostWithAuthor } from "~/lib/types";
+import { type PostWithAuthor } from "~/lib/types";
 
 type PostStore = {
   posts: PostWithAuthor[];
