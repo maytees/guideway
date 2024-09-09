@@ -48,7 +48,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`anitaliased  h-full min-h-screen font-sans ${data?.colorScheme ?? "theme-yellow"} ${data?.font ?? "font-mono"} `}
+        className={`anitaliased  h-full min-h-screen font-sans ${data?.colorScheme ?? "theme-zinc"} ${data?.font ?? "font-mono"} `}
       >
         <ThemeProvider
           attribute="class"
