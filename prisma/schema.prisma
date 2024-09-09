@@ -123,6 +123,7 @@ model User {
     isTwoFactorEnabled    Boolean                @default(false)
     twoFactorConfirmation TwoFactorConfirmation?
     Session               Session[]
+    colorScheme           String                 @default("theme-zinc")
 
     google_id String? @unique
 
