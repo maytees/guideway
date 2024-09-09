@@ -1,5 +1,6 @@
 "use client";
 import { type Prisma } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 import { useTransition } from "react";
 import { Button } from "~/components/ui/button";
 import {
@@ -20,24 +21,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
-import { saveTheme } from "./_actions/save-theme";
+import { saveFont } from "./_actions/save-font";
 
-export default function ThemeSetting({
+export default function FontSetting({
   data,
 }: {
-  data: Prisma.UserGetPayload<{ select: { id: true; colorScheme: true } }>;
+  data: Prisma.UserGetPayload<{
+    select: { id: true; font: true; colorScheme: true };
+  }>;
 }) {
   const [isPending, startTransition] = useTransition();
 
   const handleSubmit = (formData: FormData) => {
     startTransition(() =>
-      saveTheme(formData, data.id)
+      saveFont(formData, data.id)
         .then(() => {
-          // You might want to add some success handling here
+          revalidatePath("/", "layout");
         })
         .catch((error) => {
           console.error(error);
-          // You might want to add some error handling here
         }),
     );
   };
@@ -46,33 +48,23 @@ export default function ThemeSetting({
     <Card className="w-full">
       <form action={handleSubmit}>
         <CardHeader>
-          <CardTitle>Color Theme</CardTitle>
+          <CardTitle>Font</CardTitle>
           <CardDescription>
-            Configure what color scheme you&apos;d like to use.
+            Configure what font type you&apos;d like to use.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-1">
-            <Label>Color Scheme</Label>
-            <Select
-              disabled={isPending}
-              name="color"
-              defaultValue={data.colorScheme}
-            >
+            <Label>Font</Label>
+            <Select name="font" defaultValue={data.font}>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a color" />
+                <SelectValue placeholder="Select a font" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>Color</SelectLabel>
-                  <SelectItem value="theme-zinc">Black</SelectItem>
-                  <SelectItem value="theme-green">Green</SelectItem>
-                  <SelectItem value="theme-blue">Blue</SelectItem>
-                  <SelectItem value="theme-violet">Violet</SelectItem>
-                  <SelectItem value="theme-yellow">Yellow</SelectItem>
-                  <SelectItem value="theme-orange">Orange</SelectItem>
-                  <SelectItem value="theme-red">Red</SelectItem>
-                  <SelectItem value="theme-rose">Rose</SelectItem>
+                  <SelectLabel>Font</SelectLabel>
+                  <SelectItem value="font-mono">Mono</SelectItem>
+                  <SelectItem value="font-normal">Normal</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -81,7 +73,7 @@ export default function ThemeSetting({
 
         <CardFooter>
           <Button type="submit" disabled={isPending}>
-            Save
+            {isPending ? "Saving..." : "Save"}
           </Button>
         </CardFooter>
       </form>

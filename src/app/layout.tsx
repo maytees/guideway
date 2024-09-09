@@ -30,6 +30,7 @@ async function getData(userId: string | undefined) {
       },
       select: {
         colorScheme: true,
+        font: true,
       },
     });
     return data;
@@ -47,7 +48,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`anitaliased  h-full min-h-screen font-sans ${data?.colorScheme ?? "theme-yellow"}`}
+        className={`anitaliased  h-full min-h-screen font-sans ${data?.colorScheme ?? "theme-yellow"} ${data?.font ?? "font-mono"} `}
       >
         <ThemeProvider
           attribute="class"

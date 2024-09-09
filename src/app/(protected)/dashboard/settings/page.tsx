@@ -1,8 +1,31 @@
+import { unstable_noStore as noStore } from "next/cache";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import { validateRequest } from "~/server/auth";
+import { db } from "~/server/db";
 import Darkmode from "./components/appearance/Darkmode";
+import FontSetting from "./components/appearance/Font";
 import ThemeSetting from "./components/appearance/Theme";
 
-const SettingsPage = () => {
+async function getData(userId: string | undefined) {
+  noStore();
+  const data = await db.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      font: true,
+      id: true,
+      colorScheme: true,
+    },
+  });
+
+  return data;
+}
+
+const SettingsPage = async () => {
+  const { user } = await validateRequest();
+  const data = await getData(user?.id);
+
   return (
     <div className="mt-10 px-2 max-md:mt-20 md:px-3 2xl:px-20">
       <div className="3xl:gap-10 flex w-full flex-col sm:flex-row sm:items-center sm:justify-between lg:justify-start lg:gap-5">
@@ -23,7 +46,8 @@ const SettingsPage = () => {
         <TabsContent value="appearance" className="mt-5">
           <div className="flex flex-col gap-5 ">
             <Darkmode />
-            <ThemeSetting />
+            <ThemeSetting data={data ?? { id: '', colorScheme: '' }} />
+            <FontSetting data={data ?? { id: '', font: '', colorScheme: '' }} />
           </div>
         </TabsContent>
       </Tabs>
