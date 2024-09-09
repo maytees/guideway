@@ -22,8 +22,10 @@ import { Button } from "~/components/ui/button";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
+  CardTitle,
 } from "~/components/ui/card";
 import {
   DropdownMenu,
@@ -40,6 +42,7 @@ import {
 } from "~/components/ui/tooltip";
 import { type GroupWithMembersAndPosts } from "~/lib/types";
 import { usePostStore } from "~/stores/post-store";
+import CreatePostButton from "./CreatePostButton";
 import ReadMore from "./Readmore";
 import { colors } from "./TagsSetting";
 
@@ -80,6 +83,22 @@ const Posts = (props: {
 
   return (
     <div className="w-9/12 space-y-4">
+      {sortedPosts.length === 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Whoops...</CardTitle>
+            <CardDescription>
+              Doesn&apos;t seem like there are any posts in this group.
+            </CardDescription>
+            <div className="pt-5">
+              <CreatePostButton
+                group={props.group}
+                currentUser={props.currentUser}
+              />
+            </div>
+          </CardHeader>
+        </Card>
+      )}
       {sortedPosts.map((post) => (
         <Card key={post.id}>
           <CardHeader className="flex flex-row items-center justify-between">
