@@ -124,7 +124,7 @@ model User {
     twoFactorConfirmation TwoFactorConfirmation?
     Session               Session[]
     colorScheme           String                 @default("theme-zinc")
-    font                  String                 @default("font-mono")
+    font                  String                 @default("font-normal")
 
     google_id String? @unique
 
