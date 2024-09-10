@@ -42,6 +42,7 @@ export const PostMenu = ({ postId }: { postId: number }) => {
   }, [isDeletingDialogOpen, countdown]);
 
   const handleDeletePost = async () => {
+    setIsDeletingDialogOpen(false);
     startDeletingTransition(() => {
       deletePost(postId)
         .then((data) => {
@@ -55,8 +56,6 @@ export const PostMenu = ({ postId }: { postId: number }) => {
             description: "Successfully deleted post: " + data.post?.title,
             position: "top-center",
           });
-
-          setIsDeletingDialogOpen(false);
         })
         .catch((e) => {
           toast.error("Could not delete post: " + e);
