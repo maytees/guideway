@@ -25,7 +25,7 @@ const Darkmode = ({
   data,
 }: {
   data: Prisma.UserGetPayload<{
-    select: { id: true; font: true; colorScheme: true; colorMode: true };
+    select: { colorMode: true; id: true };
   }>;
 }) => {
   const { theme, setTheme } = useTheme();

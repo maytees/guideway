@@ -16,6 +16,7 @@ async function getData(userId: string | undefined) {
       font: true,
       id: true,
       colorScheme: true,
+      colorMode: true,
     },
   });
 
@@ -45,9 +46,9 @@ const SettingsPage = async () => {
         <TabsContent value="billing"></TabsContent>
         <TabsContent value="appearance" className="mt-5">
           <div className="flex flex-col gap-5 ">
-            <Darkmode />
-            <ThemeSetting data={data ?? { id: '', colorScheme: '' }} />
-            <FontSetting data={data ?? { id: '', font: '', colorScheme: '' }} />
+            <Darkmode data={data ?? { id: "", colorMode: "" }} />
+            <ThemeSetting data={data ?? { id: "", colorScheme: "" }} />
+            <FontSetting data={data ?? { id: "", font: "", colorScheme: "" }} />
           </div>
         </TabsContent>
       </Tabs>

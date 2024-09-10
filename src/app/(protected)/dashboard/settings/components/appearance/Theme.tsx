@@ -25,7 +25,9 @@ import { saveTheme } from "./_actions/save-theme";
 export default function ThemeSetting({
   data,
 }: {
-  data: Prisma.UserGetPayload<{ select: { id: true; colorScheme: true } }>;
+  data: Prisma.UserGetPayload<{
+    select: { id: true; colorScheme: true };
+  }>;
 }) {
   const [isPending, startTransition] = useTransition();
 
