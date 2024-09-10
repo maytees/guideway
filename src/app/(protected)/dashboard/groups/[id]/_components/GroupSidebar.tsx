@@ -46,9 +46,9 @@ const GroupSidebar = ({ group }: { group: GroupWithMembersAndPosts }) => {
             <h4 className="font-semibold">Total Posts</h4>
             <p className="text-sm text-muted-foreground">{<TotalPosts />}</p>
           </div>
-          <Button variant="outline" className="w-full">
+          {/* <Button variant="outline" className="w-full">
             View Full Details
-          </Button>
+          </Button> */}
         </CardContent>
       </Card>
       <Card>
