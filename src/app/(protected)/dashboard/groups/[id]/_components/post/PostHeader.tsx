@@ -13,7 +13,7 @@ interface PostHeaderProps {
   currentUser: User;
 }
 
-export const PostHeader = ({ post, currentUser }: PostHeaderProps) => (
+export const PostHeader = ({ post }: PostHeaderProps) => (
   <CardHeader className="flex flex-row items-center justify-between">
     <div className="flex flex-row items-start">
       <Avatar>

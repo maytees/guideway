@@ -112,10 +112,10 @@ const Posts = (props: PostsProps) => {
     try {
       const data = await likePost(postId);
       if (data.success) {
-        toast.success(data.success as string);
+        toast.success(data.success);
       }
       if (data.error) {
-        toast.error(data.error as string);
+        toast.error(data.error);
       }
     } finally {
       setLikingPosts((prev) => ({ ...prev, [postId]: false }));
