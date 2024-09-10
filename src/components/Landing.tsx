@@ -6,6 +6,7 @@ import {
   TwitterLogoIcon,
 } from "@radix-ui/react-icons";
 import { type Variants, motion, useAnimation } from "framer-motion";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -29,6 +30,8 @@ import {
 
 export default function Landing() {
   const router = useRouter();
+
+  const { setTheme } = useTheme();
 
   const controls = useAnimation();
   const [ref, inView] = useInView();
@@ -56,6 +59,10 @@ export default function Landing() {
     featuresHeadingInView,
     inView,
   ]);
+
+  useEffect(() => {
+    setTheme("light");
+  }, [setTheme]);
 
   const variants = {
     hidden: {
