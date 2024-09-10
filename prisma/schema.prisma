@@ -51,23 +51,31 @@ model Group {
     pinnedBy User[] @relation("UserPinnedGroups")
 }
 
+model PostTag {
+    id     Int    @id @default(autoincrement())
+    value  String // Text
+    color  String // Hex value
+    Post   Post?  @relation(fields: [postId], references: [id], onDelete: Cascade)
+    postId Int?
+}
+
 model Post {
-    id             Int       @id @default(autoincrement())
-    title          String
-    content        String
-    created_at     DateTime  @default(now())
-    updated_at     DateTime  @default(now())
-    author         User      @relation(fields: [author_id], references: [id])
-    author_id      String    @map("author_id")
-    club           Group     @relation(fields: [club_id], references: [id])
-    club_id        String    @map("club_id")
-    likes          Like[]
-    comments       Comment[]
-    isAnnouncement Boolean   @default(false)
-    isDraft        Boolean   @default(false)
-    isPinned       Boolean   @default(false)
-    viewCount      Int       @default(0)
-    shareCount     Int       @default(0)
+    id         Int       @id @default(autoincrement())
+    title      String
+    content    String
+    created_at DateTime  @default(now())
+    updated_at DateTime  @default(now())
+    author     User      @relation(fields: [author_id], references: [id])
+    author_id  String    @map("author_id")
+    club       Group     @relation(fields: [club_id], references: [id], onDelete: Cascade)
+    club_id    String    @map("club_id")
+    likes      Like[]
+    comments   Comment[]
+    isDraft    Boolean   @default(false)
+    isPinned   Boolean   @default(false)
+    viewCount  Int       @default(0)
+    shareCount Int       @default(0)
+    tags       PostTag[]
 }
 
 model Comment {
@@ -76,8 +84,8 @@ model Comment {
     created_at DateTime      @default(now())
     updated_at DateTime      @default(now())
     author_id  String        @map("author_id")
-    author     User          @relation(fields: [author_id], references: [id])
-    post       Post          @relation(fields: [post_id], references: [id])
+    author     User          @relation(fields: [author_id], references: [id], onDelete: Cascade)
+    post       Post          @relation(fields: [post_id], references: [id], onDelete: Cascade)
     post_id    Int           @map("post_id")
     likes      CommentLike[]
 }
@@ -86,9 +94,9 @@ model Like {
     id         Int      @id @default(autoincrement())
     created_at DateTime @default(now())
     user_id    String   @map("user_id")
-    user       User     @relation(fields: [user_id], references: [id])
+    user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
     post_id    Int      @map("post_id")
-    post       Post     @relation(fields: [post_id], references: [id])
+    post       Post     @relation(fields: [post_id], references: [id], onDelete: Cascade)
 
     @@unique([user_id, post_id])
 }
@@ -97,9 +105,9 @@ model CommentLike {
     id         Int      @id @default(autoincrement())
     created_at DateTime @default(now())
     user_id    String   @map("user_id")
-    user       User     @relation(fields: [user_id], references: [id])
+    user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
     comment_id Int
-    comment    Comment  @relation(fields: [comment_id], references: [id])
+    comment    Comment  @relation(fields: [comment_id], references: [id], onDelete: Cascade)
 
     @@unique([user_id, comment_id])
 }
@@ -115,6 +123,11 @@ model User {
     isTwoFactorEnabled    Boolean                @default(false)
     twoFactorConfirmation TwoFactorConfirmation?
     Session               Session[]
+
+    // Appearance
+    colorScheme String @default("theme-zinc")
+    font        String @default("font-normal")
+    colorMode   String @default("light") // Either light, dark, or system
 
     google_id String? @unique
 

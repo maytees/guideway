@@ -12,10 +12,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { type User } from "@prisma/client";
+import { useEffect } from "react";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
 import { type GroupWithMembers } from "~/lib/types";
+import { useGroupStore } from "~/stores/group-store";
 import SidebarProfile from "./SidebarProfile";
 
 type SidebarLink = {
@@ -67,6 +69,12 @@ export default function Sidebar(props: {
 }) {
   const pathname = usePathname();
 
+  const { groups, setGroups } = useGroupStore();
+
+  useEffect(() => {
+    setGroups(props.groups);
+  }, [props.groups, setGroups]);
+
   return (
     <div className="grid min-h-screen md:grid-cols-[240px_1fr] lg:grid-cols-[300px_1fr]">
       <div className="hidden h-full border-r bg-muted/40 pt-10 md:block">
@@ -91,9 +99,9 @@ export default function Sidebar(props: {
                   >
                     {link.icon}
                     {link.label}
-                    {link.badge && (
+                    {link.badge && groups.length - 1 > 0 && (
                       <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                        {props.groups.length - 1}
+                        {groups.length - 1}
                       </Badge>
                     )}
                   </Link>

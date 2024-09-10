@@ -6,6 +6,7 @@ import {
   TwitterLogoIcon,
 } from "@radix-ui/react-icons";
 import { type Variants, motion, useAnimation } from "framer-motion";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -29,6 +30,8 @@ import {
 
 export default function Landing() {
   const router = useRouter();
+
+  const { setTheme } = useTheme();
 
   const controls = useAnimation();
   const [ref, inView] = useInView();
@@ -56,6 +59,10 @@ export default function Landing() {
     featuresHeadingInView,
     inView,
   ]);
+
+  useEffect(() => {
+    setTheme("light");
+  }, [setTheme]);
 
   const variants = {
     hidden: {
@@ -235,8 +242,8 @@ interface IFeature {
 const featuresTwo: IFeature[] = [
   {
     title: "Club Promotions",
-    desc: "Showcase your clubs achievements, events, and news to the entire school community.",
-    long: "Showcase your club's achievements, events, and news to the entire school community with Guideway's promotion features. Create club  profiles, share photos & videos, and highlight your club's unique culture and values. Leverage Guideway's social sharing tools to spread  the word about upcoming events, fundraisers, and drives. Attract new members and build a strong reputation for your club.",
+    desc: "Showcase your club's achievements, events, and news to the entire school community.",
+    long: "Showcase your club's achievements, events, and news to the entire school community with Guideway's promotion features. Create club profiles, share photos & videos, and highlight your club's unique culture and values. Leverage Guideway's social sharing tools to spread the word about upcoming events, fundraisers, and drives. Attract new members and build a strong reputation for your club.",
     icon: "/megaphone.svg",
     href: "/docs",
   },
@@ -244,7 +251,7 @@ const featuresTwo: IFeature[] = [
     title: "Quick Onboarding",
     desc: "Get started quickly as a school administrator. Guideway allows you to easily onboard every club in your school, and manage them with ease.",
     long: `
-    Get started with Guideway quickly and easily, thanks to our step- by - step  onboarding process.Our intuitive setup wizard guides club leaders  through the creation of their club profile, member invitation, and  initial configuration.We also offer school - wide onboarding, which allows school administrators to onboard and monitor all clubs in their school.
+    Get started with Guideway quickly and easily, thanks to its step-by-step onboarding process. The intuitive setup wizard guides club leaders through the creation of their club profile, member invitation, and initial configuration. Guideway also offers school-wide onboarding, which allows school administrators to onboard and monitor all clubs in their school.
     `,
     href: "/docs",
     icon: "/rocket.svg",
@@ -252,8 +259,8 @@ const featuresTwo: IFeature[] = [
   },
   {
     title: "Polls & Voting",
-    desc: "Can't decide? Then allow your club memebers to. Create polls on various topics, gather member opinions, and analyze results easily.",
-    long: "Make important club decisions democratically with Guideway's polls and  voting system. Create polls on various topics, gather member opinions,  and analyze results easily. Whether you're electing club officers,  choosing event themes, or making budget allocations, Guideway ensures  that every member's voice is heard. Foster a sense of ownership and  engagement within your club.",
+    desc: "Can't decide? Then allow your club members to. Create polls on various topics, gather member opinions, and analyze results easily.",
+    long: "Make important club decisions democratically with Guideway's polls and voting system. Create polls on various topics, gather member opinions, and analyze results easily. Whether you're electing club officers, choosing event themes, or making budget allocations, Guideway ensures that every member's voice is heard. Foster a sense of ownership and engagement within your club.",
     href: "/docs",
     icon: "/vote.svg",
   },
@@ -262,18 +269,18 @@ const featuresTwo: IFeature[] = [
 const features: IFeature[] = [
   {
     title: "Club Guidelines",
-    desc: "Guideway allows you to easily establish club club constitutions and bylaws. We also allow you to create your own profanity filter allowing you to keep your community pure.",
+    desc: "Guideway allows you to easily establish club constitutions and bylaws. It also allows you to create your own profanity filter, enabling you to keep your community pure.",
     long: `
-    Establish and maintain your club's guidelines and bylaws with Guideway's  constitution feature. Store and display your club's mission statement,  membership criteria, and governing rules in a centralized location.  Ensure transparency by making your club's  constitution easily accessible to all members. 
+    Establish and maintain your club's guidelines and bylaws with Guideway's constitution feature. Store and display your club's mission statement, membership criteria, and governing rules in a centralized location. Ensure transparency by making your club's constitution easily accessible to all members. 
     `,
     icon: "/scroll.svg",
     href: "/docs",
   },
   {
     title: "Club Management",
-    desc: "Officers, Marketers, Presidents? We got you covered. Guideway has everything you need to manage your club. From member registration and role assignment, and permissions to attendance tracking and event planning.",
+    desc: "Officers, Marketers, Presidents? Guideway has you covered. It has everything you need to manage your club. From member registration and role assignment, to permissions, attendance tracking, and event planning.",
     long: `
-    Streamline every aspect of club administration with Guideway's  comprehensive management tools. From member registration and role  assignment to attendance tracking and event planning, Guideway  simplifies the tasks of running a successful club. Our  intuitive interface and customizable settings enable club leaders to  manage their organizations efficiently, saving time and effort.
+    Streamline every aspect of club administration with Guideway's comprehensive management tools. From member registration and role assignment to attendance tracking and event planning, Guideway simplifies the tasks of running a successful club. Its intuitive interface and customizable settings enable club leaders to manage their organizations efficiently, saving time and effort.
     `,
     icon: "/tri.svg",
     href: "/docs",
@@ -281,9 +288,9 @@ const features: IFeature[] = [
   },
   {
     title: "Communication",
-    desc: "Guideway also allows you to communicate with other club members through our real time chat feature.",
+    desc: "Guideway also allows you to communicate with other club members through its real-time chat feature.",
     long: `
-    Stay connected and engaged with your club members through Guideway's  communication features. Our platform offers a club  chat system, allowing members to discuss ideas, collaborate on projects,  and build strong relationships. With Guideway, your club will never  miss a beat.
+    Stay connected and engaged with your club members through Guideway's communication features. The platform offers a club chat system, allowing members to discuss ideas, collaborate on projects, and build strong relationships. With Guideway, your club will never miss a beat.
     `,
     icon: "/paperplane.svg",
     href: "/docs",

@@ -1,14 +1,14 @@
 "use server";
-import { type GroupWithMembers } from "~/lib/types";
+import { revalidatePath } from "next/cache";
+import { type GroupWithMembersAndPosts } from "~/lib/types";
 import { formatJoinCode } from "~/lib/utils";
 import { type IJoinGroupCode, joinGroupSchema } from "~/lib/validation";
 import { validateRequest } from "~/server/auth";
 import { db } from "~/server/db";
-
 interface ActionResult {
   error?: string;
   success?: string;
-  group?: GroupWithMembers;
+  group?: GroupWithMembersAndPosts;
 }
 
 export async function joinGroup(values: IJoinGroupCode): Promise<ActionResult> {
@@ -47,6 +47,22 @@ export async function joinGroup(values: IJoinGroupCode): Promise<ActionResult> {
     include: {
       members: true,
       pinnedBy: true,
+      posts: {
+        include: {
+          author: true,
+          likes: {
+            include: {
+              user: true,
+            },
+          },
+          comments: {
+            include: {
+              likes: true,
+              author: true,
+            },
+          },
+        },
+      },
     },
   });
 
@@ -96,8 +112,10 @@ export async function joinGroup(values: IJoinGroupCode): Promise<ActionResult> {
     },
   });
 
+  revalidatePath("/dashboard");
+
   return {
     success: "Successfully joined new group",
-    group,
+    group: group as GroupWithMembersAndPosts,
   };
 }

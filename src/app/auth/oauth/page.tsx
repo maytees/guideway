@@ -29,10 +29,6 @@ const Google = () => {
 
   const router = useRouter();
 
-  if (!requiresName) {
-    router.push("/dashboard");
-  }
-
   const form = useForm<IGoogleName>({
     resolver: zodResolver(goolgeNameSchema),
     defaultValues: {
@@ -41,11 +37,10 @@ const Google = () => {
   });
 
   useEffect(() => {
-    if (!id) {
-      setError("Id not provided");
-      return;
+    if (!requiresName || !id) {
+      router.push("/dashboard");
     }
-  }, [id]);
+  }, [requiresName, id, router]);
 
   function onSubmit(values: IGoogleName) {
     if (!id) {
@@ -67,6 +62,7 @@ const Google = () => {
           if (data?.success) {
             form.reset();
             setSuccess(data.success);
+            setTimeout(() => router.push("/dashboard"), 2000);
           }
         })
         .catch(() => {
@@ -76,57 +72,53 @@ const Google = () => {
     });
   }
 
+  if (!requiresName || !id) {
+    return null;
+  }
+
   return (
-    <>
-      <FormCard
-        title={"One more thing..."}
-        description={"Please set a username for your account"}
-      >
-        {!success ? (
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-              <FormField
-                disabled={isPending}
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem className="mt-3">
-                    <div className="flex items-center">
-                      <FormLabel htmlFor="username">Username</FormLabel>
-                    </div>
-                    <FormControl>
-                      <Input
-                        type="text"
-                        disabled={isPending}
-                        placeholder="Set username"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className="mt-2 space-y-2">
-                <ErrorComponent message={error} />
-                <Button type="submit" className="w-full">
-                  Continue
-                </Button>
-              </div>
-            </form>
-          </Form>
-        ) : (
-          <>
-            <SuccessComponent message={success} />
-            <Button
-              className="w-full"
-              onClick={() => router.push("/dashboard")}
-            >
-              Go home
-            </Button>
-          </>
-        )}
-      </FormCard>
-    </>
+    <FormCard
+      title={"One more thing..."}
+      description={"Please set a username for your account"}
+    >
+      {!success ? (
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FormField
+              disabled={isPending}
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem className="mt-3">
+                  <div className="flex items-center">
+                    <FormLabel htmlFor="username">Username</FormLabel>
+                  </div>
+                  <FormControl>
+                    <Input
+                      type="text"
+                      disabled={isPending}
+                      placeholder="Set username"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="mt-2 space-y-2">
+              <ErrorComponent message={error} />
+              <Button type="submit" className="w-full" disabled={isPending}>
+                Continue
+              </Button>
+            </div>
+          </form>
+        </Form>
+      ) : (
+        <>
+          <SuccessComponent message={success} />
+        </>
+      )}
+    </FormCard>
   );
 };
 

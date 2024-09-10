@@ -128,6 +128,7 @@ export const register = async (values: IRegister): Promise<ActionResult> => {
       name,
       password: hashedPassword,
       email,
+      image: `https://api.dicebear.com/9.x/shapes/svg?seed=${name}`
     },
   });
 
@@ -209,29 +210,21 @@ export const updateUsername = async (
 
   const { username } = fields.data;
 
-  const validate = await validateRequest(true);
-
-  if (!validate.user) {
-    return {
-      error: "Unauthorized (1)",
-    };
-  }
-
-  if (validate.user.name) {
-    return {
-      error: "Username already set",
-    };
-  }
-
-  const user = await db.user.findUnique({
+  const existingUser = await db.user.findUnique({
     where: {
       id,
     },
   });
 
-  if (!user) {
+  if (!existingUser) {
     return {
-      error: "Invalid email",
+      error: "User not found",
+    };
+  }
+
+  if (existingUser.name) {
+    return {
+      error: "Username already set",
     };
   }
 

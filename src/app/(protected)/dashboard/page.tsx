@@ -18,7 +18,7 @@ async function getData(userId: string) {
       groups: {
         include: {
           members: true,
-          pinnedBy: true
+          pinnedBy: true,
         },
       },
       ownedGroups: {
@@ -58,10 +58,6 @@ const Page = async () => {
   return (
     <TooltipProvider>
       <div className="mt-10 px-2 max-md:mt-20 md:px-3 2xl:px-40">
-        {/* <h1>Welcome, {user.name}</h1>
-      <form action={signout}>
-        <button type="submit">Log out</button>
-      </form> */}
         <div className="3xl:gap-10 flex w-full flex-col sm:flex-row sm:items-center sm:justify-between lg:justify-start lg:gap-5">
           <h1 className="mb-2 text-2xl font-semibold sm:mb-0 sm:text-2xl lg:text-3xl">
             Group explorer
