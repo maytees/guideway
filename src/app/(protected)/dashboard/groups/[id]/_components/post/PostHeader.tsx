@@ -63,6 +63,6 @@ export const PostHeader = ({ post }: PostHeaderProps) => (
         })}
       </div>
     </div>
-    <PostMenu />
+    <PostMenu postId={post.id} />
   </CardHeader>
 );
