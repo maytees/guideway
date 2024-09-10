@@ -21,7 +21,12 @@ export default async function Layout({
   const { user } = validate;
 
   if (!user) {
-    redirect("/auth/login");
+    return redirect("/auth/login");
+  }
+
+  if (!user.name) {
+    console.log("test");
+    return redirect(`/auth/oauth?requiresName=true&id=${user.id}`);
   }
 
   const dbUser = await db.user.findUnique({

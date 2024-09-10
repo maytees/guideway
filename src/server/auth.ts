@@ -2,7 +2,6 @@ import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
 import { Google } from "arctic";
 import { Lucia, type Session, type User } from "lucia";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { cache } from "react";
 import { env } from "~/env";
 import { db } from "./db";
@@ -44,14 +43,12 @@ declare module "lucia" {
 // Checks if there is a current via cookie, if so then validate it,
 // then update the cookie if necessary. Use cache() to prevent
 // unnecessary database calls
+
 export const validateRequest = cache(
-  async (
-    noRedirect?: boolean,
-  ): Promise<
+  async (): Promise<
     { user: User; session: Session } | { user: null; session: null }
   > => {
     const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
-
     if (!sessionId) {
       return {
         user: null,
@@ -59,18 +56,18 @@ export const validateRequest = cache(
       };
     }
 
-    const res = await lucia.validateSession(sessionId);
-    // Nextjs throws when setting cookie when rendering page
+    const result = await lucia.validateSession(sessionId);
+    // next.js throws when you attempt to set cookie when rendering page
     try {
-      if (res.session && res.session.fresh) {
-        const sessionCookie = lucia.createSessionCookie(res.session.id);
+      if (result.session && result.session.fresh) {
+        const sessionCookie = lucia.createSessionCookie(result.session.id);
         cookies().set(
           sessionCookie.name,
           sessionCookie.value,
           sessionCookie.attributes,
         );
       }
-      if (!res.session) {
+      if (!result.session) {
         const sessionCookie = lucia.createBlankSessionCookie();
         cookies().set(
           sessionCookie.name,
@@ -79,16 +76,53 @@ export const validateRequest = cache(
         );
       }
     } catch {}
-
-    if (res.user && !res.user.name && !noRedirect) {
-      return redirect(
-        `${env.BASE_URL}/auth/oauth?requiresName=true&id=${res.user.id}`,
-      );
-    }
-
-    return res;
+    return result;
   },
 );
+
+// export const validateRequest = cache(
+//   async (
+//     noRedirect?: boolean,
+//   ): Promise<
+//     { user: User; session: Session } | { user: null; session: null }
+//   > => {
+//     const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
+
+//     if (!sessionId) {
+//       return {
+//         user: null,
+//         session: null,
+//       };
+//     }
+
+//     const result = await lucia.validateSession(sessionId);
+
+//     if (result.session && result.session.fresh) {
+//       const sessionCookie = lucia.createSessionCookie(result.session.id);
+//       cookies().set(
+//         sessionCookie.name,
+//         sessionCookie.value,
+//         sessionCookie.attributes,
+//       );
+//     }
+//     if (!result.session) {
+//       const sessionCookie = lucia.createBlankSessionCookie();
+//       cookies().set(
+//         sessionCookie.name,
+//         sessionCookie.value,
+//         sessionCookie.attributes,
+//       );
+//     }
+
+//     if (result.user && !result.user.name && !noRedirect) {
+//       return redirect(
+//         `/auth/oauth?requiresName=true&id=${result.user.id}`,
+//       );
+//     }
+
+//     return result;
+//   },
+// );
 
 export const google = new Google(
   env.GOOGLE_CLIENT_ID,

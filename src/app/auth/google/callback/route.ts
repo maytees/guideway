@@ -105,7 +105,7 @@ export async function GET(request: Request): Promise<Response> {
         google_id: googleUser.sub,
         email: googleUser.email,
         emailVerified: new Date(),
-        image: googleUser.picture
+        image: googleUser.picture,
       },
     });
 
@@ -116,10 +116,12 @@ export async function GET(request: Request): Promise<Response> {
       sessionCookie.value,
       sessionCookie.attributes,
     );
+
     return new Response(null, {
       status: 302,
       headers: {
         Location: `/auth/oauth?requiresName=true&id=${newUser.id}`,
+        "Set-Cookie": sessionCookie.serialize(),
       },
     });
   } catch (error) {
