@@ -8,15 +8,17 @@ import {
   EllipsisVertical,
   Eye,
   Flag,
+  Heart,
   MessageSquare,
   Pencil,
   PinIcon,
   Share2,
-  ThumbsUp,
-  Trash,
+  Trash
 } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
+import { likePost } from "~/actions/dashboard/like-post";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
 import {
@@ -50,6 +52,7 @@ const Posts = (props: {
   group: GroupWithMembersAndPosts;
   currentUser: User;
 }) => {
+  const [likingPosts, setLikingPosts] = useState<Record<string, boolean>>({});
   // Sort posts to bring pinned posts to the top
   const { posts, setPosts } = usePostStore();
   const sortedPosts = [...posts].sort((a, b) => {
@@ -74,6 +77,21 @@ const Posts = (props: {
     }
     if (!showComments[postId]) {
       toggleComments(postId);
+    }
+  };
+
+  const likePostSubmit = async (postId: string) => {
+    setLikingPosts((prev) => ({ ...prev, [postId]: true }));
+    try {
+      const data = await likePost(postId);
+      if (data.success) {
+        toast.success(data.success);
+      }
+      if (data.error) {
+        toast.error(data.error);
+      }
+    } finally {
+      setLikingPosts((prev) => ({ ...prev, [postId]: false }));
     }
   };
 
@@ -111,7 +129,7 @@ const Posts = (props: {
                     src={
                       post.author.image ??
                       "https://api.dicebear.com/9.x/miniavs/svg?seed=" +
-                        post.author.name
+                      post.author.name
                     }
                     alt={post.author.name ?? "User"}
                     width={32}
@@ -196,8 +214,13 @@ const Posts = (props: {
               <div className="flex gap-4">
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant="outline" size="sm">
-                      <ThumbsUp className="h-4 w-4" />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => likePostSubmit(post.id.toString())}
+                      disabled={likingPosts[post.id.toString()]}
+                    >
+                      <Heart className={`h-4 w-4 ${post.likes.some(like => like.user_id === props.currentUser.id) ? 'fill-current' : ''}`} />
                       <span className="ml-1">{post.likes.length}</span>
                     </Button>
                   </TooltipTrigger>
@@ -234,7 +257,7 @@ const Posts = (props: {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button variant="outline" size="sm">
-                      <Bookmark fill="black" className="h-4 w-4" />
+                      <Bookmark className="h-4 w-4" />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
@@ -335,9 +358,10 @@ const Posts = (props: {
                               variant="ghost"
                               size="sm"
                               className="h-6 px-2 py-1"
+                              disabled={true}
                             >
-                              <ThumbsUp className="mr-1 h-4 w-4" /> (
-                              {comment.likes.length})
+                              <Heart className="mr-1 h-4 w-4" />
+                              {comment.likes.length}
                             </Button>
                           </div>
                         </div>
