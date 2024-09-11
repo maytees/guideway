@@ -123,6 +123,7 @@ export const validateRequest = cache(
 //     return result;
 //   },
 // );
+console.log("thing: ", env.BASE_URL);
 
 export const google = new Google(
   env.GOOGLE_CLIENT_ID,
