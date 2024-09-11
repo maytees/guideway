@@ -123,10 +123,10 @@ export const validateRequest = cache(
 //     return result;
 //   },
 // );
-console.log("thing: ", env.APP_URL);
+const redirect = `${env.APP_URL}/auth/google/callback`;
 
 export const google = new Google(
   env.GOOGLE_CLIENT_ID,
   env.GOOGLE_CLIENT_SECRET,
-  `${env.APP_URL}/auth/google/callback`,
+  redirect,
 );
