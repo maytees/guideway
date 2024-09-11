@@ -8,7 +8,7 @@ export const sendVerificationEmail = async (
   token: string,
   name: string,
 ) => {
-  const link = `${env.BASE_URL}/auth/verify?token=${token}`;
+  const link = `${env.NEXT_APP_URL}/auth/verify?token=${token}`;
 
   await resend.emails.send({
     from: "no-reply@guideway.co",
@@ -23,7 +23,7 @@ export const sendPasswordResetEmail = async (
   token: string,
   name: string,
 ) => {
-  const link = `${env.BASE_URL}/auth/password-reset?token=${token}`;
+  const link = `${env.NEXT_APP_URL}/auth/password-reset?token=${token}`;
 
   await resend.emails.send({
     from: "no-reply@guideway.co",
