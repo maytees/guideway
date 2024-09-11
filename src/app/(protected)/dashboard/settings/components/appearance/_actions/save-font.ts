@@ -3,18 +3,18 @@ import { revalidatePath } from "next/cache";
 import { db } from "~/server/db";
 
 export async function saveFont(formData: FormData, userId: string) {
-    "use server";
+  "use server";
 
-    const font = formData.get("font") as string;
+  const font = formData.get("font") as string;
 
-    await db.user.update({
-        where: {
-            id: userId,
-        },
-        data: {
-            font: font ?? undefined,
-        },
-    });
+  await db.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      font: font ?? undefined,
+    },
+  });
 
-    revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
 }

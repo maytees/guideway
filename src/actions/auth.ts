@@ -128,7 +128,7 @@ export const register = async (values: IRegister): Promise<ActionResult> => {
       name,
       password: hashedPassword,
       email,
-      image: `https://api.dicebear.com/9.x/shapes/svg?seed=${name}`
+      image: `https://api.dicebear.com/9.x/shapes/svg?seed=${name}`,
     },
   });
 
