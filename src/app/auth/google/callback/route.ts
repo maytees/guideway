@@ -97,7 +97,7 @@ export async function GET(request: Request): Promise<Response> {
     });
 
     if (emailExists) {
-      return NextResponse.redirect(env.NEXT_APP_URL + "/auth/register?code=409");
+      return NextResponse.redirect(env.APP_URL + "/auth/register?code=409");
     }
 
     const newUser = await db.user.create({
