@@ -62,7 +62,7 @@ export const goolgeNameSchema = z.object({
       "Username must be less than 31 characters long",
     )
     .refine(
-      (s) => /^[a-z0-9_-]+$/.test(s),
+      (s) => /^[a-zA-Z0-9_-]+$/.test(s),
       "Username can only contain letters, numbers, dashes and underscores",
     ),
 });

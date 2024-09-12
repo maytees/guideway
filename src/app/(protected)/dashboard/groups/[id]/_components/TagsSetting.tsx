@@ -34,7 +34,11 @@ export const colors: { bg: string; text: string }[] = [
   { bg: "#ffe4e6", text: "#9f1239" }, // Rose
 ];
 
-const TagSelector: React.FC<TagSelectorProps> = ({ tags, setTags, isPending }) => {
+const TagSelector: React.FC<TagSelectorProps> = ({
+  tags,
+  setTags,
+  isPending,
+}) => {
   const [inputValue, setInputValue] = useState("");
   const [selectedColor, setSelectedColor] = useState(colors[0]);
 
@@ -74,7 +78,10 @@ const TagSelector: React.FC<TagSelectorProps> = ({ tags, setTags, isPending }) =
                 placeholder="e.g Announcement"
                 disabled={tags.length >= 3 || isPending}
               />
-              <Button onClick={handleAddTag} disabled={tags.length >= 3 || isPending}>
+              <Button
+                onClick={handleAddTag}
+                disabled={tags.length >= 3 || isPending}
+              >
                 Add Tag
               </Button>
             </div>

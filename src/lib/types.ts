@@ -2,7 +2,7 @@ import {
   type Comment,
   type Group,
   type Prisma,
-  type User
+  type User,
 } from "@prisma/client";
 
 export type LoginActions = "EMAIL_NOT_VERIFIED";
