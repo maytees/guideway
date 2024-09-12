@@ -65,6 +65,7 @@ const Post = ({
         {post.comments.length > 0 && (
           <Comments
             post={post}
+            currentUser={currentUser}
             showComments={showComments}
             toggleComments={toggleComments}
           />
