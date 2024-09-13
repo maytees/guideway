@@ -1,7 +1,8 @@
 "use client";
 import { type User } from "@prisma/client";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
+import { incrementViewCount } from "~/actions/dashboard/increment-view-count";
 import { likePost } from "~/actions/dashboard/like-post";
 import {
   Card,
@@ -44,36 +45,48 @@ const Post = ({
   showComments,
   toggleComments,
   commentInputRefs,
-}: PostProps) => (
-  <Card key={post.id}>
-    <PostHeader post={post} currentUser={currentUser} />
-    <PostContent post={post} />
-    <CardFooter className="mt-2 flex flex-col gap-2">
-      <PostActions
-        post={post}
-        currentUser={currentUser}
-        likePostSubmit={likePostSubmit}
-        likingPosts={likingPosts}
-        focusCommentInput={focusCommentInput}
-      />
-      <div className="mt-1 w-full">
-        <CommentInput
-          currentUser={currentUser}
-          commentInputRefs={commentInputRefs}
+}: PostProps) => {
+  const incrementViewCountCallback = useCallback(() => {
+    incrementViewCount(post.id.toString()).catch((error) => {
+      console.error("Error incrementing view count:", error);
+    });
+  }, [post.id]);
+
+  useEffect(() => {
+    incrementViewCountCallback();
+  }, [incrementViewCountCallback]);
+
+  return (
+    <Card key={post.id}>
+      <PostHeader post={post} currentUser={currentUser} />
+      <PostContent post={post} />
+      <CardFooter className="mt-2 flex flex-col gap-2">
+        <PostActions
           post={post}
+          currentUser={currentUser}
+          likePostSubmit={likePostSubmit}
+          likingPosts={likingPosts}
+          focusCommentInput={focusCommentInput}
         />
-        {post.comments.length > 0 && (
-          <Comments
-            post={post}
+        <div className="mt-1 w-full">
+          <CommentInput
             currentUser={currentUser}
-            showComments={showComments}
-            toggleComments={toggleComments}
+            commentInputRefs={commentInputRefs}
+            post={post}
           />
-        )}
-      </div>
-    </CardFooter>
-  </Card>
-);
+          {post.comments.length > 0 && (
+            <Comments
+              post={post}
+              currentUser={currentUser}
+              showComments={showComments}
+              toggleComments={toggleComments}
+            />
+          )}
+        </div>
+      </CardFooter>
+    </Card>
+  );
+};
 
 interface PostsProps {
   group: GroupWithMembersAndPosts;
