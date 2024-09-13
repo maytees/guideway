@@ -10,6 +10,7 @@ import {
 import { useEffect, useState, useTransition } from "react";
 import { toast } from "sonner";
 import { deletePost } from "~/actions/dashboard/delete-post";
+import { checkPostPinned, pinPost } from "~/actions/dashboard/pin-post";
 import { Button } from "~/components/ui/button";
 import {
   Dialog,
@@ -31,7 +32,21 @@ import {
 export const PostMenu = ({ postId }: { postId: number }) => {
   const [isDeletingDialogOpen, setIsDeletingDialogOpen] = useState(false);
   const [isDeleting, startDeletingTransition] = useTransition();
+  const [isPinning, startPinningTransition] = useTransition();
   const [countdown, setCountdown] = useState(5);
+  const [isPinned, setIsPinned] = useState(false);
+
+  useEffect(() => {
+    checkPostPinned(postId)
+      .then((result) => {
+        if (result.isPinned !== undefined) {
+          setIsPinned(result.isPinned ?? false);
+        }
+      })
+      .catch((error) => {
+        toast.error("Could not check if post is pinned: " + error);
+      });
+  }, [postId]);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -63,6 +78,30 @@ export const PostMenu = ({ postId }: { postId: number }) => {
     });
   };
 
+  const handlePinPost = async () => {
+    startPinningTransition(() => {
+      pinPost(postId)
+        .then((data) => {
+          if (data.error) {
+            toast.error(data.error);
+            return;
+          }
+
+          setIsPinned(!isPinned);
+          toast.success("Success!", {
+            duration: 5000,
+            description: isPinned
+              ? "Successfully unpinned post"
+              : "Successfully pinned post",
+            position: "top-center",
+          });
+        })
+        .catch((e) => {
+          toast.error("Could not pin post: " + e);
+        });
+    });
+  };
+
   return (
     <div className="flex items-center gap-2">
       <DropdownMenu>
@@ -72,9 +111,17 @@ export const PostMenu = ({ postId }: { postId: number }) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem>
-            <PinIcon className="mr-2 h-4 w-4" />
-            <span>Pin Post</span>
+          <DropdownMenuItem onSelect={handlePinPost} disabled={isPinning}>
+            <PinIcon
+              className={`mr-2 h-4 w-4 ${isPinned ? "fill-current" : ""}`}
+            />
+            <span>
+              {isPinning
+                ? "Processing..."
+                : isPinned
+                  ? "Unpin Post"
+                  : "Pin Post"}
+            </span>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Pencil className="mr-2 h-4 w-4" />
