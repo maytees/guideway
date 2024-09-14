@@ -9,8 +9,7 @@ import {
   Loader2,
   Pin,
   School,
-  Star,
-  Users
+  Users,
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -86,13 +85,13 @@ const AllGroups = (props: { groups: GroupWithMembers[]; user: User }) => {
           groups.map((group) =>
             group.id === groupId
               ? ({
-                ...group,
-                pinnedBy: result.isPinned
-                  ? [...(group.pinnedBy || []), props.user]
-                  : (group.pinnedBy || []).filter(
-                    (u) => u.id !== props.user.id,
-                  ),
-              } as GroupWithMembers)
+                  ...group,
+                  pinnedBy: result.isPinned
+                    ? [...(group.pinnedBy || []), props.user]
+                    : (group.pinnedBy || []).filter(
+                        (u) => u.id !== props.user.id,
+                      ),
+                } as GroupWithMembers)
               : group,
           ),
         );
@@ -110,25 +109,25 @@ const AllGroups = (props: { groups: GroupWithMembers[]; user: User }) => {
 
   const filteredGroups = Array.isArray(groups)
     ? groups
-      .filter((group) => {
-        if (!group || typeof group.name !== "string") {
-          return false;
-        }
+        .filter((group) => {
+          if (!group || typeof group.name !== "string") {
+            return false;
+          }
 
-        return (
-          group.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-          (categoryFilter === "All" || group.category === categoryFilter)
-        );
-      })
-      .sort((a, b) => {
-        const isPinnedA =
-          a.pinnedBy?.some((user) => user.id === props.user.id) ?? false;
-        const isPinnedB =
-          b.pinnedBy?.some((user) => user.id === props.user.id) ?? false;
-        if (isPinnedA && !isPinnedB) return -1;
-        if (!isPinnedA && isPinnedB) return 1;
-        return 0;
-      })
+          return (
+            group.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+            (categoryFilter === "All" || group.category === categoryFilter)
+          );
+        })
+        .sort((a, b) => {
+          const isPinnedA =
+            a.pinnedBy?.some((user) => user.id === props.user.id) ?? false;
+          const isPinnedB =
+            b.pinnedBy?.some((user) => user.id === props.user.id) ?? false;
+          if (isPinnedA && !isPinnedB) return -1;
+          if (!isPinnedA && isPinnedB) return 1;
+          return 0;
+        })
     : [];
 
   return (
@@ -277,14 +276,10 @@ const AllGroups = (props: { groups: GroupWithMembers[]; user: User }) => {
                   {group.description}
                 </p>
 
-                <div className="mt-8 grid grid-cols-3 grid-rows-2 xl:max-w-2xl">
+                <div className="mt-8 grid grid-cols-2 grid-rows-2 xl:max-w-xl">
                   <div className="flex items-center gap-2">
                     <Users className="size-4" />
                     <span>{group.members.length} Members</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="size-4" />
-                    <span>Meets Weekly</span>
                   </div>
                   <div className="flex items-center gap-2 hover:cursor-pointer">
                     <BookKey className="size-4" />
@@ -307,6 +302,10 @@ const AllGroups = (props: { groups: GroupWithMembers[]; user: User }) => {
                     </Tooltip>
                   </div>
                   <div className="flex items-center gap-2">
+                    <Calendar className="size-4" />
+                    <span>Meets Weekly</span>
+                  </div>
+                  <div className="flex items-center gap-2">
                     <Clock className="size-4" />
                     <span>
                       Created{" "}
@@ -315,10 +314,6 @@ const AllGroups = (props: { groups: GroupWithMembers[]; user: User }) => {
                       })}{" "}
                       {group.created_at.getFullYear()}
                     </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Star className="size-4" />
-                    <span>4.8 Rating</span>
                   </div>
                 </div>
               </CardContent>
