@@ -62,8 +62,8 @@ const Darkmode = ({
                 <Sun className="size-5 dark:hidden" />
                 <Moon className="hidden size-5 dark:inline-block" />
                 <span>
-                  {theme
-                    ? theme.charAt(0).toUpperCase() + theme.slice(1)
+                  {colorMode
+                    ? colorMode.charAt(0).toUpperCase() + colorMode.slice(1)
                     : "System"}
                 </span>
                 <ChevronDown className="size-4" />
