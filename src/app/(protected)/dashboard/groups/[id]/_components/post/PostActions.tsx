@@ -106,7 +106,7 @@ export const PostActions = ({
         </div>
       </TooltipTrigger>
       <TooltipContent>
-        <p>Number of times this post has been viewed</p>
+        <p>View Count</p>
       </TooltipContent>
     </Tooltip>
   </div>

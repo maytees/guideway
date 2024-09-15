@@ -1,5 +1,6 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
@@ -26,6 +27,7 @@ const Google = () => {
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
+  const [redirectCountdown, setRedirectCountdown] = useState<number | null>(null);
 
   const router = useRouter();
 
@@ -41,6 +43,15 @@ const Google = () => {
       router.push("/dashboard");
     }
   }, [requiresName, id, router]);
+
+  useEffect(() => {
+    if (redirectCountdown !== null && redirectCountdown > 0) {
+      const timer = setTimeout(() => setRedirectCountdown(redirectCountdown - 1), 1000);
+      return () => clearTimeout(timer);
+    } else if (redirectCountdown === 0) {
+      router.push("/dashboard");
+    }
+  }, [redirectCountdown, router]);
 
   function onSubmit(values: IGoogleName) {
     if (!id) {
@@ -62,7 +73,7 @@ const Google = () => {
           if (data?.success) {
             form.reset();
             setSuccess(data.success);
-            setTimeout(() => router.push("/dashboard"), 2000);
+            setRedirectCountdown(2);
           }
         })
         .catch(() => {
@@ -116,6 +127,10 @@ const Google = () => {
       ) : (
         <>
           <SuccessComponent message={success} />
+          <div className="mt-4 flex items-center justify-center">
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <span>Redirecting in {redirectCountdown} seconds...</span>
+          </div>
         </>
       )}
     </FormCard>

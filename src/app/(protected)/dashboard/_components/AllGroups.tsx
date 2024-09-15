@@ -9,7 +9,6 @@ import {
   Loader2,
   Pin,
   School,
-  Star,
   Users,
 } from "lucide-react";
 import Link from "next/link";
@@ -277,14 +276,10 @@ const AllGroups = (props: { groups: GroupWithMembers[]; user: User }) => {
                   {group.description}
                 </p>
 
-                <div className="mt-8 grid grid-cols-3 grid-rows-2 xl:max-w-2xl">
+                <div className="mt-8 grid grid-cols-2 grid-rows-2 xl:max-w-xl">
                   <div className="flex items-center gap-2">
                     <Users className="size-4" />
                     <span>{group.members.length} Members</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="size-4" />
-                    <span>Meets Weekly</span>
                   </div>
                   <div className="flex items-center gap-2 hover:cursor-pointer">
                     <BookKey className="size-4" />
@@ -307,6 +302,10 @@ const AllGroups = (props: { groups: GroupWithMembers[]; user: User }) => {
                     </Tooltip>
                   </div>
                   <div className="flex items-center gap-2">
+                    <Calendar className="size-4" />
+                    <span>Meets Weekly</span>
+                  </div>
+                  <div className="flex items-center gap-2">
                     <Clock className="size-4" />
                     <span>
                       Created{" "}
@@ -315,14 +314,6 @@ const AllGroups = (props: { groups: GroupWithMembers[]; user: User }) => {
                       })}{" "}
                       {group.created_at.getFullYear()}
                     </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Star className="size-4" />
-                    <span>4.8 Rating</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Star className="size-4" />
-                    <span>4.8 Rating sigma</span>
                   </div>
                 </div>
               </CardContent>
