@@ -1,5 +1,4 @@
 "use client";
-import { type User } from "@prisma/client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { incrementViewCount } from "~/actions/dashboard/increment-view-count";
@@ -25,7 +24,6 @@ import { Comments } from "./post/comment/Comments";
 
 interface PostProps {
   post: PostWithAuthor;
-  currentUser: User;
   likePostSubmit: (postId: string) => Promise<void>;
   likingPosts: Record<string, boolean>;
   focusCommentInput: (postId: string) => void;
@@ -38,7 +36,6 @@ interface PostProps {
 
 const Post = ({
   post,
-  currentUser,
   likePostSubmit,
   likingPosts,
   focusCommentInput,
@@ -58,26 +55,20 @@ const Post = ({
 
   return (
     <Card key={post.id}>
-      <PostHeader post={post} currentUser={currentUser} />
+      <PostHeader post={post} />
       <PostContent post={post} />
       <CardFooter className="mt-2 flex flex-col gap-2">
         <PostActions
           post={post}
-          currentUser={currentUser}
           likePostSubmit={likePostSubmit}
           likingPosts={likingPosts}
           focusCommentInput={focusCommentInput}
         />
         <div className="mt-1 w-full">
-          <CommentInput
-            currentUser={currentUser}
-            commentInputRefs={commentInputRefs}
-            post={post}
-          />
+          <CommentInput commentInputRefs={commentInputRefs} post={post} />
           {post.comments.length > 0 && (
             <Comments
               post={post}
-              currentUser={currentUser}
               showComments={showComments}
               toggleComments={toggleComments}
             />
@@ -90,7 +81,6 @@ const Post = ({
 
 interface PostsProps {
   group: GroupWithMembersAndPosts;
-  currentUser: User;
 }
 
 const Posts = (props: PostsProps) => {
@@ -150,10 +140,7 @@ const Posts = (props: PostsProps) => {
               Doesn&apos;t seem like there are any posts in this group.
             </CardDescription>
             <div className="pt-5">
-              <CreatePostButton
-                group={props.group}
-                currentUser={props.currentUser}
-              />
+              <CreatePostButton group={props.group} />
             </div>
           </CardHeader>
         </Card>
@@ -162,7 +149,6 @@ const Posts = (props: PostsProps) => {
         <Post
           key={post.id}
           post={post}
-          currentUser={props.currentUser}
           likePostSubmit={likePostSubmit}
           likingPosts={likingPosts}
           focusCommentInput={focusCommentInput}

@@ -18,6 +18,7 @@ import { Button } from "~/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
 import { type GroupWithMembers } from "~/lib/types";
 import { useGroupStore } from "~/stores/group-store";
+import { useUserStore } from "~/stores/user-store";
 import SidebarProfile from "./SidebarProfile";
 
 type SidebarLink = {
@@ -68,12 +69,14 @@ export default function Sidebar(props: {
   user: User;
 }) {
   const pathname = usePathname();
+  const { setUser } = useUserStore();
 
   const { groups, setGroups } = useGroupStore();
 
   useEffect(() => {
     setGroups(props.groups);
-  }, [props.groups, setGroups]);
+    setUser(props.user);
+  }, [props.groups, props.user, setGroups, setUser]);
 
   return (
     <div className="grid min-h-screen md:grid-cols-[240px_1fr] lg:grid-cols-[300px_1fr]">

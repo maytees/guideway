@@ -1,5 +1,4 @@
 "use client";
-import { type User } from "@prisma/client";
 import { formatDistanceToNow } from "date-fns";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
@@ -10,7 +9,6 @@ import { PostMenu } from "./PostMenu";
 
 interface PostHeaderProps {
   post: PostWithAuthor;
-  currentUser: User;
 }
 
 export const PostHeader = ({ post }: PostHeaderProps) => (

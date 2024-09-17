@@ -1,6 +1,5 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { type User } from "@prisma/client";
 import { PlusIcon } from "lucide-react";
 import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
@@ -33,12 +32,8 @@ import { type GroupWithMembersAndPosts, type Tag } from "~/lib/types";
 import { type IPost, postSchema } from "~/lib/validation";
 import { usePostStore } from "~/stores/post-store";
 import AdditionalSettings from "./TagsSetting";
-// import { createPost } from "~/actions/posts"; // Assume this is your server action
 
-const CreatePostButton = (props: {
-  group: GroupWithMembersAndPosts;
-  currentUser: User;
-}) => {
+const CreatePostButton = (props: { group: GroupWithMembersAndPosts }) => {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
@@ -65,7 +60,7 @@ const CreatePostButton = (props: {
             return;
           }
 
-          toast.success(`Successfuly created post!`, {
+          toast.success(`Successfully created post!`, {
             position: "top-center",
             duration: 5000,
           });
