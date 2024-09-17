@@ -1,5 +1,5 @@
 "use client";
-import { type CommentLike, type User } from "@prisma/client";
+import { type CommentLike } from "@prisma/client";
 import { formatDistanceToNow } from "date-fns";
 import { ChevronDown, ChevronUp, Heart } from "lucide-react";
 import { useTransition } from "react";
@@ -8,21 +8,21 @@ import { likeComment } from "~/actions/dashboard/like-comment";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
 import { type PostWithAuthor } from "~/lib/types";
+import { useUserStore } from "~/stores/user-store";
 
 interface CommentsProps {
   post: PostWithAuthor;
   showComments: Record<string, boolean>;
   toggleComments: (postId: string) => void;
-  currentUser: User;
 }
 
 export const Comments = ({
   post,
   showComments,
   toggleComments,
-  currentUser,
 }: CommentsProps) => {
   const [isLiking, startLikingTransition] = useTransition();
+  const { user: currentUser } = useUserStore();
 
   function handleLikeComment(commentId: number) {
     startLikingTransition(() => {
@@ -90,7 +90,7 @@ export const Comments = ({
                   disabled={isLiking}
                 >
                   <Heart
-                    className={`mr-1 h-4 w-4 ${comment.likes.some((like: CommentLike) => like.user_id === currentUser.id) ? "fill-current" : ""}`}
+                    className={`mr-1 h-4 w-4 ${comment.likes.some((like: CommentLike) => like.user_id === currentUser?.id) ? "fill-current" : ""}`}
                   />
                   {comment.likes.length}
                 </Button>

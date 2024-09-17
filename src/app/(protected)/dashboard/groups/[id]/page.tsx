@@ -92,7 +92,7 @@ const GroupPage = async (props: {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <CreatePostButton group={data} currentUser={currentUser} />
+            <CreatePostButton group={data} />
             <InviteDialog
               joinCode={`${data.join_code.slice(0, 4)}-${data.join_code.slice(4, 8)}`}
             />
@@ -106,10 +106,7 @@ const GroupPage = async (props: {
         <Separator className="mt-4" />
       </div>
       <div className="mt-8 flex flex-row gap-10">
-        <Posts
-          group={data as GroupWithMembersAndPosts}
-          currentUser={currentUser}
-        />
+        <Posts group={data as GroupWithMembersAndPosts} />
         <GroupSidebar group={data as GroupWithMembersAndPosts} />
       </div>
     </div>
