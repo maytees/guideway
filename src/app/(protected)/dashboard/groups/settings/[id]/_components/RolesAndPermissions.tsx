@@ -227,6 +227,10 @@ export default function RolesTable(props: {
     return () => clearTimeout(timer);
   }, [isDeletingDialogOpen, countdown]);
 
+  useEffect(() => {
+    setRoles(props.group.roles);
+  }, [props.group.roles]);
+
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center gap-2">
