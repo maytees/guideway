@@ -1,19 +1,20 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { type Prisma } from "@prisma/client";
-import { MoreHorizontal, Pen, Plus, Shield, Trash, Users } from "lucide-react";
-import { useEffect, useState, useTransition } from "react";
 import {
   DragDropContext,
   Draggable,
   Droppable,
   type DropResult,
-} from "react-beautiful-dnd";
+} from "@hello-pangea/dnd";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { type Prisma } from "@prisma/client";
+import { MoreHorizontal, Pen, Plus, Shield, Trash, Users } from "lucide-react";
+import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { createRole } from "~/actions/dashboard/group/settings/create-role";
 import { deleteRole } from "~/actions/dashboard/group/settings/delete-role";
+import { updateRoles } from "~/actions/dashboard/group/settings/update-roles";
 import { ErrorComponent } from "~/components/forms/FormInfo";
 import { Button } from "~/components/ui/button";
 import { Checkbox } from "~/components/ui/checkbox";
@@ -131,7 +132,9 @@ export default function RolesTable(props: {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>();
   const [countdown, setCountdown] = useState(3);
-  const [roles, setRoles] = useState(props.group.roles);
+  const [roles, setRoles] = useState(
+    props.group.roles.sort((a, b) => a.order - b.order),
+  );
 
   const form = useForm<IRoleName>({
     resolver: zodResolver(roleNameSchema),
@@ -168,6 +171,31 @@ export default function RolesTable(props: {
           setIsCreateDialogOpen(false);
         })
         .catch((e) => setError("There was an error: " + e));
+    });
+  };
+
+  const handleSaveOrder = (newOrders: Record<number, number>) => {
+    startTransition(() => {
+      updateRoles(props.group.id, newOrders)
+        .then((data) => {
+          if (data.error) {
+            toast.error(data.error);
+            return;
+          }
+
+          if (data.roles) {
+            setRoles(data.roles);
+          }
+
+          toast.success("Success!", {
+            duration: 5000,
+            description: "Successfully changed order of roles",
+            position: "top-center",
+          });
+        })
+        .catch((e) => {
+          toast.error("Could not reorder roles: " + e);
+        });
     });
   };
 
@@ -209,7 +237,18 @@ export default function RolesTable(props: {
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem!);
 
+    const newRoleOrders: Record<number, number> = {};
+    items.forEach((role, newIndex) => {
+      if (role.order !== newIndex + 1) {
+        newRoleOrders[role.order] = newIndex + 1;
+      }
+    });
+
     setRoles(items);
+
+    if (Object.keys(newRoleOrders).length > 0) {
+      handleSaveOrder(newRoleOrders);
+    }
   };
 
   useEffect(() => {
@@ -228,22 +267,19 @@ export default function RolesTable(props: {
   }, [isDeletingDialogOpen, countdown]);
 
   useEffect(() => {
+    const initialRoleOrders: Record<string, number> = {};
+    roles.forEach((role, index) => {
+      initialRoleOrders[role.id] = role.order || index + 1;
+    });
+  }, [roles]);
+
+  useEffect(() => {
     setRoles(props.group.roles);
   }, [props.group.roles]);
 
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center gap-2">
-        <Button
-          onClick={() => {
-            toast.success(
-              "Roles listed in order successfully. " +
-                roles.map((role) => role.name).toString(),
-            );
-          }}
-        >
-          Save Order
-        </Button>
         <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
           <DialogTrigger asChild>
             <Button variant={"outline"} size={"icon"}>

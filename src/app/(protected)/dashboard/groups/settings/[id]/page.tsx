@@ -18,6 +18,9 @@ async function getData(groupId: string | undefined) {
         include: {
           users: true,
         },
+        orderBy: {
+          order: "asc",
+        },
       },
     },
   });
