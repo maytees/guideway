@@ -7,6 +7,7 @@ import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { createRole } from "~/actions/dashboard/group/settings/create-role";
+import { deleteRole } from "~/actions/dashboard/group/settings/delete-role";
 import { ErrorComponent } from "~/components/forms/FormInfo";
 import { Button } from "~/components/ui/button";
 import { Checkbox } from "~/components/ui/checkbox";
@@ -171,25 +172,25 @@ export default function RolesTable(props: {
     // Call server action (toggle permission in role)
   };
 
-  const handleDeleteRole = async () => {
-    // setIsDeletingDialogOpen(false);
-    // startTransition(() => {
-    // deletePost(postId)
-    //   .then((data) => {
-    //     if (data.error) {
-    //       toast.error(data.error);
-    //       return;
-    //     }
-    //     toast.success("Success!", {
-    //       duration: 5000,
-    //       description: "Successfully deleted post: " + data.post?.title,
-    //       position: "top-center",
-    //     });
-    //   })
-    //   .catch((e) => {
-    //     toast.error("Could not delete post: " + e);
-    //   });
-    // });
+  const handleDeleteRole = (roleId: string, roleName: string) => {
+    setIsDeletingDialogOpen(false);
+    startTransition(() => {
+      deleteRole(roleId)
+        .then((data) => {
+          if (data.error) {
+            toast.error(data.error);
+            return;
+          }
+          toast.success("Success!", {
+            duration: 5000,
+            description: "Successfully deleted role: " + roleName,
+            position: "top-center",
+          });
+        })
+        .catch((e) => {
+          toast.error("Could not delete role: " + e);
+        });
+    });
   };
 
   useEffect(() => {
@@ -443,7 +444,9 @@ export default function RolesTable(props: {
                             </Button>
                             <Button
                               variant="destructive"
-                              onClick={handleDeleteRole}
+                              onClick={() => {
+                                handleDeleteRole(role.id, role.name);
+                              }}
                               disabled={countdown > 0 || isPending}
                               className="relative"
                             >
