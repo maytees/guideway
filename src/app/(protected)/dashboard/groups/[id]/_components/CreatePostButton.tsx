@@ -31,7 +31,7 @@ import { Textarea } from "~/components/ui/textarea";
 import { type GroupWithMembersAndPosts, type Tag } from "~/lib/types";
 import { type IPost, postSchema } from "~/lib/validation";
 import { usePostStore } from "~/stores/post-store";
-import AdditionalSettings from "./TagsSetting";
+import TagSelector from "./TagsSetting";
 
 const CreatePostButton = (props: { group: GroupWithMembersAndPosts }) => {
   const [open, setOpen] = useState(false);
@@ -162,11 +162,7 @@ const CreatePostButton = (props: { group: GroupWithMembersAndPosts }) => {
                 </FormItem>
               )}
             />
-            <AdditionalSettings
-              tags={tags}
-              setTags={setTags}
-              isPending={isPending}
-            />
+            <TagSelector tags={tags} setTags={setTags} isPending={isPending} />
             <ErrorComponent message={error} />
             <div className="flex w-full flex-row items-center justify-between">
               <DialogClose asChild>

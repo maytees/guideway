@@ -42,6 +42,8 @@ model Role {
 
     users       User[]
     permissions String[] // List of permissions (defined in app)
+
+    color String // Hex value
 }
 
 model Group {
