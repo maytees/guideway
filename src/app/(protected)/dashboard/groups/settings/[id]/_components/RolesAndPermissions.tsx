@@ -4,6 +4,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { type Prisma } from "@prisma/client";
 import { MoreHorizontal, Pen, Plus, Shield, Trash, Users } from "lucide-react";
 import { useEffect, useState, useTransition } from "react";
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  type DropResult,
+} from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { createRole } from "~/actions/dashboard/group/settings/create-role";
@@ -125,6 +131,7 @@ export default function RolesTable(props: {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>();
   const [countdown, setCountdown] = useState(3);
+  const [roles, setRoles] = useState(props.group.roles);
 
   const form = useForm<IRoleName>({
     resolver: zodResolver(roleNameSchema),
@@ -193,6 +200,18 @@ export default function RolesTable(props: {
     });
   };
 
+  const onDragEnd = (result: DropResult) => {
+    if (!result.destination) {
+      return;
+    }
+
+    const items = Array.from(roles);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem!);
+
+    setRoles(items);
+  };
+
   useEffect(() => {
     if (!isCreateDialogOpen) {
       setSelectedColor(colors[0]);
@@ -209,11 +228,21 @@ export default function RolesTable(props: {
   }, [isDeletingDialogOpen, countdown]);
 
   return (
-    <div className="flex flex-row-reverse items-start gap-4">
-      <div className="flex flex-shrink flex-row justify-end">
+    <div className="flex flex-col gap-5">
+      <div className="flex items-center gap-2">
+        <Button
+          onClick={() => {
+            toast.success(
+              "Roles listed in order successfully. " +
+                roles.map((role) => role.name).toString(),
+            );
+          }}
+        >
+          Save Order
+        </Button>
         <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
           <DialogTrigger asChild>
-            <Button size={"icon"}>
+            <Button variant={"outline"} size={"icon"}>
               <Plus className="h-5 w-5" />
             </Button>
           </DialogTrigger>
@@ -299,181 +328,220 @@ export default function RolesTable(props: {
           </DialogContent>
         </Dialog>
       </div>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Badge Preview</TableHead>
-            <TableHead>Users</TableHead>
-            <TableHead>Permissions</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {props.group.roles.map((role) => (
-            <TableRow key={role.id}>
-              <TableCell className="font-medium">{role.name}</TableCell>
-              <TableCell>
-                <span
-                  className="w-fit rounded px-2 py-1 text-xs font-semibold"
-                  style={{
-                    backgroundColor: role.color,
-                    color: colors.find((c) => c.bg === role.color)?.text,
-                  }}
-                >
-                  {role.name}
-                </span>
-              </TableCell>
-              <TableCell>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button variant="outline">
-                      <Users className="mr-2 h-4 w-4" />
-                      Users ({role.users.length})
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[425px]">
-                    <DialogHeader>
-                      <DialogTitle>Manage Users for {role.name}</DialogTitle>
-                    </DialogHeader>
-                    <ScrollArea className="h-[200px] w-full rounded-md border p-4"></ScrollArea>
-                  </DialogContent>
-                </Dialog>
-              </TableCell>
-              <TableCell>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button variant="outline">
-                      <Shield className="mr-2 h-4 w-4" />
-                      Permissions ({role.permissions.length})
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>
-                        Manage Permissions for {role.name}
-                      </DialogTitle>
-                    </DialogHeader>
-                    <ScrollArea className="h-[300px] w-full rounded-md border p-4">
-                      {allPermissions.map((permission) => (
-                        <div
-                          key={permission.id}
-                          className="mb-4 flex flex-col space-y-1"
-                        >
-                          <div className="flex items-center space-x-2">
-                            <Checkbox
-                              id={`${role.id}-${permission.id}`}
-                              checked={role.permissions.includes(permission.id)}
-                              onCheckedChange={() =>
-                                handleTogglePermission(role.id, permission.id)
-                              }
-                            />
-                            <label
-                              htmlFor={`${role.id}-${permission.id}`}
-                              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                            >
-                              {permission.name}
-                            </label>
-                          </div>
-                          <p className="ml-6 text-sm text-gray-500">
-                            {permission.description}
-                          </p>
-                        </div>
-                      ))}
-                    </ScrollArea>
-                  </DialogContent>
-                </Dialog>
-              </TableCell>
-              <TableCell className="text-right">
-                <DropdownMenu modal={false}>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="h-8 w-8 p-0">
-                      <span className="sr-only">Open menu</span>
-                      <MoreHorizontal className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>{role.name}</DropdownMenuLabel>
-                    <DropdownMenuItem>
-                      <Pen className="mr-2 h-4 w-4" />
-                      <span>Modify</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <Dialog
-                      open={isDeletingDialogOpen}
-                      onOpenChange={(open) => {
-                        setIsDeletingDialogOpen(open);
-                        if (open) setCountdown(3);
-                      }}
+      <div className="flex flex-shrink flex-row justify-end">
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Name</TableHead>
+                <TableHead>Badge Preview</TableHead>
+                <TableHead>Users</TableHead>
+                <TableHead>Permissions</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <Droppable droppableId="roles">
+              {(provided) => (
+                <TableBody {...provided.droppableProps} ref={provided.innerRef}>
+                  {roles.map((role, index) => (
+                    <Draggable
+                      key={role.id}
+                      draggableId={role.id}
+                      index={index}
                     >
-                      <DialogTrigger asChild>
-                        <DropdownMenuItem
-                          onSelect={(e) => {
-                            e.preventDefault();
-                            setIsDeletingDialogOpen(true);
-                          }}
-                          className="text-destructive hover:text-destructive focus:text-destructive"
+                      {(provided, snapshot) => (
+                        <TableRow
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          className={snapshot.isDragging ? "bg-muted" : ""}
                         >
-                          <Trash className="mr-2 h-4 w-4" />
-                          <span>Delete</span>
-                        </DropdownMenuItem>
-                      </DialogTrigger>
-                      <DialogContent className="sm:max-w-[425px]">
-                        <DialogHeader>
-                          <DialogTitle className="text-destructive">
-                            Confirm Deletion - {role.name}
-                          </DialogTitle>
-                          <DialogDescription>
-                            Are you sure you want to delete this role? This
-                            action is irreversible.
-                          </DialogDescription>
-                        </DialogHeader>
-                        <DialogFooter className="flex flex-col items-center sm:flex-row sm:justify-between">
-                          <div className="mb-4 text-sm font-medium sm:mb-0">
-                            {countdown > 0
-                              ? `Please wait ${countdown} seconds`
-                              : "You can now delete"}
-                          </div>
-                          <div className="flex gap-2">
-                            <Button
-                              variant="outline"
-                              onClick={() => setIsDeletingDialogOpen(false)}
-                              disabled={isPending}
-                            >
-                              Cancel
-                            </Button>
-                            <Button
-                              variant="destructive"
-                              onClick={() => {
-                                handleDeleteRole(role.id, role.name);
+                          <TableCell className="font-medium">
+                            {role.name}
+                          </TableCell>
+                          <TableCell>
+                            <span
+                              className="w-fit rounded px-2 py-1 text-xs font-semibold"
+                              style={{
+                                backgroundColor: role.color,
+                                color: colors.find((c) => c.bg === role.color)
+                                  ?.text,
                               }}
-                              disabled={countdown > 0 || isPending}
-                              className="relative"
                             >
-                              {countdown > 0 && (
-                                <div className="absolute inset-0 flex items-center justify-center rounded-md bg-destructive/20">
-                                  <div
-                                    className="h-full w-full animate-pulse rounded-md bg-destructive/40"
-                                    style={{
-                                      animationDuration: `${countdown}s`,
-                                      animationIterationCount: "1",
-                                    }}
-                                  />
-                                </div>
-                              )}
-                              Delete
-                            </Button>
-                          </div>
-                        </DialogFooter>
-                      </DialogContent>
-                    </Dialog>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+                              {role.name}
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <Dialog>
+                              <DialogTrigger asChild>
+                                <Button variant="outline">
+                                  <Users className="mr-2 h-4 w-4" />
+                                  Users ({role.users.length})
+                                </Button>
+                              </DialogTrigger>
+                              <DialogContent className="sm:max-w-[425px]">
+                                <DialogHeader>
+                                  <DialogTitle>
+                                    Manage Users for {role.name}
+                                  </DialogTitle>
+                                </DialogHeader>
+                                <ScrollArea className="h-[200px] w-full rounded-md border p-4"></ScrollArea>
+                              </DialogContent>
+                            </Dialog>
+                          </TableCell>
+                          <TableCell>
+                            <Dialog>
+                              <DialogTrigger asChild>
+                                <Button variant="outline">
+                                  <Shield className="mr-2 h-4 w-4" />
+                                  Permissions ({role.permissions.length})
+                                </Button>
+                              </DialogTrigger>
+                              <DialogContent>
+                                <DialogHeader>
+                                  <DialogTitle>
+                                    Manage Permissions for {role.name}
+                                  </DialogTitle>
+                                </DialogHeader>
+                                <ScrollArea className="h-[300px] w-full rounded-md border p-4">
+                                  {allPermissions.map((permission) => (
+                                    <div
+                                      key={permission.id}
+                                      className="mb-4 flex flex-col space-y-1"
+                                    >
+                                      <div className="flex items-center space-x-2">
+                                        <Checkbox
+                                          id={`${role.id}-${permission.id}`}
+                                          checked={role.permissions.includes(
+                                            permission.id,
+                                          )}
+                                          onCheckedChange={() =>
+                                            handleTogglePermission(
+                                              role.id,
+                                              permission.id,
+                                            )
+                                          }
+                                        />
+                                        <label
+                                          htmlFor={`${role.id}-${permission.id}`}
+                                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                        >
+                                          {permission.name}
+                                        </label>
+                                      </div>
+                                      <p className="ml-6 text-sm text-gray-500">
+                                        {permission.description}
+                                      </p>
+                                    </div>
+                                  ))}
+                                </ScrollArea>
+                              </DialogContent>
+                            </Dialog>
+                          </TableCell>
+                          <TableCell className="text-right">
+                            <DropdownMenu modal={false}>
+                              <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" className="h-8 w-8 p-0">
+                                  <span className="sr-only">Open menu</span>
+                                  <MoreHorizontal className="h-4 w-4" />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="end">
+                                <DropdownMenuLabel>
+                                  {role.name}
+                                </DropdownMenuLabel>
+                                <DropdownMenuItem>
+                                  <Pen className="mr-2 h-4 w-4" />
+                                  <span>Modify</span>
+                                </DropdownMenuItem>
+                                <DropdownMenuSeparator />
+                                <Dialog
+                                  open={isDeletingDialogOpen}
+                                  onOpenChange={(open) => {
+                                    setIsDeletingDialogOpen(open);
+                                    if (open) setCountdown(3);
+                                  }}
+                                >
+                                  <DialogTrigger asChild>
+                                    <DropdownMenuItem
+                                      onSelect={(e) => {
+                                        e.preventDefault();
+                                        setIsDeletingDialogOpen(true);
+                                      }}
+                                      className="text-destructive hover:text-destructive focus:text-destructive"
+                                    >
+                                      <Trash className="mr-2 h-4 w-4" />
+                                      <span>Delete</span>
+                                    </DropdownMenuItem>
+                                  </DialogTrigger>
+                                  <DialogContent className="sm:max-w-[425px]">
+                                    <DialogHeader>
+                                      <DialogTitle className="text-destructive">
+                                        Confirm Deletion - {role.name}
+                                      </DialogTitle>
+                                      <DialogDescription>
+                                        Are you sure you want to delete this
+                                        role? This action is irreversible.
+                                      </DialogDescription>
+                                    </DialogHeader>
+                                    <DialogFooter className="flex flex-col items-center sm:flex-row sm:justify-between">
+                                      <div className="mb-4 text-sm font-medium sm:mb-0">
+                                        {countdown > 0
+                                          ? `Please wait ${countdown} seconds`
+                                          : "You can now delete"}
+                                      </div>
+                                      <div className="flex gap-2">
+                                        <Button
+                                          variant="outline"
+                                          onClick={() =>
+                                            setIsDeletingDialogOpen(false)
+                                          }
+                                          disabled={isPending}
+                                        >
+                                          Cancel
+                                        </Button>
+                                        <Button
+                                          variant="destructive"
+                                          onClick={() => {
+                                            handleDeleteRole(
+                                              role.id,
+                                              role.name,
+                                            );
+                                          }}
+                                          disabled={countdown > 0 || isPending}
+                                          className="relative"
+                                        >
+                                          {countdown > 0 && (
+                                            <div className="absolute inset-0 flex items-center justify-center rounded-md bg-destructive/20">
+                                              <div
+                                                className="h-full w-full animate-pulse rounded-md bg-destructive/40"
+                                                style={{
+                                                  animationDuration: `${countdown}s`,
+                                                  animationIterationCount: "1",
+                                                }}
+                                              />
+                                            </div>
+                                          )}
+                                          Delete
+                                        </Button>
+                                      </div>
+                                    </DialogFooter>
+                                  </DialogContent>
+                                </Dialog>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
+                          </TableCell>
+                        </TableRow>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </TableBody>
+              )}
+            </Droppable>
+          </Table>
+        </DragDropContext>
+      </div>
     </div>
   );
 }
