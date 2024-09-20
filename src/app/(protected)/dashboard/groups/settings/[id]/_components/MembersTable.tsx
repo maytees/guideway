@@ -1,10 +1,14 @@
 "use client";
 
 import { type Prisma } from "@prisma/client";
-import { Table, TableBody, TableHead, TableHeader, TableRow } from "~/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "~/components/ui/table";
 import { MemberRow } from "./MemberRow";
-
-type Member = Prisma.UserGetPayload<{}>;
 
 const MembersTable = (props: {
   group: Prisma.GroupGetPayload<{
@@ -25,11 +29,7 @@ const MembersTable = (props: {
       </TableHeader>
       <TableBody>
         {props.group.members.map((member) => (
-          <MemberRow
-            key={member.id}
-            member={member}
-            groupId={props.group.id}
-          />
+          <MemberRow key={member.id} member={member} groupId={props.group.id} />
         ))}
       </TableBody>
     </Table>
