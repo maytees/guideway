@@ -37,7 +37,7 @@ model Role {
     description String?
     created_at  DateTime @default(now())
     updated_at  DateTime @default(now())
-    group       Group    @relation(fields: [groupId], references: [id])
+    group       Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
     groupId     String
 
     users       User[]
@@ -46,6 +46,8 @@ model Role {
     order Int
 
     color String // Hex value
+
+    isDefault Boolean @default(false)
 }
 
 model Group {
