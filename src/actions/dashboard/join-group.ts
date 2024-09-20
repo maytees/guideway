@@ -112,6 +112,38 @@ export async function joinGroup(values: IJoinGroupCode): Promise<ActionResult> {
     },
   });
 
+  const defaultRole = await db.role.findFirst({
+    where: {
+      groupId: group.id,
+      isDefault: true,
+    },
+  });
+
+  if (!defaultRole) {
+    return {
+      error: "Group does not have default role!",
+    };
+  }
+
+  const updatedRole = await db.role.update({
+    where: {
+      id: defaultRole.id,
+    },
+    data: {
+      users: {
+        connect: {
+          id: user.id,
+        },
+      },
+    },
+  });
+
+  if (!updatedRole) {
+    return {
+      error: `Could not add user to the ${defaultRole.name} role (default)`,
+    };
+  }
+
   revalidatePath("/dashboard");
 
   return {
