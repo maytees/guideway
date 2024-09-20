@@ -1,4 +1,6 @@
+import { ArrowLeft } from "lucide-react";
 import { unstable_noStore as noStore } from "next/cache";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { db } from "~/server/db";
@@ -37,8 +39,11 @@ const SettingsPage = async (props: { params: { id: string } }) => {
 
   return (
     <div className="mt-10 px-2 max-md:mt-20 md:px-3 2xl:px-20">
-      <div className="3xl:gap-10 flex w-full flex-col sm:flex-row sm:items-center sm:justify-between lg:justify-start lg:gap-5">
-        <h1 className="mb-2 text-2xl font-semibold sm:mb-0 sm:text-2xl lg:text-3xl">
+      <div className="mb-4 flex items-center gap-4">
+        <Link href={`/dashboard/groups/${props.params.id}`}>
+          <ArrowLeft className="h-4 w-4" />
+        </Link>
+        <h1 className="text-2xl font-semibold sm:text-2xl lg:text-3xl">
           Settings
         </h1>
       </div>
