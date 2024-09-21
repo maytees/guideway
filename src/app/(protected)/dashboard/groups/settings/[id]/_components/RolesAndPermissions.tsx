@@ -57,6 +57,7 @@ import {
 } from "~/components/ui/table";
 import { colors, DEFAULT_COLOR } from "~/lib/utils";
 import { type IRoleName, roleNameSchema } from "~/lib/validation";
+import { ModifyRoleDialog } from "./ModifyRoleDialog";
 
 type Permission = {
   id: string;
@@ -108,6 +109,11 @@ export default function RolesTable(props: {
   const [roles, setRoles] = useState(
     props.group.roles.sort((a, b) => a.order - b.order),
   );
+  const [modifyingRole, setModifyingRole] = useState<{
+    id: string;
+    name: string;
+    color: string;
+  } | null>(null);
 
   const form = useForm<IRoleName>({
     resolver: zodResolver(roleNameSchema),
@@ -463,7 +469,7 @@ export default function RolesTable(props: {
                                 <DropdownMenuLabel>
                                   {role.name}
                                 </DropdownMenuLabel>
-                                <DropdownMenuItem>
+                                <DropdownMenuItem onSelect={() => setModifyingRole(role)}>
                                   <Pen className="mr-2 h-4 w-4" />
                                   <span>Modify</span>
                                 </DropdownMenuItem>
@@ -567,6 +573,14 @@ export default function RolesTable(props: {
           </Table>
         </DragDropContext>
       </div>
+      {modifyingRole && (
+        <ModifyRoleDialog
+          isOpen={!!modifyingRole}
+          onClose={() => setModifyingRole(null)}
+          role={modifyingRole}
+          groupId={props.group.id}
+        />
+      )}
     </div>
   );
 }
