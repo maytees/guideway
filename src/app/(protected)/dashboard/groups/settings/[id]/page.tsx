@@ -4,6 +4,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { db } from "~/server/db";
+import DefaultRoleSetting from "./_components/DefaultRoleSetting";
 import MembersTable from "./_components/MembersTable";
 import RolesTable from "./_components/RolesAndPermissions";
 
@@ -37,6 +38,8 @@ const SettingsPage = async (props: { params: { id: string } }) => {
     return redirect("/404");
   }
 
+  const defaultRole = data.roles.find((role) => role.isDefault);
+
   return (
     <div className="mt-10 px-2 max-md:mt-20 md:px-3 2xl:px-20">
       <div className="mb-4 flex items-center gap-4">
@@ -47,13 +50,21 @@ const SettingsPage = async (props: { params: { id: string } }) => {
           Settings
         </h1>
       </div>
-      <Tabs defaultValue="roles" className="w-full lg:mt-5 ">
+      <Tabs defaultValue="general" className="w-full lg:mt-5 ">
         <TabsList className="mb-5">
           <TabsTrigger value="general">General</TabsTrigger>
           <TabsTrigger value="roles">Roles & Permissions</TabsTrigger>
           <TabsTrigger value="members">Members</TabsTrigger>
         </TabsList>
-        <TabsContent value="general"></TabsContent>
+        <TabsContent value="general">
+          <div className="flex flex-col gap-5">
+            <DefaultRoleSetting
+              groupId={data.id}
+              roles={data.roles}
+              defaultRoleId={defaultRole?.id ?? ""}
+            />
+          </div>
+        </TabsContent>
         <TabsContent value="roles">
           <RolesTable group={data} />
         </TabsContent>

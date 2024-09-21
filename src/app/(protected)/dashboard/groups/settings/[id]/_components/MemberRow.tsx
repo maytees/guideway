@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { TableCell, TableRow } from "~/components/ui/table";
-import { colors } from "./RolesAndPermissions";
+import { colors } from "~/lib/utils";
 
 type Member = Prisma.UserGetPayload<object>;
 

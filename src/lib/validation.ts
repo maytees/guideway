@@ -123,3 +123,9 @@ export const updatesSignupSchema = z.object({
 });
 
 export type IUpdatesSignup = z.infer<typeof updatesSignupSchema>;
+
+export const defaultRoleSchema = z.object({
+  defaultRoleId: z.string().min(1, "Please select a default role"),
+});
+
+export type IDefaultRole = z.infer<typeof defaultRoleSchema>;
