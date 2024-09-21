@@ -3,6 +3,7 @@ import {
   Club,
   Compass,
   FileText,
+  HelpCircle,
   LogOut,
   Settings,
   SidebarOpen,
@@ -64,6 +65,11 @@ const sidebarLinks: SidebarLink[] = [
     label: "Changelogs",
   },
   {
+    href: "/faq",
+    icon: <HelpCircle className="h-5 w-5" />,
+    label: "FAQ",
+  },
+  {
     href: "/auth/logout",
     icon: <LogOut className="h-5 w-5" />,
     label: "Log out",
@@ -100,8 +106,8 @@ export default function Sidebar(props: {
                     key={index}
                     href={link.href}
                     className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:bg-primary/5 hover:text-primary ${isActive
-                        ? "bg-muted text-primary"
-                        : "text-muted-foreground"
+                      ? "bg-muted text-primary"
+                      : "text-muted-foreground"
                       }`}
                     aria-current={isActive ? "page" : undefined}
                   >
@@ -143,8 +149,8 @@ export default function Sidebar(props: {
                     key={index}
                     href={link.href}
                     className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:bg-primary/5 hover:text-primary ${isActive
-                        ? "bg-muted text-primary"
-                        : "text-muted-foreground"
+                      ? "bg-muted text-primary"
+                      : "text-muted-foreground"
                       }`}
                     aria-current={isActive ? "page" : undefined}
                   >
