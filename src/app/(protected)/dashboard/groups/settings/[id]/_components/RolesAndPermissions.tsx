@@ -178,13 +178,13 @@ export default function RolesTable(props: {
     });
   };
 
-  const handleToggleUser = (roleId: string, user: string) => {
-    // Call server action (toggle user in role)
-  };
+  // const handleToggleUser = (roleId: string, user: string) => {
+  //   // Call server action (toggle user in role)
+  // };
 
-  const handleTogglePermission = (roleId: string, permissionId: string) => {
-    // Call server action (toggle permission in role)
-  };
+  // const handleTogglePermission = (roleId: string, permissionId: string) => {
+  //   // Call server action (toggle permission in role)
+  // };
 
   const handleDeleteRole = (roleId: string, roleName: string) => {
     setIsDeletingDialogOpen(false);
@@ -434,12 +434,12 @@ export default function RolesTable(props: {
                                           checked={role.permissions.includes(
                                             permission.id,
                                           )}
-                                          onCheckedChange={() =>
-                                            handleTogglePermission(
-                                              role.id,
-                                              permission.id,
-                                            )
-                                          }
+                                        // onCheckedChange={() =>
+                                        //   handleTogglePermission(
+                                        //     role.id,
+                                        //     permission.id,
+                                        //   )
+                                        // }
                                         />
                                         <label
                                           htmlFor={`${role.id}-${permission.id}`}

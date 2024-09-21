@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { CardHeader } from "~/components/ui/card";
 import { type PostWithAuthor, type Tag } from "~/lib/types";
-import { colors } from "../TagsSetting";
+import { colors } from "~/lib/utils";
 import { PostMenu } from "./PostMenu";
 
 interface PostHeaderProps {
@@ -22,7 +22,7 @@ export const PostHeader = ({ post }: PostHeaderProps) => (
             src={
               post.author.image ??
               "https://api.dicebear.com/9.x/miniavs/svg?seed=" +
-                post.author.name
+              post.author.name
             }
             alt={post.author.name ?? "User"}
             width={32}
