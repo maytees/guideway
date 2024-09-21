@@ -9,8 +9,10 @@ const ChangelogPage = () => {
     const changelogs = fs.readdirSync(changelogDir).map((filename) => {
         const filePath = path.join(changelogDir, filename);
         const fileContent = fs.readFileSync(filePath, "utf-8");
-        const { data, content } = matter(fileContent);
-        return { date: data.date, content, title: data.title };
+        const { content } = matter(fileContent);
+        return {
+            content: content,
+        };
     });
 
     return (
@@ -21,13 +23,9 @@ const ChangelogPage = () => {
             </div>
             <ul className="space-y-6">
                 {changelogs.reverse().map((log, index) => (
-                    <div>
+                    <div key={index}>
                         <Separator />
                         <li key={index} className="bg-white p-6">
-                            <div className="mb-4">
-                                <h2 className="text-xl font-semibold">{log.title}</h2>
-                                <p className="text-sm text-gray-500">{log.date}</p>
-                            </div>
                             <div className="prose prose-lg">
                                 <ReactMarkdown>{log.content}</ReactMarkdown>
                             </div>
