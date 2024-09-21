@@ -29,6 +29,7 @@ type DefaultRoleSettingProps = {
     roles: Role[];
     defaultRoleId: string;
     focus?: boolean;
+    isLoading?: boolean;
 };
 
 export default function DefaultRoleSetting({
@@ -36,6 +37,7 @@ export default function DefaultRoleSetting({
     roles,
     defaultRoleId,
     focus = false,
+    isLoading = false,
 }: DefaultRoleSettingProps) {
     const [isPending, startTransition] = useTransition();
     const selectRef = useRef<HTMLButtonElement>(null);
@@ -95,27 +97,31 @@ export default function DefaultRoleSetting({
                     <div className="space-y-1">
                         <Label htmlFor="defaultRole">Default Role</Label>
                         <Select
-                            disabled={isPending}
+                            disabled={isPending || isLoading}
                             onValueChange={(value) => form.setValue("defaultRoleId", value)}
                             defaultValue={defaultRoleIdValue}
                         >
                             <SelectTrigger className="w-full" ref={selectRef}>
-                                <SelectValue placeholder="Select a default role" />
+                                <SelectValue placeholder={isLoading ? "Loading..." : "Select a default role"} />
                             </SelectTrigger>
                             <SelectContent>
-                                {roles
-                                    .sort((a, b) => a.order - b.order)
-                                    .map((role) => (
-                                        <SelectItem key={role.id} value={role.id}>
-                                            {role.name}
-                                        </SelectItem>
-                                    ))}
+                                {isLoading ? (
+                                    <SelectItem value="" disabled>Loading roles...</SelectItem>
+                                ) : (
+                                    roles
+                                        .sort((a, b) => a.order - b.order)
+                                        .map((role) => (
+                                            <SelectItem key={role.id} value={role.id}>
+                                                {role.name}
+                                            </SelectItem>
+                                        ))
+                                )}
                             </SelectContent>
                         </Select>
                     </div>
                 </CardContent>
                 <CardFooter>
-                    <Button type="submit" disabled={isPending}>
+                    <Button type="submit" disabled={isPending || isLoading}>
                         {isPending ? "Saving..." : "Save"}
                     </Button>
                 </CardFooter>
