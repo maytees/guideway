@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^1.4.0",
+    "@hello-pangea/dnd": "^17.0.0",
     "@hookform/resolvers": "^3.3.4",
     "@lucia-auth/adapter-prisma": "^4.0.1",
     "@prisma/client": "^5.10.2",
@@ -75,6 +76,7 @@
     "react-spinners": "^0.13.8",
     "resend": "^3.2.0",
     "sonner": "^1.4.41",
+    "swr": "^2.2.5",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
     "totp-generator": "^1.0.0",

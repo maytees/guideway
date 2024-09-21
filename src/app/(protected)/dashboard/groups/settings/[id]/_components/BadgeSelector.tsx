@@ -15,13 +15,13 @@ import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { type Tag } from "~/lib/types";
 import { colors } from "~/lib/utils";
 
-type TagSelectorProps = {
+type RoleTagSelectorProps = {
   tags: Tag[];
   setTags: React.Dispatch<React.SetStateAction<Tag[]>>;
   isPending: boolean;
 };
 
-const TagSelector: React.FC<TagSelectorProps> = ({
+const RoleTagSelector: React.FC<RoleTagSelectorProps> = ({
   tags,
   setTags,
   isPending,
@@ -143,4 +143,4 @@ const TagSelector: React.FC<TagSelectorProps> = ({
   );
 };
 
-export default TagSelector;
+export default RoleTagSelector;

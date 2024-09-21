@@ -1,0 +1,249 @@
+Date : 2024-09-20 17:15:04
+Directory : /Users/maythamajam/Workspace/guideway
+Total : 157 files,  25305 codes, 242 comments, 1404 blanks, all 26951 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          3 |     12,995 |          0 |          3 |     12,998 |
+| TypeScript JSX     |        101 |      8,995 |        107 |        875 |      9,977 |
+| TypeScript         |         36 |      2,315 |         95 |        432 |      2,842 |
+| CSS                |          1 |        564 |          0 |         35 |        599 |
+| Prisma             |          1 |        174 |          7 |         35 |        216 |
+| XML                |          9 |        118 |          0 |          8 |        126 |
+| JavaScript         |          5 |        109 |         29 |         12 |        150 |
+| JSON with Comments |          1 |         35 |          4 |          4 |         43 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                           | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                              |        157 |     25,305 |        242 |      1,404 |     26,951 |
+| . (Files)                                                                                                                      |         10 |     13,185 |         11 |         19 |     13,215 |
+| prisma                                                                                                                         |          1 |        174 |          7 |         35 |        216 |
+| public                                                                                                                         |          9 |        118 |          0 |          8 |        126 |
+| src                                                                                                                            |        137 |     11,828 |        224 |      1,342 |     13,394 |
+| src (Files)                                                                                                                    |          1 |         32 |         22 |          4 |         58 |
+| src/actions                                                                                                                    |         16 |      1,295 |         35 |        250 |      1,580 |
+| src/actions (Files)                                                                                                            |          2 |        391 |         11 |         93 |        495 |
+| src/actions/dashboard                                                                                                          |         14 |        904 |         24 |        157 |      1,085 |
+| src/actions/dashboard (Files)                                                                                                  |         10 |        694 |         13 |        121 |        828 |
+| src/actions/dashboard/group                                                                                                    |          4 |        210 |         11 |         36 |        257 |
+| src/actions/dashboard/group (Files)                                                                                            |          1 |         44 |          0 |          7 |         51 |
+| src/actions/dashboard/group/settings                                                                                           |          3 |        166 |         11 |         29 |        206 |
+| src/app                                                                                                                        |         51 |      4,519 |         20 |        366 |      4,905 |
+| src/app (Files)                                                                                                                |          2 |         70 |          5 |         10 |         85 |
+| src/app/(protected)                                                                                                            |         35 |      3,591 |         12 |        251 |      3,854 |
+| src/app/(protected)/dashboard                                                                                                  |         35 |      3,591 |         12 |        251 |      3,854 |
+| src/app/(protected)/dashboard (Files)                                                                                          |          2 |        125 |          0 |         21 |        146 |
+| src/app/(protected)/dashboard/_components                                                                                      |          5 |        851 |          1 |         47 |        899 |
+| src/app/(protected)/dashboard/groups                                                                                           |         21 |      2,260 |          9 |        146 |      2,415 |
+| src/app/(protected)/dashboard/groups (Files)                                                                                   |          1 |          5 |          0 |          3 |          8 |
+| src/app/(protected)/dashboard/groups/[id]                                                                                      |         14 |      1,356 |          5 |         90 |      1,451 |
+| src/app/(protected)/dashboard/groups/[id] (Files)                                                                              |          1 |        107 |          1 |          9 |        117 |
+| src/app/(protected)/dashboard/groups/[id]/_components                                                                          |         13 |      1,249 |          4 |         81 |      1,334 |
+| src/app/(protected)/dashboard/groups/[id]/_components (Files)                                                                  |          7 |        694 |          4 |         52 |        750 |
+| src/app/(protected)/dashboard/groups/[id]/_components/post                                                                     |          6 |        555 |          0 |         29 |        584 |
+| src/app/(protected)/dashboard/groups/[id]/_components/post (Files)                                                             |          4 |        393 |          0 |         18 |        411 |
+| src/app/(protected)/dashboard/groups/[id]/_components/post/comment                                                             |          2 |        162 |          0 |         11 |        173 |
+| src/app/(protected)/dashboard/groups/settings                                                                                  |          6 |        899 |          4 |         53 |        956 |
+| src/app/(protected)/dashboard/groups/settings/[id]                                                                             |          6 |        899 |          4 |         53 |        956 |
+| src/app/(protected)/dashboard/groups/settings/[id] (Files)                                                                     |          1 |         58 |          1 |          7 |         66 |
+| src/app/(protected)/dashboard/groups/settings/[id]/_components                                                                 |          5 |        841 |          3 |         46 |        890 |
+| src/app/(protected)/dashboard/settings                                                                                         |          7 |        355 |          2 |         37 |        394 |
+| src/app/(protected)/dashboard/settings (Files)                                                                                 |          1 |         54 |          0 |          6 |         60 |
+| src/app/(protected)/dashboard/settings/components                                                                              |          6 |        301 |          2 |         31 |        334 |
+| src/app/(protected)/dashboard/settings/components/appearance                                                                   |          6 |        301 |          2 |         31 |        334 |
+| src/app/(protected)/dashboard/settings/components/appearance (Files)                                                           |          3 |        254 |          2 |         16 |        272 |
+| src/app/(protected)/dashboard/settings/components/appearance/_actions                                                          |          3 |         47 |          0 |         15 |         62 |
+| src/app/api                                                                                                                    |          1 |         18 |          0 |          6 |         24 |
+| src/app/api/getUserRole                                                                                                        |          1 |         18 |          0 |          6 |         24 |
+| src/app/auth                                                                                                                   |         12 |        629 |          3 |         86 |        718 |
+| src/app/auth (Files)                                                                                                           |          1 |          8 |          0 |          2 |         10 |
+| src/app/auth/error                                                                                                             |          1 |         43 |          1 |         10 |         54 |
+| src/app/auth/forgot-password                                                                                                   |          1 |        107 |          1 |          6 |        114 |
+| src/app/auth/google                                                                                                            |          2 |        146 |          0 |         25 |        171 |
+| src/app/auth/google (Files)                                                                                                    |          1 |         26 |          0 |          5 |         31 |
+| src/app/auth/google/callback                                                                                                   |          1 |        120 |          0 |         20 |        140 |
+| src/app/auth/login                                                                                                             |          1 |          9 |          0 |          2 |         11 |
+| src/app/auth/logout                                                                                                            |          1 |         33 |          0 |          7 |         40 |
+| src/app/auth/oauth                                                                                                             |          2 |        143 |          0 |         19 |        162 |
+| src/app/auth/password-reset                                                                                                    |          1 |        127 |          1 |         10 |        138 |
+| src/app/auth/register                                                                                                          |          1 |          8 |          0 |          2 |         10 |
+| src/app/auth/verify                                                                                                            |          1 |          5 |          0 |          3 |          8 |
+| src/app/faq                                                                                                                    |          1 |        211 |          0 |         13 |        224 |
+| src/components                                                                                                                 |         57 |      4,844 |         90 |        587 |      5,521 |
+| src/components (Files)                                                                                                         |          4 |        868 |         87 |         62 |      1,017 |
+| src/components/forms                                                                                                           |          6 |        545 |          0 |         45 |        590 |
+| src/components/ui                                                                                                              |         47 |      3,431 |          3 |        480 |      3,914 |
+| src/lib                                                                                                                        |          6 |        453 |         12 |         70 |        535 |
+| src/server                                                                                                                     |          2 |         85 |         45 |         21 |        151 |
+| src/stores                                                                                                                     |          3 |         36 |          0 |          9 |         45 |
+| src/styles                                                                                                                     |          1 |        564 |          0 |         35 |        599 |
++--------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                                                       | language           | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| /Users/maythamajam/Workspace/guideway/.eslintrc.cjs                                                                            | JavaScript         |         41 |          1 |          1 |         43 |
+| /Users/maythamajam/Workspace/guideway/components.json                                                                          | JSON               |         17 |          0 |          1 |         18 |
+| /Users/maythamajam/Workspace/guideway/middleware.ts                                                                            | TypeScript         |          0 |          0 |          1 |          1 |
+| /Users/maythamajam/Workspace/guideway/next.config.js                                                                           | JavaScript         |         26 |          5 |          3 |         34 |
+| /Users/maythamajam/Workspace/guideway/package-lock.json                                                                        | JSON               |     12,868 |          0 |          1 |     12,869 |
+| /Users/maythamajam/Workspace/guideway/package.json                                                                             | JSON               |        110 |          0 |          1 |        111 |
+| /Users/maythamajam/Workspace/guideway/postcss.config.cjs                                                                       | JavaScript         |          6 |          0 |          2 |          8 |
+| /Users/maythamajam/Workspace/guideway/prettier.config.js                                                                       | JavaScript         |          4 |          1 |          2 |          7 |
+| /Users/maythamajam/Workspace/guideway/prisma/schema.prisma                                                                     | Prisma             |        174 |          7 |         35 |        216 |
+| /Users/maythamajam/Workspace/guideway/public/arrow.svg                                                                         | XML                |          3 |          0 |          1 |          4 |
+| /Users/maythamajam/Workspace/guideway/public/dash.svg                                                                          | XML                |          3 |          0 |          1 |          4 |
+| /Users/maythamajam/Workspace/guideway/public/logo.svg                                                                          | XML                |          1 |          0 |          0 |          1 |
+| /Users/maythamajam/Workspace/guideway/public/megaphone.svg                                                                     | XML                |         18 |          0 |          1 |         19 |
+| /Users/maythamajam/Workspace/guideway/public/paperplane.svg                                                                    | XML                |         18 |          0 |          1 |         19 |
+| /Users/maythamajam/Workspace/guideway/public/rocket.svg                                                                        | XML                |         18 |          0 |          1 |         19 |
+| /Users/maythamajam/Workspace/guideway/public/scroll.svg                                                                        | XML                |         19 |          0 |          1 |         20 |
+| /Users/maythamajam/Workspace/guideway/public/tri.svg                                                                           | XML                |         19 |          0 |          1 |         20 |
+| /Users/maythamajam/Workspace/guideway/public/vote.svg                                                                          | XML                |         19 |          0 |          1 |         20 |
+| /Users/maythamajam/Workspace/guideway/src/actions/auth.ts                                                                      | TypeScript         |        352 |         11 |         82 |        445 |
+| /Users/maythamajam/Workspace/guideway/src/actions/dashboard/create-group.ts                                                    | TypeScript         |        124 |          3 |         18 |        145 |
+| /Users/maythamajam/Workspace/guideway/src/actions/dashboard/create-post.ts                                                     | TypeScript         |         69 |          2 |         13 |         84 |
+| /Users/maythamajam/Workspace/guideway/src/actions/dashboard/delete-post.ts                                                     | TypeScript         |         48 |          0 |          9 |         57 |
+| /Users/maythamajam/Workspace/guideway/src/actions/dashboard/group/get-user-role.ts                                             | TypeScript         |         44 |          0 |          7 |         51 |
+| /Users/maythamajam/Workspace/guideway/src/actions/dashboard/group/settings/create-role.ts                                      | TypeScript         |         72 |          7 |         12 |         91 |
+| /Users/maythamajam/Workspace/guideway/src/actions/dashboard/group/settings/delete-role.ts                                      | TypeScript         |         30 |          0 |          9 |         39 |
+| /Users/maythamajam/Workspace/guideway/src/actions/dashboard/group/settings/update-roles.ts                                     | TypeScript         |         64 |          4 |          8 |         76 |
+| /Users/maythamajam/Workspace/guideway/src/actions/dashboard/increment-view-count.ts                                            | TypeScript         |         12 |          0 |          2 |         14 |
+| /Users/maythamajam/Workspace/guideway/src/actions/dashboard/join-group.ts                                                      | TypeScript         |        132 |          0 |         22 |        154 |
+| /Users/maythamajam/Workspace/guideway/src/actions/dashboard/like-comment.ts                                                    | TypeScript         |         58 |          2 |         11 |         71 |
+| /Users/maythamajam/Workspace/guideway/src/actions/dashboard/like-post.ts                                                       | TypeScript         |         76 |          2 |         11 |         89 |
+| /Users/maythamajam/Workspace/guideway/src/actions/dashboard/pin-group.ts                                                       | TypeScript         |         50 |          4 |         13 |         67 |
+| /Users/maythamajam/Workspace/guideway/src/actions/dashboard/pin-post.ts                                                        | TypeScript         |         90 |          0 |         13 |        103 |
+| /Users/maythamajam/Workspace/guideway/src/actions/dashboard/post-comment.ts                                                    | TypeScript         |         35 |          0 |          9 |         44 |
+| /Users/maythamajam/Workspace/guideway/src/actions/send-updates-email.ts                                                        | TypeScript         |         39 |          0 |         11 |         50 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/_components/AllGroups.tsx                                  | TypeScript JSX     |        320 |          1 |         13 |        334 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/_components/CreateGroup.tsx                                | TypeScript JSX     |        225 |          0 |         11 |        236 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/_components/JoinGroup.tsx                                  | TypeScript JSX     |        128 |          0 |         12 |        140 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/_components/Sidebar.tsx                                    | TypeScript JSX     |        156 |          0 |          8 |        164 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/_components/SidebarProfile.tsx                             | TypeScript JSX     |         22 |          0 |          3 |         25 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/CreatePostButton.tsx               | TypeScript JSX     |        181 |          0 |         11 |        192 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/GroupSidebar.tsx                   | TypeScript JSX     |        106 |          3 |          5 |        114 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/InviteDialog.tsx                   | TypeScript JSX     |         62 |          0 |          5 |         67 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/Posts.tsx                          | TypeScript JSX     |        151 |          0 |         14 |        165 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/Readmore.tsx                       | TypeScript JSX     |         30 |          0 |          6 |         36 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/TagsSetting.tsx                    | TypeScript JSX     |        153 |          0 |          7 |        160 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/TotalPosts.tsx                     | TypeScript JSX     |         11 |          1 |          4 |         16 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/post/PostActions.tsx               | TypeScript JSX     |        113 |          0 |          3 |        116 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/post/PostContent.tsx               | TypeScript JSX     |         15 |          0 |          3 |         18 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/post/PostHeader.tsx                | TypeScript JSX     |         64 |          0 |          3 |         67 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/post/PostMenu.tsx                  | TypeScript JSX     |        201 |          0 |          9 |        210 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/post/comment/CommentInput.tsx      | TypeScript JSX     |         63 |          0 |          6 |         69 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/post/comment/Comments.tsx          | TypeScript JSX     |         99 |          0 |          5 |        104 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/page.tsx                                       | TypeScript JSX     |        107 |          1 |          9 |        117 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/page.tsx                                            | TypeScript JSX     |          5 |          0 |          3 |          8 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/settings/[id]/_components/BadgeSelector.tsx         | TypeScript JSX     |        153 |          0 |          7 |        160 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/settings/[id]/_components/MemberRow.tsx             | TypeScript JSX     |         97 |          1 |          6 |        104 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/settings/[id]/_components/MembersTable.tsx          | TypeScript JSX     |         36 |          0 |          4 |         40 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/settings/[id]/_components/RolesAndPermissions.tsx   | TypeScript JSX     |        545 |          2 |         28 |        575 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/settings/[id]/_components/UserRoleBadgeWrapper.tsx  | TypeScript JSX     |         10 |          0 |          1 |         11 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/settings/[id]/page.tsx                              | TypeScript JSX     |         58 |          1 |          7 |         66 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/layout.tsx                                                 | TypeScript JSX     |         57 |          0 |         10 |         67 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/page.tsx                                                   | TypeScript JSX     |         68 |          0 |         11 |         79 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/settings/components/appearance/Darkmode.tsx                | TypeScript JSX     |         90 |          0 |          6 |         96 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/settings/components/appearance/Font.tsx                    | TypeScript JSX     |         78 |          0 |          5 |         83 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/settings/components/appearance/Theme.tsx                   | TypeScript JSX     |         86 |          2 |          5 |         93 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/settings/components/appearance/_actions/save-color-mode.ts | TypeScript         |         15 |          0 |          4 |         19 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/settings/components/appearance/_actions/save-font.ts       | TypeScript         |         16 |          0 |          5 |         21 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/settings/components/appearance/_actions/save-theme.ts      | TypeScript         |         16 |          0 |          6 |         22 |
+| /Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/settings/page.tsx                                          | TypeScript JSX     |         54 |          0 |          6 |         60 |
+| /Users/maythamajam/Workspace/guideway/src/app/api/getUserRole/route.ts                                                         | TypeScript         |         18 |          0 |          6 |         24 |
+| /Users/maythamajam/Workspace/guideway/src/app/auth/error/page.tsx                                                              | TypeScript JSX     |         43 |          1 |         10 |         54 |
+| /Users/maythamajam/Workspace/guideway/src/app/auth/forgot-password/page.tsx                                                    | TypeScript JSX     |        107 |          1 |          6 |        114 |
+| /Users/maythamajam/Workspace/guideway/src/app/auth/google/callback/route.ts                                                    | TypeScript         |        120 |          0 |         20 |        140 |
+| /Users/maythamajam/Workspace/guideway/src/app/auth/google/route.ts                                                             | TypeScript         |         26 |          0 |          5 |         31 |
+| /Users/maythamajam/Workspace/guideway/src/app/auth/layout.tsx                                                                  | TypeScript JSX     |          8 |          0 |          2 |         10 |
+| /Users/maythamajam/Workspace/guideway/src/app/auth/login/page.tsx                                                              | TypeScript JSX     |          9 |          0 |          2 |         11 |
+| /Users/maythamajam/Workspace/guideway/src/app/auth/logout/page.tsx                                                             | TypeScript JSX     |         33 |          0 |          7 |         40 |
+| /Users/maythamajam/Workspace/guideway/src/app/auth/oauth/layout.tsx                                                            | TypeScript JSX     |         16 |          0 |          5 |         21 |
+| /Users/maythamajam/Workspace/guideway/src/app/auth/oauth/page.tsx                                                              | TypeScript JSX     |        127 |          0 |         14 |        141 |
+| /Users/maythamajam/Workspace/guideway/src/app/auth/password-reset/page.tsx                                                     | TypeScript JSX     |        127 |          1 |         10 |        138 |
+| /Users/maythamajam/Workspace/guideway/src/app/auth/register/page.tsx                                                           | TypeScript JSX     |          8 |          0 |          2 |         10 |
+| /Users/maythamajam/Workspace/guideway/src/app/auth/verify/page.tsx                                                             | TypeScript JSX     |          5 |          0 |          3 |          8 |
+| /Users/maythamajam/Workspace/guideway/src/app/faq/page.tsx                                                                     | TypeScript JSX     |        211 |          0 |         13 |        224 |
+| /Users/maythamajam/Workspace/guideway/src/app/layout.tsx                                                                       | TypeScript JSX     |         59 |          5 |          6 |         70 |
+| /Users/maythamajam/Workspace/guideway/src/app/page.tsx                                                                         | TypeScript JSX     |         11 |          0 |          4 |         15 |
+| /Users/maythamajam/Workspace/guideway/src/components/Footer.tsx                                                                | TypeScript JSX     |        213 |         68 |         13 |        294 |
+| /Users/maythamajam/Workspace/guideway/src/components/Landing.tsx                                                               | TypeScript JSX     |        501 |          0 |         35 |        536 |
+| /Users/maythamajam/Workspace/guideway/src/components/Navbar.tsx                                                                | TypeScript JSX     |        120 |         19 |          8 |        147 |
+| /Users/maythamajam/Workspace/guideway/src/components/UserRoleBadge.tsx                                                         | TypeScript JSX     |         34 |          0 |          6 |         40 |
+| /Users/maythamajam/Workspace/guideway/src/components/forms/FormCard.tsx                                                        | TypeScript JSX     |         32 |          0 |          3 |         35 |
+| /Users/maythamajam/Workspace/guideway/src/components/forms/FormInfo.tsx                                                        | TypeScript JSX     |         38 |          0 |          6 |         44 |
+| /Users/maythamajam/Workspace/guideway/src/components/forms/LoginForm.tsx                                                       | TypeScript JSX     |        130 |          0 |          8 |        138 |
+| /Users/maythamajam/Workspace/guideway/src/components/forms/RegisterForm.tsx                                                    | TypeScript JSX     |        183 |          0 |         11 |        194 |
+| /Users/maythamajam/Workspace/guideway/src/components/forms/UpdatesSubscribeForm.tsx                                            | TypeScript JSX     |        106 |          0 |          7 |        113 |
+| /Users/maythamajam/Workspace/guideway/src/components/forms/VerifyForm.tsx                                                      | TypeScript JSX     |         56 |          0 |         10 |         66 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/ThemeProvider.tsx                                                      | TypeScript JSX     |          6 |          0 |          3 |          9 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/accordion.tsx                                                          | TypeScript JSX     |         50 |          0 |          8 |         58 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/alert-dialog.tsx                                                       | TypeScript JSX     |        127 |          0 |         15 |        142 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/alert.tsx                                                              | TypeScript JSX     |         53 |          0 |          7 |         60 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/aspect-ratio.tsx                                                       | TypeScript JSX     |          4 |          0 |          4 |          8 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/avatar.tsx                                                             | TypeScript JSX     |         44 |          0 |          7 |         51 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/badge.tsx                                                              | TypeScript JSX     |         31 |          0 |          6 |         37 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/breadcrumb.tsx                                                         | TypeScript JSX     |        105 |          0 |         11 |        116 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/button.tsx                                                             | TypeScript JSX     |         52 |          0 |          6 |         58 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/calendar.tsx                                                           | TypeScript JSX     |         67 |          0 |          6 |         73 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/card.tsx                                                               | TypeScript JSX     |         78 |          0 |          9 |         87 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/carousel.tsx                                                           | TypeScript JSX     |        232 |          0 |         31 |        263 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/checkbox.tsx                                                           | TypeScript JSX     |         26 |          0 |          5 |         31 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/collapsible.tsx                                                        | TypeScript JSX     |          6 |          0 |          6 |         12 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/command.tsx                                                            | TypeScript JSX     |        137 |          0 |         19 |        156 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/context-menu.tsx                                                       | TypeScript JSX     |        186 |          0 |         19 |        205 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/dialog.tsx                                                             | TypeScript JSX     |        109 |          0 |         14 |        123 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/drawer.tsx                                                             | TypeScript JSX     |        105 |          0 |         14 |        119 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/dropdown-menu.tsx                                                      | TypeScript JSX     |        187 |          0 |         19 |        206 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/form.tsx                                                               | TypeScript JSX     |        153 |          0 |         25 |        178 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/hover-card.tsx                                                         | TypeScript JSX     |         23 |          0 |          7 |         30 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/input.tsx                                                              | TypeScript JSX     |         21 |          0 |          5 |         26 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/label.tsx                                                              | TypeScript JSX     |         21 |          0 |          6 |         27 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/menubar.tsx                                                            | TypeScript JSX     |        221 |          0 |         20 |        241 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/navigation-menu.tsx                                                    | TypeScript JSX     |        117 |          0 |         12 |        129 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/pagination.tsx                                                         | TypeScript JSX     |        111 |          0 |         11 |        122 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/popover.tsx                                                            | TypeScript JSX     |         26 |          0 |          8 |         34 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/progress.tsx                                                           | TypeScript JSX     |         24 |          0 |          5 |         29 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/radio-group.tsx                                                        | TypeScript JSX     |         39 |          0 |          6 |         45 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/resizable.tsx                                                          | TypeScript JSX     |         39 |          0 |          7 |         46 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/scroll-area.tsx                                                        | TypeScript JSX     |         43 |          0 |          6 |         49 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/select.tsx                                                             | TypeScript JSX     |        151 |          0 |         14 |        165 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/separator.tsx                                                          | TypeScript JSX     |         27 |          0 |          5 |         32 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/sheet.tsx                                                              | TypeScript JSX     |        125 |          0 |         16 |        141 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/skeleton.tsx                                                           | TypeScript JSX     |         13 |          0 |          3 |         16 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/slider.tsx                                                             | TypeScript JSX     |         24 |          0 |          5 |         29 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/sonner.tsx                                                             | TypeScript JSX     |         26 |          0 |          6 |         32 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/switch.tsx                                                             | TypeScript JSX     |         25 |          0 |          5 |         30 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/table.tsx                                                              | TypeScript JSX     |        110 |          0 |         11 |        121 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/tabs.tsx                                                               | TypeScript JSX     |         48 |          0 |          8 |         56 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/textarea.tsx                                                           | TypeScript JSX     |         20 |          0 |          5 |         25 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/toast.tsx                                                              | TypeScript JSX     |        116 |          0 |         14 |        130 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/toaster.tsx                                                            | TypeScript JSX     |         32 |          0 |          4 |         36 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/toggle-group.tsx                                                       | TypeScript JSX     |         52 |          0 |         10 |         62 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/toggle.tsx                                                             | TypeScript JSX     |         39 |          0 |          7 |         46 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/tooltip.tsx                                                            | TypeScript JSX     |         23 |          0 |          8 |         31 |
+| /Users/maythamajam/Workspace/guideway/src/components/ui/use-toast.ts                                                           | TypeScript         |        157 |          3 |         32 |        192 |
+| /Users/maythamajam/Workspace/guideway/src/env.js                                                                               | JavaScript         |         32 |         22 |          4 |         58 |
+| /Users/maythamajam/Workspace/guideway/src/lib/email.ts                                                                         | TypeScript         |        105 |          1 |         10 |        116 |
+| /Users/maythamajam/Workspace/guideway/src/lib/routes.ts                                                                        | TypeScript         |         13 |          0 |          3 |         16 |
+| /Users/maythamajam/Workspace/guideway/src/lib/tokens.ts                                                                        | TypeScript         |         84 |          2 |         15 |        101 |
+| /Users/maythamajam/Workspace/guideway/src/lib/types.ts                                                                         | TypeScript         |         79 |          0 |         17 |         96 |
+| /Users/maythamajam/Workspace/guideway/src/lib/utils.ts                                                                         | TypeScript         |         65 |          4 |         11 |         80 |
+| /Users/maythamajam/Workspace/guideway/src/lib/validation.ts                                                                    | TypeScript         |        107 |          5 |         14 |        126 |
+| /Users/maythamajam/Workspace/guideway/src/server/auth.ts                                                                       | TypeScript         |         73 |         45 |         15 |        133 |
+| /Users/maythamajam/Workspace/guideway/src/server/db.ts                                                                         | TypeScript         |         12 |          0 |          6 |         18 |
+| /Users/maythamajam/Workspace/guideway/src/stores/group-store.ts                                                                | TypeScript         |         12 |          0 |          3 |         15 |
+| /Users/maythamajam/Workspace/guideway/src/stores/post-store.ts                                                                 | TypeScript         |         12 |          0 |          3 |         15 |
+| /Users/maythamajam/Workspace/guideway/src/stores/user-store.ts                                                                 | TypeScript         |         12 |          0 |          3 |         15 |
+| /Users/maythamajam/Workspace/guideway/src/styles/globals.css                                                                   | CSS                |        564 |          0 |         35 |        599 |
+| /Users/maythamajam/Workspace/guideway/tailwind.config.ts                                                                       | TypeScript         |         78 |          0 |          3 |         81 |
+| /Users/maythamajam/Workspace/guideway/tsconfig.json                                                                            | JSON with Comments |         35 |          4 |          4 |         43 |
+| Total                                                                                                                          |                    |     25,305 |        242 |      1,404 |     26,951 |
++--------------------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
