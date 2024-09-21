@@ -1,0 +1,159 @@
+"filename", "language", "TypeScript", "CSS", "TypeScript JSX", "JavaScript", "Prisma", "JSON", "JSON with Comments", "XML", "comment", "blank", "total"
+"/Users/maythamajam/Workspace/guideway/.eslintrc.cjs", "JavaScript", 0, 0, 0, 41, 0, 0, 0, 0, 1, 1, 43
+"/Users/maythamajam/Workspace/guideway/components.json", "JSON", 0, 0, 0, 0, 0, 17, 0, 0, 0, 1, 18
+"/Users/maythamajam/Workspace/guideway/middleware.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"/Users/maythamajam/Workspace/guideway/next.config.js", "JavaScript", 0, 0, 0, 26, 0, 0, 0, 0, 5, 3, 34
+"/Users/maythamajam/Workspace/guideway/package-lock.json", "JSON", 0, 0, 0, 0, 0, 12868, 0, 0, 0, 1, 12869
+"/Users/maythamajam/Workspace/guideway/package.json", "JSON", 0, 0, 0, 0, 0, 110, 0, 0, 0, 1, 111
+"/Users/maythamajam/Workspace/guideway/postcss.config.cjs", "JavaScript", 0, 0, 0, 6, 0, 0, 0, 0, 0, 2, 8
+"/Users/maythamajam/Workspace/guideway/prettier.config.js", "JavaScript", 0, 0, 0, 4, 0, 0, 0, 0, 1, 2, 7
+"/Users/maythamajam/Workspace/guideway/prisma/schema.prisma", "Prisma", 0, 0, 0, 0, 174, 0, 0, 0, 7, 35, 216
+"/Users/maythamajam/Workspace/guideway/public/arrow.svg", "XML", 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 4
+"/Users/maythamajam/Workspace/guideway/public/dash.svg", "XML", 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 4
+"/Users/maythamajam/Workspace/guideway/public/logo.svg", "XML", 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1
+"/Users/maythamajam/Workspace/guideway/public/megaphone.svg", "XML", 0, 0, 0, 0, 0, 0, 0, 18, 0, 1, 19
+"/Users/maythamajam/Workspace/guideway/public/paperplane.svg", "XML", 0, 0, 0, 0, 0, 0, 0, 18, 0, 1, 19
+"/Users/maythamajam/Workspace/guideway/public/rocket.svg", "XML", 0, 0, 0, 0, 0, 0, 0, 18, 0, 1, 19
+"/Users/maythamajam/Workspace/guideway/public/scroll.svg", "XML", 0, 0, 0, 0, 0, 0, 0, 19, 0, 1, 20
+"/Users/maythamajam/Workspace/guideway/public/tri.svg", "XML", 0, 0, 0, 0, 0, 0, 0, 19, 0, 1, 20
+"/Users/maythamajam/Workspace/guideway/public/vote.svg", "XML", 0, 0, 0, 0, 0, 0, 0, 19, 0, 1, 20
+"/Users/maythamajam/Workspace/guideway/src/actions/auth.ts", "TypeScript", 352, 0, 0, 0, 0, 0, 0, 0, 11, 82, 445
+"/Users/maythamajam/Workspace/guideway/src/actions/dashboard/create-group.ts", "TypeScript", 124, 0, 0, 0, 0, 0, 0, 0, 3, 18, 145
+"/Users/maythamajam/Workspace/guideway/src/actions/dashboard/create-post.ts", "TypeScript", 69, 0, 0, 0, 0, 0, 0, 0, 2, 13, 84
+"/Users/maythamajam/Workspace/guideway/src/actions/dashboard/delete-post.ts", "TypeScript", 48, 0, 0, 0, 0, 0, 0, 0, 0, 9, 57
+"/Users/maythamajam/Workspace/guideway/src/actions/dashboard/group/get-user-role.ts", "TypeScript", 44, 0, 0, 0, 0, 0, 0, 0, 0, 7, 51
+"/Users/maythamajam/Workspace/guideway/src/actions/dashboard/group/settings/create-role.ts", "TypeScript", 72, 0, 0, 0, 0, 0, 0, 0, 7, 12, 91
+"/Users/maythamajam/Workspace/guideway/src/actions/dashboard/group/settings/delete-role.ts", "TypeScript", 30, 0, 0, 0, 0, 0, 0, 0, 0, 9, 39
+"/Users/maythamajam/Workspace/guideway/src/actions/dashboard/group/settings/update-roles.ts", "TypeScript", 64, 0, 0, 0, 0, 0, 0, 0, 4, 8, 76
+"/Users/maythamajam/Workspace/guideway/src/actions/dashboard/increment-view-count.ts", "TypeScript", 12, 0, 0, 0, 0, 0, 0, 0, 0, 2, 14
+"/Users/maythamajam/Workspace/guideway/src/actions/dashboard/join-group.ts", "TypeScript", 132, 0, 0, 0, 0, 0, 0, 0, 0, 22, 154
+"/Users/maythamajam/Workspace/guideway/src/actions/dashboard/like-comment.ts", "TypeScript", 58, 0, 0, 0, 0, 0, 0, 0, 2, 11, 71
+"/Users/maythamajam/Workspace/guideway/src/actions/dashboard/like-post.ts", "TypeScript", 76, 0, 0, 0, 0, 0, 0, 0, 2, 11, 89
+"/Users/maythamajam/Workspace/guideway/src/actions/dashboard/pin-group.ts", "TypeScript", 50, 0, 0, 0, 0, 0, 0, 0, 4, 13, 67
+"/Users/maythamajam/Workspace/guideway/src/actions/dashboard/pin-post.ts", "TypeScript", 90, 0, 0, 0, 0, 0, 0, 0, 0, 13, 103
+"/Users/maythamajam/Workspace/guideway/src/actions/dashboard/post-comment.ts", "TypeScript", 35, 0, 0, 0, 0, 0, 0, 0, 0, 9, 44
+"/Users/maythamajam/Workspace/guideway/src/actions/send-updates-email.ts", "TypeScript", 39, 0, 0, 0, 0, 0, 0, 0, 0, 11, 50
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/_components/AllGroups.tsx", "TypeScript JSX", 0, 0, 320, 0, 0, 0, 0, 0, 1, 13, 334
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/_components/CreateGroup.tsx", "TypeScript JSX", 0, 0, 225, 0, 0, 0, 0, 0, 0, 11, 236
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/_components/JoinGroup.tsx", "TypeScript JSX", 0, 0, 128, 0, 0, 0, 0, 0, 0, 12, 140
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/_components/Sidebar.tsx", "TypeScript JSX", 0, 0, 156, 0, 0, 0, 0, 0, 0, 8, 164
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/_components/SidebarProfile.tsx", "TypeScript JSX", 0, 0, 22, 0, 0, 0, 0, 0, 0, 3, 25
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/CreatePostButton.tsx", "TypeScript JSX", 0, 0, 181, 0, 0, 0, 0, 0, 0, 11, 192
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/GroupSidebar.tsx", "TypeScript JSX", 0, 0, 106, 0, 0, 0, 0, 0, 3, 5, 114
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/InviteDialog.tsx", "TypeScript JSX", 0, 0, 62, 0, 0, 0, 0, 0, 0, 5, 67
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/Posts.tsx", "TypeScript JSX", 0, 0, 151, 0, 0, 0, 0, 0, 0, 14, 165
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/Readmore.tsx", "TypeScript JSX", 0, 0, 30, 0, 0, 0, 0, 0, 0, 6, 36
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/TagsSetting.tsx", "TypeScript JSX", 0, 0, 153, 0, 0, 0, 0, 0, 0, 7, 160
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/TotalPosts.tsx", "TypeScript JSX", 0, 0, 11, 0, 0, 0, 0, 0, 1, 4, 16
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/post/PostActions.tsx", "TypeScript JSX", 0, 0, 113, 0, 0, 0, 0, 0, 0, 3, 116
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/post/PostContent.tsx", "TypeScript JSX", 0, 0, 15, 0, 0, 0, 0, 0, 0, 3, 18
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/post/PostHeader.tsx", "TypeScript JSX", 0, 0, 64, 0, 0, 0, 0, 0, 0, 3, 67
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/post/PostMenu.tsx", "TypeScript JSX", 0, 0, 201, 0, 0, 0, 0, 0, 0, 9, 210
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/post/comment/CommentInput.tsx", "TypeScript JSX", 0, 0, 63, 0, 0, 0, 0, 0, 0, 6, 69
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/_components/post/comment/Comments.tsx", "TypeScript JSX", 0, 0, 99, 0, 0, 0, 0, 0, 0, 5, 104
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/[id]/page.tsx", "TypeScript JSX", 0, 0, 107, 0, 0, 0, 0, 0, 1, 9, 117
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/page.tsx", "TypeScript JSX", 0, 0, 5, 0, 0, 0, 0, 0, 0, 3, 8
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/settings/[id]/_components/BadgeSelector.tsx", "TypeScript JSX", 0, 0, 153, 0, 0, 0, 0, 0, 0, 7, 160
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/settings/[id]/_components/MemberRow.tsx", "TypeScript JSX", 0, 0, 97, 0, 0, 0, 0, 0, 1, 6, 104
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/settings/[id]/_components/MembersTable.tsx", "TypeScript JSX", 0, 0, 36, 0, 0, 0, 0, 0, 0, 4, 40
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/settings/[id]/_components/RolesAndPermissions.tsx", "TypeScript JSX", 0, 0, 545, 0, 0, 0, 0, 0, 2, 28, 575
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/settings/[id]/_components/UserRoleBadgeWrapper.tsx", "TypeScript JSX", 0, 0, 10, 0, 0, 0, 0, 0, 0, 1, 11
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/groups/settings/[id]/page.tsx", "TypeScript JSX", 0, 0, 58, 0, 0, 0, 0, 0, 1, 7, 66
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/layout.tsx", "TypeScript JSX", 0, 0, 57, 0, 0, 0, 0, 0, 0, 10, 67
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/page.tsx", "TypeScript JSX", 0, 0, 68, 0, 0, 0, 0, 0, 0, 11, 79
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/settings/components/appearance/Darkmode.tsx", "TypeScript JSX", 0, 0, 90, 0, 0, 0, 0, 0, 0, 6, 96
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/settings/components/appearance/Font.tsx", "TypeScript JSX", 0, 0, 78, 0, 0, 0, 0, 0, 0, 5, 83
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/settings/components/appearance/Theme.tsx", "TypeScript JSX", 0, 0, 86, 0, 0, 0, 0, 0, 2, 5, 93
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/settings/components/appearance/_actions/save-color-mode.ts", "TypeScript", 15, 0, 0, 0, 0, 0, 0, 0, 0, 4, 19
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/settings/components/appearance/_actions/save-font.ts", "TypeScript", 16, 0, 0, 0, 0, 0, 0, 0, 0, 5, 21
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/settings/components/appearance/_actions/save-theme.ts", "TypeScript", 16, 0, 0, 0, 0, 0, 0, 0, 0, 6, 22
+"/Users/maythamajam/Workspace/guideway/src/app/(protected)/dashboard/settings/page.tsx", "TypeScript JSX", 0, 0, 54, 0, 0, 0, 0, 0, 0, 6, 60
+"/Users/maythamajam/Workspace/guideway/src/app/api/getUserRole/route.ts", "TypeScript", 18, 0, 0, 0, 0, 0, 0, 0, 0, 6, 24
+"/Users/maythamajam/Workspace/guideway/src/app/auth/error/page.tsx", "TypeScript JSX", 0, 0, 43, 0, 0, 0, 0, 0, 1, 10, 54
+"/Users/maythamajam/Workspace/guideway/src/app/auth/forgot-password/page.tsx", "TypeScript JSX", 0, 0, 107, 0, 0, 0, 0, 0, 1, 6, 114
+"/Users/maythamajam/Workspace/guideway/src/app/auth/google/callback/route.ts", "TypeScript", 120, 0, 0, 0, 0, 0, 0, 0, 0, 20, 140
+"/Users/maythamajam/Workspace/guideway/src/app/auth/google/route.ts", "TypeScript", 26, 0, 0, 0, 0, 0, 0, 0, 0, 5, 31
+"/Users/maythamajam/Workspace/guideway/src/app/auth/layout.tsx", "TypeScript JSX", 0, 0, 8, 0, 0, 0, 0, 0, 0, 2, 10
+"/Users/maythamajam/Workspace/guideway/src/app/auth/login/page.tsx", "TypeScript JSX", 0, 0, 9, 0, 0, 0, 0, 0, 0, 2, 11
+"/Users/maythamajam/Workspace/guideway/src/app/auth/logout/page.tsx", "TypeScript JSX", 0, 0, 33, 0, 0, 0, 0, 0, 0, 7, 40
+"/Users/maythamajam/Workspace/guideway/src/app/auth/oauth/layout.tsx", "TypeScript JSX", 0, 0, 16, 0, 0, 0, 0, 0, 0, 5, 21
+"/Users/maythamajam/Workspace/guideway/src/app/auth/oauth/page.tsx", "TypeScript JSX", 0, 0, 127, 0, 0, 0, 0, 0, 0, 14, 141
+"/Users/maythamajam/Workspace/guideway/src/app/auth/password-reset/page.tsx", "TypeScript JSX", 0, 0, 127, 0, 0, 0, 0, 0, 1, 10, 138
+"/Users/maythamajam/Workspace/guideway/src/app/auth/register/page.tsx", "TypeScript JSX", 0, 0, 8, 0, 0, 0, 0, 0, 0, 2, 10
+"/Users/maythamajam/Workspace/guideway/src/app/auth/verify/page.tsx", "TypeScript JSX", 0, 0, 5, 0, 0, 0, 0, 0, 0, 3, 8
+"/Users/maythamajam/Workspace/guideway/src/app/faq/page.tsx", "TypeScript JSX", 0, 0, 211, 0, 0, 0, 0, 0, 0, 13, 224
+"/Users/maythamajam/Workspace/guideway/src/app/layout.tsx", "TypeScript JSX", 0, 0, 59, 0, 0, 0, 0, 0, 5, 6, 70
+"/Users/maythamajam/Workspace/guideway/src/app/page.tsx", "TypeScript JSX", 0, 0, 11, 0, 0, 0, 0, 0, 0, 4, 15
+"/Users/maythamajam/Workspace/guideway/src/components/Footer.tsx", "TypeScript JSX", 0, 0, 213, 0, 0, 0, 0, 0, 68, 13, 294
+"/Users/maythamajam/Workspace/guideway/src/components/Landing.tsx", "TypeScript JSX", 0, 0, 501, 0, 0, 0, 0, 0, 0, 35, 536
+"/Users/maythamajam/Workspace/guideway/src/components/Navbar.tsx", "TypeScript JSX", 0, 0, 120, 0, 0, 0, 0, 0, 19, 8, 147
+"/Users/maythamajam/Workspace/guideway/src/components/UserRoleBadge.tsx", "TypeScript JSX", 0, 0, 34, 0, 0, 0, 0, 0, 0, 6, 40
+"/Users/maythamajam/Workspace/guideway/src/components/forms/FormCard.tsx", "TypeScript JSX", 0, 0, 32, 0, 0, 0, 0, 0, 0, 3, 35
+"/Users/maythamajam/Workspace/guideway/src/components/forms/FormInfo.tsx", "TypeScript JSX", 0, 0, 38, 0, 0, 0, 0, 0, 0, 6, 44
+"/Users/maythamajam/Workspace/guideway/src/components/forms/LoginForm.tsx", "TypeScript JSX", 0, 0, 130, 0, 0, 0, 0, 0, 0, 8, 138
+"/Users/maythamajam/Workspace/guideway/src/components/forms/RegisterForm.tsx", "TypeScript JSX", 0, 0, 183, 0, 0, 0, 0, 0, 0, 11, 194
+"/Users/maythamajam/Workspace/guideway/src/components/forms/UpdatesSubscribeForm.tsx", "TypeScript JSX", 0, 0, 106, 0, 0, 0, 0, 0, 0, 7, 113
+"/Users/maythamajam/Workspace/guideway/src/components/forms/VerifyForm.tsx", "TypeScript JSX", 0, 0, 56, 0, 0, 0, 0, 0, 0, 10, 66
+"/Users/maythamajam/Workspace/guideway/src/components/ui/ThemeProvider.tsx", "TypeScript JSX", 0, 0, 6, 0, 0, 0, 0, 0, 0, 3, 9
+"/Users/maythamajam/Workspace/guideway/src/components/ui/accordion.tsx", "TypeScript JSX", 0, 0, 50, 0, 0, 0, 0, 0, 0, 8, 58
+"/Users/maythamajam/Workspace/guideway/src/components/ui/alert-dialog.tsx", "TypeScript JSX", 0, 0, 127, 0, 0, 0, 0, 0, 0, 15, 142
+"/Users/maythamajam/Workspace/guideway/src/components/ui/alert.tsx", "TypeScript JSX", 0, 0, 53, 0, 0, 0, 0, 0, 0, 7, 60
+"/Users/maythamajam/Workspace/guideway/src/components/ui/aspect-ratio.tsx", "TypeScript JSX", 0, 0, 4, 0, 0, 0, 0, 0, 0, 4, 8
+"/Users/maythamajam/Workspace/guideway/src/components/ui/avatar.tsx", "TypeScript JSX", 0, 0, 44, 0, 0, 0, 0, 0, 0, 7, 51
+"/Users/maythamajam/Workspace/guideway/src/components/ui/badge.tsx", "TypeScript JSX", 0, 0, 31, 0, 0, 0, 0, 0, 0, 6, 37
+"/Users/maythamajam/Workspace/guideway/src/components/ui/breadcrumb.tsx", "TypeScript JSX", 0, 0, 105, 0, 0, 0, 0, 0, 0, 11, 116
+"/Users/maythamajam/Workspace/guideway/src/components/ui/button.tsx", "TypeScript JSX", 0, 0, 52, 0, 0, 0, 0, 0, 0, 6, 58
+"/Users/maythamajam/Workspace/guideway/src/components/ui/calendar.tsx", "TypeScript JSX", 0, 0, 67, 0, 0, 0, 0, 0, 0, 6, 73
+"/Users/maythamajam/Workspace/guideway/src/components/ui/card.tsx", "TypeScript JSX", 0, 0, 78, 0, 0, 0, 0, 0, 0, 9, 87
+"/Users/maythamajam/Workspace/guideway/src/components/ui/carousel.tsx", "TypeScript JSX", 0, 0, 232, 0, 0, 0, 0, 0, 0, 31, 263
+"/Users/maythamajam/Workspace/guideway/src/components/ui/checkbox.tsx", "TypeScript JSX", 0, 0, 26, 0, 0, 0, 0, 0, 0, 5, 31
+"/Users/maythamajam/Workspace/guideway/src/components/ui/collapsible.tsx", "TypeScript JSX", 0, 0, 6, 0, 0, 0, 0, 0, 0, 6, 12
+"/Users/maythamajam/Workspace/guideway/src/components/ui/command.tsx", "TypeScript JSX", 0, 0, 137, 0, 0, 0, 0, 0, 0, 19, 156
+"/Users/maythamajam/Workspace/guideway/src/components/ui/context-menu.tsx", "TypeScript JSX", 0, 0, 186, 0, 0, 0, 0, 0, 0, 19, 205
+"/Users/maythamajam/Workspace/guideway/src/components/ui/dialog.tsx", "TypeScript JSX", 0, 0, 109, 0, 0, 0, 0, 0, 0, 14, 123
+"/Users/maythamajam/Workspace/guideway/src/components/ui/drawer.tsx", "TypeScript JSX", 0, 0, 105, 0, 0, 0, 0, 0, 0, 14, 119
+"/Users/maythamajam/Workspace/guideway/src/components/ui/dropdown-menu.tsx", "TypeScript JSX", 0, 0, 187, 0, 0, 0, 0, 0, 0, 19, 206
+"/Users/maythamajam/Workspace/guideway/src/components/ui/form.tsx", "TypeScript JSX", 0, 0, 153, 0, 0, 0, 0, 0, 0, 25, 178
+"/Users/maythamajam/Workspace/guideway/src/components/ui/hover-card.tsx", "TypeScript JSX", 0, 0, 23, 0, 0, 0, 0, 0, 0, 7, 30
+"/Users/maythamajam/Workspace/guideway/src/components/ui/input.tsx", "TypeScript JSX", 0, 0, 21, 0, 0, 0, 0, 0, 0, 5, 26
+"/Users/maythamajam/Workspace/guideway/src/components/ui/label.tsx", "TypeScript JSX", 0, 0, 21, 0, 0, 0, 0, 0, 0, 6, 27
+"/Users/maythamajam/Workspace/guideway/src/components/ui/menubar.tsx", "TypeScript JSX", 0, 0, 221, 0, 0, 0, 0, 0, 0, 20, 241
+"/Users/maythamajam/Workspace/guideway/src/components/ui/navigation-menu.tsx", "TypeScript JSX", 0, 0, 117, 0, 0, 0, 0, 0, 0, 12, 129
+"/Users/maythamajam/Workspace/guideway/src/components/ui/pagination.tsx", "TypeScript JSX", 0, 0, 111, 0, 0, 0, 0, 0, 0, 11, 122
+"/Users/maythamajam/Workspace/guideway/src/components/ui/popover.tsx", "TypeScript JSX", 0, 0, 26, 0, 0, 0, 0, 0, 0, 8, 34
+"/Users/maythamajam/Workspace/guideway/src/components/ui/progress.tsx", "TypeScript JSX", 0, 0, 24, 0, 0, 0, 0, 0, 0, 5, 29
+"/Users/maythamajam/Workspace/guideway/src/components/ui/radio-group.tsx", "TypeScript JSX", 0, 0, 39, 0, 0, 0, 0, 0, 0, 6, 45
+"/Users/maythamajam/Workspace/guideway/src/components/ui/resizable.tsx", "TypeScript JSX", 0, 0, 39, 0, 0, 0, 0, 0, 0, 7, 46
+"/Users/maythamajam/Workspace/guideway/src/components/ui/scroll-area.tsx", "TypeScript JSX", 0, 0, 43, 0, 0, 0, 0, 0, 0, 6, 49
+"/Users/maythamajam/Workspace/guideway/src/components/ui/select.tsx", "TypeScript JSX", 0, 0, 151, 0, 0, 0, 0, 0, 0, 14, 165
+"/Users/maythamajam/Workspace/guideway/src/components/ui/separator.tsx", "TypeScript JSX", 0, 0, 27, 0, 0, 0, 0, 0, 0, 5, 32
+"/Users/maythamajam/Workspace/guideway/src/components/ui/sheet.tsx", "TypeScript JSX", 0, 0, 125, 0, 0, 0, 0, 0, 0, 16, 141
+"/Users/maythamajam/Workspace/guideway/src/components/ui/skeleton.tsx", "TypeScript JSX", 0, 0, 13, 0, 0, 0, 0, 0, 0, 3, 16
+"/Users/maythamajam/Workspace/guideway/src/components/ui/slider.tsx", "TypeScript JSX", 0, 0, 24, 0, 0, 0, 0, 0, 0, 5, 29
+"/Users/maythamajam/Workspace/guideway/src/components/ui/sonner.tsx", "TypeScript JSX", 0, 0, 26, 0, 0, 0, 0, 0, 0, 6, 32
+"/Users/maythamajam/Workspace/guideway/src/components/ui/switch.tsx", "TypeScript JSX", 0, 0, 25, 0, 0, 0, 0, 0, 0, 5, 30
+"/Users/maythamajam/Workspace/guideway/src/components/ui/table.tsx", "TypeScript JSX", 0, 0, 110, 0, 0, 0, 0, 0, 0, 11, 121
+"/Users/maythamajam/Workspace/guideway/src/components/ui/tabs.tsx", "TypeScript JSX", 0, 0, 48, 0, 0, 0, 0, 0, 0, 8, 56
+"/Users/maythamajam/Workspace/guideway/src/components/ui/textarea.tsx", "TypeScript JSX", 0, 0, 20, 0, 0, 0, 0, 0, 0, 5, 25
+"/Users/maythamajam/Workspace/guideway/src/components/ui/toast.tsx", "TypeScript JSX", 0, 0, 116, 0, 0, 0, 0, 0, 0, 14, 130
+"/Users/maythamajam/Workspace/guideway/src/components/ui/toaster.tsx", "TypeScript JSX", 0, 0, 32, 0, 0, 0, 0, 0, 0, 4, 36
+"/Users/maythamajam/Workspace/guideway/src/components/ui/toggle-group.tsx", "TypeScript JSX", 0, 0, 52, 0, 0, 0, 0, 0, 0, 10, 62
+"/Users/maythamajam/Workspace/guideway/src/components/ui/toggle.tsx", "TypeScript JSX", 0, 0, 39, 0, 0, 0, 0, 0, 0, 7, 46
+"/Users/maythamajam/Workspace/guideway/src/components/ui/tooltip.tsx", "TypeScript JSX", 0, 0, 23, 0, 0, 0, 0, 0, 0, 8, 31
+"/Users/maythamajam/Workspace/guideway/src/components/ui/use-toast.ts", "TypeScript", 157, 0, 0, 0, 0, 0, 0, 0, 3, 32, 192
+"/Users/maythamajam/Workspace/guideway/src/env.js", "JavaScript", 0, 0, 0, 32, 0, 0, 0, 0, 22, 4, 58
+"/Users/maythamajam/Workspace/guideway/src/lib/email.ts", "TypeScript", 105, 0, 0, 0, 0, 0, 0, 0, 1, 10, 116
+"/Users/maythamajam/Workspace/guideway/src/lib/routes.ts", "TypeScript", 13, 0, 0, 0, 0, 0, 0, 0, 0, 3, 16
+"/Users/maythamajam/Workspace/guideway/src/lib/tokens.ts", "TypeScript", 84, 0, 0, 0, 0, 0, 0, 0, 2, 15, 101
+"/Users/maythamajam/Workspace/guideway/src/lib/types.ts", "TypeScript", 79, 0, 0, 0, 0, 0, 0, 0, 0, 17, 96
+"/Users/maythamajam/Workspace/guideway/src/lib/utils.ts", "TypeScript", 65, 0, 0, 0, 0, 0, 0, 0, 4, 11, 80
+"/Users/maythamajam/Workspace/guideway/src/lib/validation.ts", "TypeScript", 107, 0, 0, 0, 0, 0, 0, 0, 5, 14, 126
+"/Users/maythamajam/Workspace/guideway/src/server/auth.ts", "TypeScript", 73, 0, 0, 0, 0, 0, 0, 0, 45, 15, 133
+"/Users/maythamajam/Workspace/guideway/src/server/db.ts", "TypeScript", 12, 0, 0, 0, 0, 0, 0, 0, 0, 6, 18
+"/Users/maythamajam/Workspace/guideway/src/stores/group-store.ts", "TypeScript", 12, 0, 0, 0, 0, 0, 0, 0, 0, 3, 15
+"/Users/maythamajam/Workspace/guideway/src/stores/post-store.ts", "TypeScript", 12, 0, 0, 0, 0, 0, 0, 0, 0, 3, 15
+"/Users/maythamajam/Workspace/guideway/src/stores/user-store.ts", "TypeScript", 12, 0, 0, 0, 0, 0, 0, 0, 0, 3, 15
+"/Users/maythamajam/Workspace/guideway/src/styles/globals.css", "CSS", 0, 564, 0, 0, 0, 0, 0, 0, 0, 35, 599
+"/Users/maythamajam/Workspace/guideway/tailwind.config.ts", "TypeScript", 78, 0, 0, 0, 0, 0, 0, 0, 0, 3, 81
+"/Users/maythamajam/Workspace/guideway/tsconfig.json", "JSON with Comments", 0, 0, 0, 0, 0, 0, 35, 0, 4, 4, 43
+"Total", "-", 2315, 564, 8995, 109, 174, 12995, 35, 118, 242, 1404, 26951

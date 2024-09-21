@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^1.4.0",
+    "@hello-pangea/dnd": "^17.0.0",
     "@hookform/resolvers": "^3.3.4",
     "@lucia-auth/adapter-prisma": "^4.0.1",
     "@prisma/client": "^5.10.2",
@@ -55,6 +56,7 @@
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.0.0",
     "framer-motion": "^11.1.3",
+    "gray-matter": "^4.0.3",
     "input-otp": "^1.2.2",
     "lucia": "^3.1.1",
     "lucide": "^0.363.0",
@@ -71,10 +73,12 @@
     "react-hook-form": "^7.51.1",
     "react-icons": "^5.0.1",
     "react-intersection-observer": "^9.8.2",
+    "react-markdown": "^9.0.1",
     "react-resizable-panels": "^2.0.14",
     "react-spinners": "^0.13.8",
     "resend": "^3.2.0",
     "sonner": "^1.4.41",
+    "swr": "^2.2.5",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
     "totp-generator": "^1.0.0",
@@ -84,6 +88,7 @@
     "zustand": "^4.5.5"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.15",
     "@types/bcryptjs": "^2.4.6",
     "@types/eslint": "^8.56.2",
     "@types/node": "^20.11.20",

@@ -97,7 +97,7 @@ const GroupPage = async (props: {
               joinCode={`${data.join_code.slice(0, 4)}-${data.join_code.slice(4, 8)}`}
             />
             <Button variant={"outline"} asChild className="p-2">
-              <Link href={`/dashboard/${data.id}/settings`}>
+              <Link href={`/dashboard/groups/settings/${data.id}`}>
                 <Settings className="size-5" />
               </Link>
             </Button>

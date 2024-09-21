@@ -96,10 +96,17 @@ export const postSchema = z.object({
   isPinned: z.boolean().default(false),
 });
 
+export const roleNameSchema = z.object({
+  name: z.string().min(1, "Role name is required!").max(10, {
+    message: "Role name musn't exceed 10 characters!",
+  }),
+});
+
 // Dashboard interfaces
 export type IJoinGroupCode = z.infer<typeof joinGroupSchema>;
 export type ICreateGroup = z.infer<typeof createGroupSchema>;
 export type IPost = z.infer<typeof postSchema>;
+export type IRoleName = z.infer<typeof roleNameSchema>;
 
 export type ILogin = z.infer<typeof loginSchema>;
 export type IRegister = z.infer<typeof registerSchema>;
@@ -116,3 +123,9 @@ export const updatesSignupSchema = z.object({
 });
 
 export type IUpdatesSignup = z.infer<typeof updatesSignupSchema>;
+
+export const defaultRoleSchema = z.object({
+  defaultRoleId: z.string().min(1, "Please select a default role"),
+});
+
+export type IDefaultRole = z.infer<typeof defaultRoleSchema>;

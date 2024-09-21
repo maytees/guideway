@@ -37,11 +37,17 @@ model Role {
     description String?
     created_at  DateTime @default(now())
     updated_at  DateTime @default(now())
-    group       Group    @relation(fields: [groupId], references: [id])
+    group       Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
     groupId     String
 
     users       User[]
     permissions String[] // List of permissions (defined in app)
+
+    order Int
+
+    color String // Hex value
+
+    isDefault Boolean @default(false)
 }
 
 model Group {

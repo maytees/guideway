@@ -91,5 +91,5 @@ export interface CommentsWithAuthor extends Comment {
 
 export type Tag = {
   value: string; // Text
-  color: string; // Hex color
+  color: string; // Hex color of bg maybe?
 };

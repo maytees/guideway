@@ -85,6 +85,26 @@ export async function createGroup(values: ICreateGroup): Promise<ActionResult> {
       members: {
         connect: { id: existingUser.id },
       },
+      roles: {
+        create: [
+          {
+            name: "President",
+            color: "#e0e7ff",
+            order: 1,
+            users: {
+              connect: {
+                id: user.id,
+              },
+            },
+          },
+          {
+            name: "Member",
+            color: "#fef3c7",
+            order: 2,
+            isDefault: true,
+          },
+        ],
+      },
       join_code: await generateUniqueCode(),
     },
     include: {
