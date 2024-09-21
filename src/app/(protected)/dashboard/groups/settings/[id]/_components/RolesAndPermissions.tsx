@@ -490,55 +490,67 @@ export default function RolesTable(props: {
                                   <DialogContent className="sm:max-w-[425px]">
                                     <DialogHeader>
                                       <DialogTitle className="text-destructive">
-                                        Confirm Deletion - {role.name}
+                                        {role.isDefault ? "Cannot Delete Default Role" : "Confirm Deletion"}
                                       </DialogTitle>
                                       <DialogDescription>
-                                        Are you sure you want to delete this
-                                        role? This action is irreversible.
+                                        {role.isDefault
+                                          ? "You cannot delete the default role. Please go to the General tab to change the default role first."
+                                          : "Are you sure you want to delete this role? This action is irreversible."}
                                       </DialogDescription>
                                     </DialogHeader>
-                                    <DialogFooter className="flex flex-col items-center sm:flex-row sm:justify-between">
-                                      <div className="mb-4 text-sm font-medium sm:mb-0">
-                                        {countdown > 0
-                                          ? `Please wait ${countdown} seconds`
-                                          : "You can now delete"}
-                                      </div>
-                                      <div className="flex gap-2">
+                                    {role.isDefault ? (
+                                      <DialogFooter className="flex justify-end">
                                         <Button
                                           variant="outline"
-                                          onClick={() =>
-                                            setIsDeletingDialogOpen(false)
-                                          }
-                                          disabled={isPending}
+                                          onClick={() => setIsDeletingDialogOpen(false)}
                                         >
-                                          Cancel
+                                          Close
                                         </Button>
-                                        <Button
-                                          variant="destructive"
-                                          onClick={() => {
-                                            handleDeleteRole(
-                                              role.id,
-                                              role.name,
-                                            );
-                                          }}
-                                          disabled={countdown > 0 || isPending}
-                                          className="relative"
-                                        >
-                                          {countdown > 0 && (
-                                            <div className="absolute inset-0 flex items-center justify-center rounded-md bg-destructive/20">
-                                              <div
-                                                className="h-full w-full animate-pulse rounded-md bg-destructive/40"
-                                                style={{
-                                                  animationDuration: `${countdown}s`,
-                                                  animationIterationCount: "1",
-                                                }}
-                                              />
-                                            </div>
-                                          )}
-                                          Delete
-                                        </Button>
-                                      </div>
-                                    </DialogFooter>
+                                      </DialogFooter>
+                                    ) : (
+                                      <DialogFooter className="flex flex-col items-center sm:flex-row sm:justify-between">
+                                        <div className="mb-4 text-sm font-medium sm:mb-0">
+                                          {countdown > 0
+                                            ? `Please wait ${countdown} seconds`
+                                            : "You can now delete"}
+                                        </div>
+                                        <div className="flex gap-2">
+                                          <Button
+                                            variant="outline"
+                                            onClick={() =>
+                                              setIsDeletingDialogOpen(false)
+                                            }
+                                            disabled={isPending}
+                                          >
+                                            Cancel
+                                          </Button>
+                                          <Button
+                                            variant="destructive"
+                                            onClick={() => {
+                                              handleDeleteRole(
+                                                role.id,
+                                                role.name,
+                                              );
+                                            }}
+                                            disabled={countdown > 0 || isPending}
+                                            className="relative"
+                                          >
+                                            {countdown > 0 && (
+                                              <div className="absolute inset-0 flex items-center justify-center rounded-md bg-destructive/20">
+                                                <div
+                                                  className="h-full w-full animate-pulse rounded-md bg-destructive/40"
+                                                  style={{
+                                                    animationDuration: `${countdown}s`,
+                                                    animationIterationCount: "1",
+                                                  }}
+                                                />
+                                              </div>
+                                            )}
+                                            Delete
+                                          </Button>
+                                        </div>
+                                      </DialogFooter>
+                                    )}
                                   </DialogContent>
                                 </Dialog>
                               </DropdownMenuContent>

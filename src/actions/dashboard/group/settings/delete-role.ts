@@ -18,21 +18,40 @@ export async function deleteRole(roleId: string): Promise<ActionResult> {
     };
   }
 
-  const deletedRole = await db.role.delete({
-    where: {
-      id: roleId,
-    },
-  });
+  try {
+    // Check if the role is the default role
+    const role = await db.role.findUnique({
+      where: { id: roleId },
+      select: { isDefault: true },
+    });
 
-  if (!deletedRole) {
+    if (role?.isDefault) {
+      return {
+        error: "Cannot delete the default role",
+      };
+    }
+
+    const deletedRole = await db.role.delete({
+      where: {
+        id: roleId,
+      },
+    });
+
+    if (!deletedRole) {
+      return {
+        error: "Couldn't find role with id " + roleId,
+      };
+    }
+
+    revalidatePath("/dashboard/groups/settings/[id]", "page");
+
     return {
-      error: "Couldn't find role with id" + roleId,
+      success: "Successfully deleted role.",
+    };
+  } catch (error) {
+    console.error("Failed to delete role:", error);
+    return {
+      error: "Failed to delete role",
     };
   }
-
-  revalidatePath("/dashboard/groups/settings/[id]", "page");
-
-  return {
-    success: "Successfully deleted role.",
-  };
 }

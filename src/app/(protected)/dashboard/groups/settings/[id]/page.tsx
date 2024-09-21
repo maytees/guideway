@@ -31,7 +31,7 @@ async function getData(groupId: string | undefined) {
   return data;
 }
 
-const SettingsPage = async (props: { params: { id: string } }) => {
+const SettingsPage = async (props: { params: { id: string }, searchParams: { tab?: string, focus?: string } }) => {
   const data = await getData(props.params.id);
 
   if (!data) {
@@ -39,6 +39,9 @@ const SettingsPage = async (props: { params: { id: string } }) => {
   }
 
   const defaultRole = data.roles.find((role) => role.isDefault);
+  const defaultTab = props.searchParams.tab ?? "general";
+  const focusDefaultRole = props.searchParams.focus === "defaultRole";
+
 
   return (
     <div className="mt-10 px-2 max-md:mt-20 md:px-3 2xl:px-20">
@@ -50,7 +53,7 @@ const SettingsPage = async (props: { params: { id: string } }) => {
           Settings
         </h1>
       </div>
-      <Tabs defaultValue="general" className="w-full lg:mt-5 ">
+      <Tabs defaultValue={defaultTab} className="w-full lg:mt-5 ">
         <TabsList className="mb-5">
           <TabsTrigger value="general">General</TabsTrigger>
           <TabsTrigger value="roles">Roles & Permissions</TabsTrigger>
@@ -62,6 +65,7 @@ const SettingsPage = async (props: { params: { id: string } }) => {
               groupId={data.id}
               roles={data.roles}
               defaultRoleId={defaultRole?.id ?? ""}
+              focus={focusDefaultRole}
             />
           </div>
         </TabsContent>
