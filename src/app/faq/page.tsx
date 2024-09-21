@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Accordion,
   AccordionContent,
@@ -102,7 +101,7 @@ const generalFAQ = [
 
 const FAQPage = () => {
   return (
-    <div className="mt-32 2xl:px-96">
+    <div className="mt-20 2xl:px-96 pb-20">
       <>
         <h1 className="text-center text-2xl font-bold lg:text-4xl">
           Are you stuck?
