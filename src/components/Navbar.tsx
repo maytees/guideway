@@ -52,6 +52,12 @@ const Navbar = () => {
             >
               FAQ
             </Link>
+            <Link
+              className={`text-black hover:text-muted-foreground ${currentPath === "/changelog" ? "text-foreground" : ""}`}
+              href="/changelog"
+            >
+              Changelogs
+            </Link>
           </div>
         </div>
 
@@ -113,6 +119,12 @@ const Navbar = () => {
                 href="/faq"
               >
                 FAQ
+              </Link>
+              <Link
+                className={`text-black hover:text-muted-foreground ${currentPath === "/changelog" ? "text-foreground" : ""}`}
+                href="/changelog"
+              >
+                Changelogs
               </Link>
             </nav>
           </SheetContent>
